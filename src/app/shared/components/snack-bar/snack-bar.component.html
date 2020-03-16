@@ -1,0 +1,7 @@
+<div class="snackbar">
+  <div *ngIf="data.status != '200'">Status: {{ data.status }}</div>
+
+  <div *ngIf="data.message" class="snackbar-message" id="snackbar-message">
+    {{ data.message }}
+  </div>
+</div>
