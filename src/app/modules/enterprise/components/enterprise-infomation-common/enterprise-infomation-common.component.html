@@ -1,0 +1,27 @@
+<mat-card style="text-align: center;">
+  <mat-card-title>Thông tin công ty</mat-card-title>
+  <mat-list *ngIf="enterpriseInfomation != null">
+    <mat-list-item>
+      <b>Tên công ty: </b>
+      <p>{{ enterpriseInfomation.name }}</p>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item>
+      <b>Tax code: </b>
+      <p>{{ enterpriseInfomation.tax_code }}</p>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item>
+      <b>Nghành: </b>
+      <p>{{ enterpriseInfomation.sector.name }}</p>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item>
+      <b>Phân nghành: </b>
+      <p>{{ enterpriseInfomation.sector.subsector.name }}</p>
+    </mat-list-item>
+  </mat-list>
+  <button mat-raised-button (click)="onClickInfomationDetail()">
+    Thông tin chi tiết
+  </button>
+</mat-card>

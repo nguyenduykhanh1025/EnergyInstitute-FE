@@ -13,12 +13,11 @@ import { NavbarComponent } from "./modules/layout/navbar/navbar.component";
 import { SharedModule } from "./shared/shared.module";
 import { HttpTokenInterceptor } from "./core/interceptors/http-token.interceptor";
 import { JwtModule } from "@auth0/angular-jwt";
-import { HttpErrorInterceptor } from './core/interceptors/error-handler.interceptor';
+import { HttpErrorInterceptor } from "./core/interceptors/error-handler.interceptor";
 
 export function tokenGetter() {
-  return localStorage.getItem('jwt');
+  return localStorage.getItem("jwt");
 }
-
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent],
@@ -32,9 +31,9 @@ export function tokenGetter() {
     SharedModule,
     JwtModule.forRoot({
       config: {
-        tokenGetter,
+        tokenGetter
       }
-    }),
+    })
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },

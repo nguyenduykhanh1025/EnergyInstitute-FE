@@ -9,6 +9,24 @@ export const RouteNames = {
     logout: "logout"
   },
   DASHBOARD: {
-    url: 'homepage',
+    url: "homepage"
   },
+  ENTERPRISE: {
+    url: "enterprise",
+    SHOW: {
+      name: "show"
+    },
+    DETAIL: {
+      name: "detail"
+    },
+    UPDATE: {
+      name: "update"
+    }
+  },
+  ENERGY_CONSUMPTIONS: {
+    URL : "energy_consumptions",
+    SHOW: {
+      name : ""
+    }
+  }
 };

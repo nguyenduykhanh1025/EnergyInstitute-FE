@@ -1,0 +1,138 @@
+<mat-card style="text-align: center;">
+  <mat-card-title>Cập nhập thông tin công ty chi tiết</mat-card-title>
+  <mat-form-field class="example-full-width">
+    <mat-label>Year Of Investigation</mat-label>
+    <input
+      matInput
+      placeholder="Ex. Pizza"
+      value="{{ yearOfInvestigationCurrent }}"
+      disabled
+    />
+  </mat-form-field>
+  <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+    <mat-list>
+      <mat-list-item>
+        <b>Địa chỉ: </b>
+        <mat-form-field class="item-form-field">
+          <mat-label>Tỉnh</mat-label>
+          <mat-select formControlName="provincialForm">
+            <mat-option
+              *ngFor="let provincial of provincials"
+              [value]="provincial.id"
+              (click)="handleChangeProvincial(provincial)"
+            >
+              {{ provincial.name }}
+            </mat-option>
+          </mat-select>
+          <app-error-label
+            [control]="updateForm.controls.provincialForm"
+            label=""
+          ></app-error-label>
+        </mat-form-field>
+        <mat-form-field class="item-form-field">
+          <mat-label>Huyện</mat-label>
+          <mat-select formControlName="districtForm">
+            <mat-option
+              *ngFor="let district of districts"
+              [value]="district.id"
+              (click)="handleChangeDistrict(district)"
+            >
+              {{ district.name }}
+            </mat-option>
+          </mat-select>
+          <app-error-label
+            [control]="updateForm.controls.districtForm"
+            label=""
+          ></app-error-label>
+        </mat-form-field>
+        <mat-form-field class="item-form-field">
+          <mat-label>Xã</mat-label>
+          <mat-select formControlName="communeForm">
+            <mat-option *ngFor="let commune of communes" [value]="commune.id">
+              {{ commune.name }}
+            </mat-option>
+          </mat-select>
+          <app-error-label
+            [control]="updateForm.controls.communeForm"
+            label=""
+          ></app-error-label>
+        </mat-form-field>
+      </mat-list-item>
+      <mat-list-item>
+        <b>Giá trị sản xuất: </b>
+        <mat-form-field class="item-form-field">
+          <mat-label>Giá trị sản xuất</mat-label>
+          <input
+            matInput
+            placeholder="20000"
+            formControlName="productionValueForm"
+          />
+        </mat-form-field>
+        <app-error-label
+          [control]="updateForm.controls.productionValueForm"
+          label=""
+        ></app-error-label>
+      </mat-list-item>
+
+      <mat-list-item>
+        <b>Số lượng lao động: </b>
+        <mat-form-field class="item-form-field">
+          <mat-label>Số lượng lao động</mat-label>
+          <input
+            matInput
+            placeholder="500"
+            formControlName="numberOfEmployeeForm"
+          />
+        </mat-form-field>
+        <app-error-label
+          [control]="updateForm.controls.numberOfEmployeeForm"
+          label=""
+        ></app-error-label>
+      </mat-list-item>
+
+      <mat-list-item>
+        <b>Tọa độ doanh nghiệp: </b>
+        <mat-radio-group
+          aria-label="Select an option"
+          class="item-form-field"
+          [(ngModel)]="statusCoordinatesOfEnterprise"
+          [ngModelOptions]="{ standalone: true }"
+        >
+          <mat-radio-button value="true">Nhập tọa độ của bạn</mat-radio-button>
+          <mat-radio-button value="false" style="margin-left: 20px;"
+            >Lấy tọa độ hiện tại</mat-radio-button
+          >
+        </mat-radio-group>
+      </mat-list-item>
+      <mat-list-item
+        style="margin-left: 185px;"
+        [ngStyle]="{
+          display: statusCoordinatesOfEnterprise == 'true' ? 'block' : 'none'
+        }"
+      >
+        <mat-form-field class="item-form-field" style="display: block;">
+          <mat-label>Kinh độ</mat-label>
+          <input matInput placeholder="500" formControlName="lngForm" />
+        </mat-form-field>
+        <mat-form-field class="item-form-field" style="display: block;">
+          <mat-label>Vĩ độ</mat-label>
+          <input matInput placeholder="500" formControlName="latForm" />
+        </mat-form-field>
+      </mat-list-item>
+    </mat-list>
+
+    <div>
+      <button mat-raised-button (click)="renturnToEnterpriseDetailShow()">
+        Trở về
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="!updateForm.valid"
+      >
+        Cập nhập
+      </button>
+    </div>
+  </form>
+</mat-card>
