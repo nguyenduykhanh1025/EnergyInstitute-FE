@@ -1,0 +1,24 @@
+<div class="container">
+  <mat-card class="mat-card">
+    <form class="example-form">
+      <mat-form-field class="form-field">
+        <mat-label>Email*</mat-label>
+        <input matInput placeholder="Ex. pat@example.com" #email />
+        <mat-hint>Enter your username</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field class="form-field">
+        <input matInput placeholder="Password" [type]="'password'" required #password/>
+        <mat-hint>Enter your password!</mat-hint>
+      </mat-form-field>
+    </form>
+    <button
+      mat-raised-button
+      color="primary"
+      class="form-field"
+      (click)="login(email.value, password.value)"
+    >
+      Login
+    </button>
+  </mat-card>
+</div>

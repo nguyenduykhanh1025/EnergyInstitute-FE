@@ -1,0 +1,8 @@
+<ng-container *ngIf="control.errors && (control.dirty || control.touched)">
+  <mat-error *ngFor="let error of control.errors | errorMessages: label">
+    {{ error }}
+  </mat-error>
+
+  <!-- error custom in validations/custom-validators.ts -->
+  <mat-error *ngIf="control.errors?.onlyNumber">Chỉ chứa giá trị số</mat-error>
+</ng-container>
