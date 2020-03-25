@@ -9,8 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy-production": "ng build --prod && npx shipit production deploy",
-    "deploy-staging": "ng build --prod -c staging && npx shipit staging deploy"
+    "heroku-postbuild": "ng build --prod"
   },
   "private": true,
   "dependencies": {
