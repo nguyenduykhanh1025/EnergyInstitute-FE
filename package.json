@@ -8,7 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "heroku-postbuild": "ng build --prod"
+    "deploy-production": "ng build --prod && npx shipit production deploy",
+    "deploy-staging": "ng build --prod -c staging && npx shipit staging deploy"
   },
   "private": true,
   "dependencies": {
@@ -31,6 +32,9 @@
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
+  },
+  "optionalDependencies": {
+    "fsevents": "^2.0.7"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.900.5",
