@@ -8,7 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "ng build --aot --prod"
+    "deploy-production": "ng build --prod && npx shipit production deploy",
+    "deploy-staging": "ng build --prod -c staging && npx shipit staging deploy"
   },
   "private": true,
   "dependencies": {
