@@ -7,23 +7,31 @@
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Personal data
+        panel 1
       </mat-panel-title>
     </mat-expansion-panel-header>
 
-    <p>sdasdadsasd</p>
-  </mat-expansion-panel>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Self aware panel
-      </mat-panel-title>
-    </mat-expansion-panel-header>
-    <p>I'm visible because I am open</p>
+    <a [routerLink]="['/enterprise/show']"
+      ><button mat-button style="width: 100%;">Thông tin công ty</button></a
+    >
+    <mat-divider></mat-divider>
+    <a [routerLink]="['/energy_consumptions']"
+      ><button mat-button style="width: 100%;">
+        Thông tin tiêu thụ năng lượng
+      </button></a
+    >
+    <mat-divider></mat-divider>
   </mat-expansion-panel>
 
-  <button mat-raised-button color="primary" style="width: 100%;" (click)="logout()">
-    <mat-icon aria-hidden="false" aria-label="Example home icon">logout</mat-icon>
+  <button
+    mat-raised-button
+    color="primary"
+    style="width: 100%;"
+    (click)="logout()"
+  >
+    <mat-icon aria-hidden="false" aria-label="Example home icon"
+      >logout</mat-icon
+    >
     Logout
   </button>
 </mat-accordion>

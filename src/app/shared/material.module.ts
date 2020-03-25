@@ -14,6 +14,9 @@ import { MatRadioModule } from "@angular/material/radio";
 import { MatSelectModule } from "@angular/material/select";
 import { MatGridListModule } from "@angular/material/grid-list";
 import { MatDividerModule } from "@angular/material/divider";
+import { MatTreeModule } from "@angular/material/tree";
+import { MatTableModule } from "@angular/material/table";
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [],
@@ -32,7 +35,10 @@ import { MatDividerModule } from "@angular/material/divider";
     MatRadioModule,
     MatSelectModule,
     MatGridListModule,
-    MatDividerModule
+    MatDividerModule,
+    MatTreeModule,
+    MatTableModule,
+    MatPaginatorModule
   ]
 })
 export class AppMaterialModule {}

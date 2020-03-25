@@ -56,8 +56,12 @@ export class EnterpriseDetailComponent implements OnInit {
     ]);
   }
 
+  goToUpdateInfomation() {
+    this.router.navigate([
+      `${RouteNames.ENTERPRISE.url}/${RouteNames.ENTERPRISE.UPDATE.name}`
+    ]);
+  }
   setUriGGMapEmbed(lat: number, lng: number) {
     this.uriGGMapEmbed = `http://maps.google.com/maps?q=${lat}, ${lng}&z=16&output=embed`;
-    console.log(this.uriGGMapEmbed);
   }
 }
