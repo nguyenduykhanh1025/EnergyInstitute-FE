@@ -1,6 +1,7 @@
 {
   "name": "energy-institute-fe",
   "version": "0.0.0",
+  "license": "MIT",
   "scripts": {
     "ng": "ng",
     "start": "node server.js",
@@ -32,10 +33,6 @@
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2",
     "typescript": "~3.6.4"
-
-  },
-  "optionalDependencies": {
-    "fsevents": "^2.0.7"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.900.5",
