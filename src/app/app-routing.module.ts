@@ -4,7 +4,7 @@ import { RouteNames } from "./constant/route-name";
 
 const routes: Routes = [
   {
-    path: "/",
+    path: "",
     data: {
       title: RouteNames.AUTH.title,
       showHeader: false,
