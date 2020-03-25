@@ -21,12 +21,15 @@ export const RouteNames = {
     },
     UPDATE: {
       name: "update"
-    }
-  },
-  ENERGY_CONSUMPTIONS: {
-    URL : "energy_consumptions",
-    SHOW: {
-      name : ""
+    },
+    ENERGY_CONSUMPTIONS: {
+      URL: "energy_consumptions",
+      SHOW: {
+        name: ""
+      },
+      UPDATE: {
+        name: "update"
+      }
     }
   }
 };

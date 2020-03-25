@@ -1,1 +1,110 @@
-<p>energy-consumptions-show works!</p>
+<mat-card style="text-align: center;">
+  <mat-card-title>Thông tin tiêu thụ năng lượng</mat-card-title>
+  <div class="example-container mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+      <!-- Name Column -->
+      <ng-container matColumnDef="year_of_investigation" sticky>
+        <th mat-header-cell *matHeaderCellDef>Năm điều tra</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.year_of_investigation }}
+        </td>
+      </ng-container>
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="self_produced_electricity" sticky>
+        <th mat-header-cell *matHeaderCellDef>Năng lượng tiêu thụ</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.self_produced_electricity }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="consumption_electricity">
+        <th mat-header-cell *matHeaderCellDef>Năng lượng phát thải</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.consumption_electricity }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="coal" style="width: 100px;">
+        <th mat-header-cell *matHeaderCellDef>Than đá</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.coal }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="bitum_coal">
+        <th mat-header-cell *matHeaderCellDef>Than bitium</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.bitum_coal }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="coke_coal">
+        <th mat-header-cell *matHeaderCellDef>Than cốc</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.coke_coal }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="dust_coal">
+        <th mat-header-cell *matHeaderCellDef>Than cám</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.dust_coal }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="ko">
+        <th mat-header-cell *matHeaderCellDef>KO</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.ko }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="do">
+        <th mat-header-cell *matHeaderCellDef>DDO</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.do }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="fo">
+        <th mat-header-cell *matHeaderCellDef>FO</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.fo }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="lpg">
+        <th mat-header-cell *matHeaderCellDef>LPG</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.lpg }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="ng">
+        <th mat-header-cell *matHeaderCellDef>NG</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.ng }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="biomass_energy">
+        <th mat-header-cell *matHeaderCellDef>Năng lượng sinh khối</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.biomass_energy }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="renewable_energy">
+        <th mat-header-cell *matHeaderCellDef>Năng lượng tái tạo</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.renewable_energy }}
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+  <button mat-raised-button color="primary" style="margin-top: 10px;">Cập nhập thông tin</button>
+</mat-card>

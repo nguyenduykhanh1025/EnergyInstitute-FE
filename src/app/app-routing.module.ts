@@ -26,7 +26,7 @@ const routes: Routes = [
       import("./modules/auth/auth.module").then(m => m.AuthModule)
   },
   {
-    path: RouteNames.ENERGY_CONSUMPTIONS.URL,
+    path: RouteNames.ENTERPRISE.ENERGY_CONSUMPTIONS.URL,
     data: {
       title: RouteNames.AUTH.title,
       showHeader: false,

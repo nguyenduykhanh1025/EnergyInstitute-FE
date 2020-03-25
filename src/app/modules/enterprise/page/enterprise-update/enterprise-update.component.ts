@@ -98,12 +98,15 @@ export class EnterpriseUpdateComponent implements OnInit {
     ]);
   }
 
+
   onSubmit() {
     this.getDataEnterPriseDetailFromUpdateForm();
     this.completeDetail.subscribe(data => {
       this.eterpriseHttpService
         .updateEnterpriseDetail(data)
-        .subscribe(data1 => {});
+        .subscribe(data1 => {
+          this.renturnToEnterpriseDetailShow();
+        });
     });
   }
 

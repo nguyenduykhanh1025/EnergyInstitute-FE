@@ -5,9 +5,11 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SharedModule } from "src/app/shared/shared.module";
 import { EnergyConsumptionsShowComponent } from './page/energy-consumptions-show/energy-consumptions-show.component';
 import { ENERGY_CONSUMPTIONS_ROUTES } from './energy-consumptions-routing.module';
+import { EnergyConsumptionsUpdateComponent } from './page/energy-consumptions-update/energy-consumptions-update.component';
 @NgModule({
   declarations: [
-  EnergyConsumptionsShowComponent],
+  EnergyConsumptionsShowComponent,
+  EnergyConsumptionsUpdateComponent],
   imports: [
     SharedModule,
     CommonModule,
