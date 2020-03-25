@@ -4,7 +4,7 @@ import { EnergyConsumptionsShowComponent } from './page/energy-consumptions-show
 import { EnergyConsumptionsUpdateComponent } from './page/energy-consumptions-update/energy-consumptions-update.component';
 
 export const ENERGY_CONSUMPTIONS_ROUTES: Routes = [
-  {
+  { 
     path: RouteNames.ENTERPRISE.ENERGY_CONSUMPTIONS.SHOW.name,
     component:EnergyConsumptionsShowComponent
   },
