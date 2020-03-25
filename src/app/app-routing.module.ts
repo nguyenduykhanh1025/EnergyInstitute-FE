@@ -4,6 +4,18 @@ import { RouteNames } from "./constant/route-name";
 
 const routes: Routes = [
   {
+    path: "/",
+    data: {
+      title: RouteNames.AUTH.title,
+      showHeader: false,
+      showSidebar: false
+    },
+    loadChildren: () =>
+      import("./modules/enterprise/enterprise.module").then(
+        m => m.EnterpriseModule
+      )
+  },
+  {
     path: RouteNames.ENTERPRISE.url,
     data: {
       title: RouteNames.AUTH.title,
