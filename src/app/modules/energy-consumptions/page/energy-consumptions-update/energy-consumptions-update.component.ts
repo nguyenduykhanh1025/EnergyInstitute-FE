@@ -1,15 +1,111 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { EnergyConsumption } from "src/app/shared/modules/energy_consumption";
+import { CustomValidators } from "src/app/shared/validations/custom-validators";
+import { EnergyConsumptionsHttpService } from "src/app/core/http/energy-consumptions-http.service";
+import { Router } from "@angular/router";
+import { RouteNames } from "src/app/constant/route-name";
 
 @Component({
-  selector: 'app-energy-consumptions-update',
-  templateUrl: './energy-consumptions-update.component.html',
-  styleUrls: ['./energy-consumptions-update.component.css']
+  selector: "app-energy-consumptions-update",
+  templateUrl: "./energy-consumptions-update.component.html",
+  styleUrls: ["./energy-consumptions-update.component.css"]
 })
 export class EnergyConsumptionsUpdateComponent implements OnInit {
+  energyConsumption: EnergyConsumption;
+  updateForm: FormGroup;
 
-  constructor() { }
+  constructor(
+    private energyConsumptionsHttpService: EnergyConsumptionsHttpService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
+    this.initEnergyConsumption();
   }
 
+  initEnergyConsumption() {
+    this.energyConsumptionsHttpService
+      .getEnnergyConsumptionFollowYear(this.getYearInUrl())
+      .subscribe(data => {
+        if (data != null) {
+          this.energyConsumption = data[0];
+          this.addInfomationToUpdateForm();
+        }
+      });
+  }
+
+  addInfomationToUpdateForm() {
+    this.updateForm = new FormGroup({
+      self_produced_electricity: new FormControl(
+        this.energyConsumption.self_produced_electricity,
+        [Validators.required, CustomValidators.onlyNumber]
+      ),
+      consumption_electricity: new FormControl(
+        this.energyConsumption.consumption_electricity,
+        [Validators.required, CustomValidators.onlyNumber]
+      ),
+      coal: new FormControl(this.energyConsumption.coal, [
+        Validators.required,
+        CustomValidators.onlyNumber
+      ]),
+      bitum_coal: new FormControl(this.energyConsumption.bitum_coal, [
+        Validators.required,
+        CustomValidators.onlyNumber
+      ]),
+      coke_coal: new FormControl(this.energyConsumption.coke_coal, [
+        Validators.required,
+        CustomValidators.onlyNumber
+      ]),
+      dust_coal: new FormControl(this.energyConsumption.dust_coal, [
+        Validators.required,
+        CustomValidators.onlyNumber
+      ]),
+      ko: new FormControl(this.energyConsumption.ko, [
+        Validators.required,
+        CustomValidators.onlyNumber
+      ]),
+      do: new FormControl(this.energyConsumption.do, [
+        Validators.required,
+        CustomValidators.onlyNumber
+      ]),
+      fo: new FormControl(this.energyConsumption.fo, [
+        Validators.required,
+        CustomValidators.onlyNumber
+      ]),
+      lpg: new FormControl(this.energyConsumption.lpg, [
+        Validators.required,
+        CustomValidators.onlyNumber
+      ]),
+      ng: new FormControl(this.energyConsumption.ng, [
+        Validators.required,
+        CustomValidators.onlyNumber
+      ]),
+      biomass_energy: new FormControl(this.energyConsumption.biomass_energy, [
+        Validators.required,
+        CustomValidators.onlyNumber
+      ]),
+      renewable_energy: new FormControl(
+        this.energyConsumption.renewable_energy,
+        [Validators.required, CustomValidators.onlyNumber]
+      )
+    });
+  }
+
+  onUpdate() {
+    let energyConsumption: EnergyConsumption = this.updateForm
+      .value as EnergyConsumption;
+    energyConsumption.year_of_investigation = Number(this.getYearInUrl());
+    this.energyConsumptionsHttpService
+      .updateEnnergyConsumption(energyConsumption)
+      .subscribe(data => {
+        this.router.navigate([
+          `${RouteNames.ENTERPRISE.ENERGY_CONSUMPTIONS.URL}`
+        ]);
+      });
+  }
+
+  getYearInUrl() {
+    return this.router.url.split("/")[this.router.url.split("/").length - 1];
+  }
 }

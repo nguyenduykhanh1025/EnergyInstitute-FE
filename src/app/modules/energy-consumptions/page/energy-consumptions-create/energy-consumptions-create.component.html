@@ -1,0 +1,232 @@
+<mat-card style="text-align: center;">
+  <mat-card-title>Tạo mới thông tin tiêu thụ năng lượng</mat-card-title>
+
+  <form
+    *ngIf="updateForm != null"
+    [formGroup]="updateForm"
+    (ngSubmit)="onCreate()"
+  >
+    <mat-card style="text-align: center;">
+      <mat-grid-list cols="2" rowHeight="1:1">
+        <mat-grid-tile >
+          <mat-list role="list">
+            <mat-list-item role="listitem">
+              <b>Năm điều tra: </b>
+              <mat-form-field class="input-value">
+                <mat-label>Năm điều tra</mat-label>
+                <mat-select formControlName="year_of_investigation">
+                  <mat-option *ngFor="let year of yearList" [value]="year">
+                    {{ year }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <app-error-label
+                [control]="updateForm.controls.year_of_investigation"
+                label=""
+              ></app-error-label>
+            </mat-list-item>
+
+            <mat-list-item role="listitem">
+              <b>Năng lượng tiêu thụ: </b>
+              <mat-form-field class="input-value">
+                <mat-label>Năng lượng tiêu thụ</mat-label>
+                <input
+                  matInput
+                  placeholder="Ex. Pizza"
+                  formControlName="self_produced_electricity"
+                />
+              </mat-form-field>
+              <app-error-label
+                [control]="updateForm.controls.self_produced_electricity"
+                label=""
+              ></app-error-label>
+            </mat-list-item>
+
+            <mat-list-item role="listitem">
+              <b>Năng lượng phát thải: </b>
+              <mat-form-field class="input-value">
+                <mat-label>Năng lượng phát thải</mat-label>
+                <input
+                  matInput
+                  placeholder="Ex. Pizza"
+                  formControlName="consumption_electricity"
+                />
+              </mat-form-field>
+              <app-error-label
+                [control]="updateForm.controls.consumption_electricity"
+                label=""
+              ></app-error-label>
+            </mat-list-item>
+
+            <mat-list-item role="listitem">
+              <b>Than đá: </b>
+              <mat-form-field class="input-value">
+                <mat-label>Than đá</mat-label>
+                <input
+                  matInput
+                  placeholder="Ex. Pizza"
+                  formControlName="coal"
+                />
+              </mat-form-field>
+              <app-error-label
+                [control]="updateForm.controls.coal"
+                label=""
+              ></app-error-label>
+            </mat-list-item>
+
+            <mat-list-item role="listitem">
+              <b>Than bitium: </b>
+              <mat-form-field class="input-value">
+                <mat-label>Than bitium</mat-label>
+                <input
+                  matInput
+                  placeholder="Ex. Pizza"
+                  formControlName="bitum_coal"
+                />
+              </mat-form-field>
+              <app-error-label
+                [control]="updateForm.controls.bitum_coal"
+                label=""
+              ></app-error-label>
+            </mat-list-item>
+
+            <mat-list-item role="listitem">
+              <b>Than cốc: </b>
+              <mat-form-field class="input-value">
+                <mat-label>Than cốc</mat-label>
+                <input
+                  matInput
+                  placeholder="Ex. Pizza"
+                  formControlName="coke_coal"
+                />
+              </mat-form-field>
+              <app-error-label
+                [control]="updateForm.controls.coke_coal"
+                label=""
+              ></app-error-label>
+            </mat-list-item>
+
+            <mat-list-item role="listitem">
+              <b>Than cám: </b>
+              <mat-form-field class="input-value">
+                <mat-label>Than cám</mat-label>
+                <input
+                  matInput
+                  placeholder="Ex. Pizza"
+                  formControlName="dust_coal"
+                />
+              </mat-form-field>
+              <app-error-label
+                [control]="updateForm.controls.dust_coal"
+                label=""
+              ></app-error-label>
+            </mat-list-item>
+          </mat-list>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-list role="list">
+            <mat-list-item role="listitem">
+              <b>KO: </b>
+              <mat-form-field class="input-value">
+                <mat-label>KO</mat-label>
+                <input matInput placeholder="Ex. Pizza" formControlName="ko" />
+              </mat-form-field>
+              <app-error-label
+                [control]="updateForm.controls.ko"
+                label=""
+              ></app-error-label>
+            </mat-list-item>
+
+            <mat-list-item role="listitem">
+              <b>DDO: </b>
+              <mat-form-field class="input-value">
+                <mat-label>DDO</mat-label>
+                <input matInput placeholder="Ex. Pizza" formControlName="do" />
+              </mat-form-field>
+              <app-error-label
+                [control]="updateForm.controls.do"
+                label=""
+              ></app-error-label>
+            </mat-list-item>
+
+            <mat-list-item role="listitem">
+              <b>FO: </b>
+              <mat-form-field class="input-value">
+                <mat-label>FO</mat-label>
+                <input matInput placeholder="Ex. Pizza" formControlName="fo" />
+              </mat-form-field>
+              <app-error-label
+                [control]="updateForm.controls.fo"
+                label=""
+              ></app-error-label>
+            </mat-list-item>
+
+            <mat-list-item role="listitem">
+              <b>LPG: </b>
+              <mat-form-field class="input-value">
+                <mat-label>LPG</mat-label>
+                <input matInput placeholder="Ex. Pizza" formControlName="lpg" />
+              </mat-form-field>
+              <app-error-label
+                [control]="updateForm.controls.lpg"
+                label=""
+              ></app-error-label>
+            </mat-list-item>
+
+            <mat-list-item role="listitem">
+              <b>NG: </b>
+              <mat-form-field class="input-value">
+                <mat-label>NG</mat-label>
+                <input matInput placeholder="Ex. Pizza" formControlName="ng" />
+              </mat-form-field>
+              <app-error-label
+                [control]="updateForm.controls.ng"
+                label=""
+              ></app-error-label>
+            </mat-list-item>
+
+            <mat-list-item role="listitem">
+              <b>Năng lượng sinh khối: </b>
+              <mat-form-field class="input-value">
+                <mat-label>Năng lượng sinh khối</mat-label>
+                <input
+                  matInput
+                  placeholder="Ex. Pizza"
+                  formControlName="biomass_energy"
+                />
+              </mat-form-field>
+              <app-error-label
+                [control]="updateForm.controls.biomass_energy"
+                label=""
+              ></app-error-label>
+            </mat-list-item>
+            <mat-list-item role="listitem">
+              <b>Năng lượng tái tạo: </b>
+              <mat-form-field class="input-value">
+                <mat-label>Năng lượng tái tạo</mat-label>
+                <input
+                  matInput
+                  placeholder="Ex. Pizza"
+                  formControlName="renewable_energy"
+                />
+              </mat-form-field>
+              <app-error-label
+                [control]="updateForm.controls.renewable_energy"
+                label=""
+              ></app-error-label>
+            </mat-list-item>
+          </mat-list>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-card>
+    <button mat-raised-button>Trở về</button>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="!updateForm.valid"
+    >
+      Tạo mới
+    </button>
+  </form>
+</mat-card>

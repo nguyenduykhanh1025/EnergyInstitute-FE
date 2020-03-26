@@ -1,4 +1,4 @@
-export interface EnergyConsumptions {
+export interface EnergyConsumption {
   id: number;
   enterprise_id: number;
   year_of_investigation: number;

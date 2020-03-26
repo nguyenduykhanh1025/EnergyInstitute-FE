@@ -29,6 +29,9 @@ export const RouteNames = {
       },
       UPDATE: {
         name: "update"
+      },
+      CREATE: {
+        name: "create"
       }
     }
   }
