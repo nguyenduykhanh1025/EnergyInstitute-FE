@@ -16,7 +16,8 @@ import { MatGridListModule } from "@angular/material/grid-list";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatTreeModule } from "@angular/material/tree";
 import { MatTableModule } from "@angular/material/table";
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginatorModule } from "@angular/material/paginator";
+import { MatDialogModule } from "@angular/material/dialog";
 
 @NgModule({
   declarations: [],
@@ -38,7 +39,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatDividerModule,
     MatTreeModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatDialogModule
   ]
 })
 export class AppMaterialModule {}

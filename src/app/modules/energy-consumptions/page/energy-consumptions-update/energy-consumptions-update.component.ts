@@ -5,7 +5,10 @@ import { CustomValidators } from "src/app/shared/validations/custom-validators";
 import { EnergyConsumptionsHttpService } from "src/app/core/http/energy-consumptions-http.service";
 import { Router } from "@angular/router";
 import { RouteNames } from "src/app/constant/route-name";
-
+import { MatDialog } from "@angular/material/dialog";
+import { ConfirmationDialogComponent } from "src/app/shared/components/confirmation-dialog/confirmation-dialog.component";
+import { Value } from "src/app/constant/string";
+import { CustomSnackbarService } from "src/app/core/services/custom-snackbar.service";
 @Component({
   selector: "app-energy-consumptions-update",
   templateUrl: "./energy-consumptions-update.component.html",
@@ -17,7 +20,9 @@ export class EnergyConsumptionsUpdateComponent implements OnInit {
 
   constructor(
     private energyConsumptionsHttpService: EnergyConsumptionsHttpService,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog,
+    public snackbarService: CustomSnackbarService
   ) {}
 
   ngOnInit(): void {
@@ -93,19 +98,38 @@ export class EnergyConsumptionsUpdateComponent implements OnInit {
   }
 
   onUpdate() {
-    let energyConsumption: EnergyConsumption = this.updateForm
-      .value as EnergyConsumption;
-    energyConsumption.year_of_investigation = Number(this.getYearInUrl());
-    this.energyConsumptionsHttpService
-      .updateEnnergyConsumption(energyConsumption)
-      .subscribe(data => {
-        this.router.navigate([
-          `${RouteNames.ENTERPRISE.ENERGY_CONSUMPTIONS.URL}`
-        ]);
-      });
+    if (!this.updateForm.invalid) {
+      let energyConsumption: EnergyConsumption = this.updateForm
+        .value as EnergyConsumption;
+      energyConsumption.year_of_investigation = Number(this.getYearInUrl());
+      this.energyConsumptionsHttpService
+        .updateEnnergyConsumption(energyConsumption)
+        .subscribe(data => {
+          this.router.navigate([
+            `${RouteNames.ENTERPRISE.ENERGY_CONSUMPTIONS.URL}`
+          ]);
+        });
+    } else {
+      this.snackbarService.success(`${Value.action_fail}`);
+    }
   }
 
   getYearInUrl() {
     return this.router.url.split("/")[this.router.url.split("/").length - 1];
+  }
+
+  onReturn() {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: "250px",
+      data: { title: Value.return, message: Value.return_qes }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == true) {
+        this.router.navigate([
+          `/${RouteNames.ENTERPRISE.ENERGY_CONSUMPTIONS.URL}`
+        ]);
+      }
+    });
   }
 }

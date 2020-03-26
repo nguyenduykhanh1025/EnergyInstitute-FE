@@ -5,7 +5,7 @@
 }
 
 table {
-  width: 100%;
+  width: 150%;
 }
 
 td.mat-column-star {
@@ -13,9 +13,6 @@ td.mat-column-star {
   padding-right: 8px;
 }
 
-th.mat-column-position, td.mat-column-position {
-  padding-left: 8px;
-}
 
 .mat-table-sticky:first-child {
   border-right: 1px solid #e0e0e0;

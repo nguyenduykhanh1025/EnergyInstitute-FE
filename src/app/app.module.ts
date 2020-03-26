@@ -14,13 +14,14 @@ import { SharedModule } from "./shared/shared.module";
 import { HttpTokenInterceptor } from "./core/interceptors/http-token.interceptor";
 import { JwtModule } from "@auth0/angular-jwt";
 import { HttpErrorInterceptor } from "./core/interceptors/error-handler.interceptor";
+import { ConfirmationDialogComponent } from "./shared/components/confirmation-dialog/confirmation-dialog.component";
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
 }
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent],
+  declarations: [AppComponent, NavbarComponent, ConfirmationDialogComponent],
   imports: [
     CommonModule,
     BrowserModule,

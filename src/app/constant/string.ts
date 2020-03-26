@@ -4,5 +4,7 @@ export const Value = {
   component: "component",
   category: "category",
   action_success: "Thành công",
-  action_fail: "Thất bại"
+  action_fail: "Thất bại",
+  return_qes: "Bạn muốn trở về",
+  return: "Trở về"
 };

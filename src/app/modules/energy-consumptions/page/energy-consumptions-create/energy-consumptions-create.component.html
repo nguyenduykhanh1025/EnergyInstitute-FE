@@ -1,14 +1,10 @@
 <mat-card style="text-align: center;">
   <mat-card-title>Tạo mới thông tin tiêu thụ năng lượng</mat-card-title>
 
-  <form
-    *ngIf="updateForm != null"
-    [formGroup]="updateForm"
-    (ngSubmit)="onCreate()"
-  >
+  <form *ngIf="updateForm != null" [formGroup]="updateForm">
     <mat-card style="text-align: center;">
       <mat-grid-list cols="2" rowHeight="1:1">
-        <mat-grid-tile >
+        <mat-grid-tile>
           <mat-list role="list">
             <mat-list-item role="listitem">
               <b>Năm điều tra: </b>
@@ -219,11 +215,12 @@
         </mat-grid-tile>
       </mat-grid-list>
     </mat-card>
-    <button mat-raised-button>Trở về</button>
+    <button mat-raised-button (click)="onReturn()">Trở về</button>
     <button
       mat-raised-button
       color="primary"
       type="submit"
+      (click)="onCreate()"
       [disabled]="!updateForm.valid"
     >
       Tạo mới
