@@ -4,31 +4,26 @@
 </mat-toolbar>
 
 <mat-accordion>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        panel 1
-      </mat-panel-title>
-    </mat-expansion-panel-header>
-
-    <a [routerLink]="['/enterprise/show']"
-      ><button mat-button style="width: 100%;">Thông tin công ty</button></a
-    >
-    <mat-divider></mat-divider>
-    <a [routerLink]="['/energy_consumptions']"
-      ><button mat-button style="width: 100%;">
-        Thông tin tiêu thụ năng lượng
-      </button></a
-    >
-    <mat-divider></mat-divider>
-  </mat-expansion-panel>
-
+  <mat-divider></mat-divider>
   <button
-    mat-raised-button
-    color="primary"
-    style="width: 100%;"
-    (click)="logout()"
+    mat-button
+    [routerLink]="['/energy_consumptions']"
+    routerLinkActive="active-link"
   >
+    <i class="material-icons">fireplace</i>
+    Thông tin tiêu thụ năng lượng
+  </button>
+  <mat-divider></mat-divider>
+  <button
+    mat-button
+    [routerLink]="['/enterprise/show']"
+    routerLinkActive="active-link"
+  >
+    <i class="material-icons" >domain</i>
+    Thông tin công ty
+  </button>
+  <mat-divider></mat-divider>
+  <button mat-raised-button color="primary" (click)="logout()">
     <mat-icon aria-hidden="false" aria-label="Example home icon"
       >logout</mat-icon
     >
