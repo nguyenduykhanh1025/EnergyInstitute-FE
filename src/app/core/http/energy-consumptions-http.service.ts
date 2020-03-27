@@ -32,4 +32,10 @@ export class EnergyConsumptionsHttpService {
       .get(this.energyConsumptionsUri, param)
       .pipe(map(res => res.energy_consumptions));
   }
+
+  deleteFollowId(id: number) {
+    return this.apiService
+      .delete(`${this.energyConsumptionsUri}/${id}`)
+      .pipe(map(res => res));
+  }
 }

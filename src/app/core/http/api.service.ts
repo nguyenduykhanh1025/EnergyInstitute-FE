@@ -65,7 +65,7 @@ export class ApiService {
     return this.http.delete(`${environment.api_url}${path}`).pipe(
       map((response: any) => {
         this.customSnackbarService.success(Value.action_success);
-        return response.data;
+        return null;
       })
     );
   }

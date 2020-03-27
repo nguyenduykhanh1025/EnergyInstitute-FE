@@ -15,13 +15,14 @@ import { HttpTokenInterceptor } from "./core/interceptors/http-token.interceptor
 import { JwtModule } from "@auth0/angular-jwt";
 import { HttpErrorInterceptor } from "./core/interceptors/error-handler.interceptor";
 import { ConfirmationDialogComponent } from "./shared/components/confirmation-dialog/confirmation-dialog.component";
+import { ConfirmDeleteDialogComponent } from './shared/components/confirm-delete-dialog/confirm-delete-dialog.component';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
 }
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, ConfirmationDialogComponent],
+  declarations: [AppComponent, NavbarComponent, ConfirmationDialogComponent, ConfirmDeleteDialogComponent],
   imports: [
     CommonModule,
     BrowserModule,

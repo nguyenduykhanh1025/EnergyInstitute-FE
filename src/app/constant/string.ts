@@ -6,5 +6,7 @@ export const Value = {
   action_success: "Thành công",
   action_fail: "Thất bại",
   return_qes: "Bạn muốn trở về",
-  return: "Trở về"
+  return: "Trở về",
+  delete_qes: "Bạn muốn xóa",
+  delete: "Xóa"
 };

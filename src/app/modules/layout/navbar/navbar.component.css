@@ -8,3 +8,6 @@ button {
     background-color: #e8eaed;
     font-size: 15px;
 }
+.home {
+    cursor: pointer;
+}
