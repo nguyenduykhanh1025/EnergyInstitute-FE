@@ -1,3 +1,7 @@
 .input-value {
-    margin-left: 20px;
+  margin-left: 20px;
+}
+.title {
+  width: 170px;
+  text-align: left;
 }
