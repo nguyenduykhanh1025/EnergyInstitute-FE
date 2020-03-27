@@ -21,10 +21,10 @@
             <mat-list-item role="listitem">
               <b>Năng lượng tiêu thụ: </b>
               <mat-form-field class="input-value">
-                <mat-label>Năng lượng tiêu thụ</mat-label>
+                <mat-label>(kWh)*</mat-label>
                 <input
                   matInput
-                  placeholder="Ex. Pizza"
+                  placeholder="1025"
                   formControlName="self_produced_electricity"
                 />
               </mat-form-field>
@@ -37,10 +37,10 @@
             <mat-list-item role="listitem">
               <b>Năng lượng phát thải: </b>
               <mat-form-field class="input-value">
-                <mat-label>Năng lượng phát thải</mat-label>
+                <mat-label>(kWh)*</mat-label>
                 <input
                   matInput
-                  placeholder="Ex. Pizza"
+                  placeholder="1025"
                   formControlName="consumption_electricity"
                 />
               </mat-form-field>
@@ -53,10 +53,10 @@
             <mat-list-item role="listitem">
               <b>Than đá: </b>
               <mat-form-field class="input-value">
-                <mat-label>Than đá</mat-label>
+                <mat-label>(tấn)*</mat-label>
                 <input
                   matInput
-                  placeholder="Ex. Pizza"
+                  placeholder="1025"
                   formControlName="coal"
                 />
               </mat-form-field>
@@ -69,10 +69,10 @@
             <mat-list-item role="listitem">
               <b>Than bitium: </b>
               <mat-form-field class="input-value">
-                <mat-label>Than bitium</mat-label>
+                <mat-label>(tấn)*</mat-label>
                 <input
                   matInput
-                  placeholder="Ex. Pizza"
+                  placeholder="1025"
                   formControlName="bitum_coal"
                 />
               </mat-form-field>
@@ -85,10 +85,10 @@
             <mat-list-item role="listitem">
               <b>Than cốc: </b>
               <mat-form-field class="input-value">
-                <mat-label>Than cốc</mat-label>
+                <mat-label>(tấn)*</mat-label>
                 <input
                   matInput
-                  placeholder="Ex. Pizza"
+                  placeholder="1025"
                   formControlName="coke_coal"
                 />
               </mat-form-field>
@@ -101,10 +101,10 @@
             <mat-list-item role="listitem">
               <b>Than cám: </b>
               <mat-form-field class="input-value">
-                <mat-label>Than cám</mat-label>
+                <mat-label>(tấn)*</mat-label>
                 <input
                   matInput
-                  placeholder="Ex. Pizza"
+                  placeholder="1025"
                   formControlName="dust_coal"
                 />
               </mat-form-field>
@@ -121,8 +121,8 @@
             <mat-list-item role="listitem">
               <b>DDO: </b>
               <mat-form-field class="input-value">
-                <mat-label>DDO</mat-label>
-                <input matInput placeholder="Ex. Pizza" formControlName="do" />
+                <mat-label>(1000l)*</mat-label>
+                <input matInput placeholder="1025" formControlName="do" />
               </mat-form-field>
               <app-error-label
                 [control]="updateForm.controls.do"
@@ -133,8 +133,8 @@
             <mat-list-item role="listitem">
               <b>FO: </b>
               <mat-form-field class="input-value">
-                <mat-label>FO</mat-label>
-                <input matInput placeholder="Ex. Pizza" formControlName="fo" />
+                <mat-label>(1000l)*</mat-label>
+                <input matInput placeholder="1025" formControlName="fo" />
               </mat-form-field>
               <app-error-label
                 [control]="updateForm.controls.fo"
@@ -145,8 +145,8 @@
             <mat-list-item role="listitem">
               <b>LPG: </b>
               <mat-form-field class="input-value">
-                <mat-label>LPG</mat-label>
-                <input matInput placeholder="Ex. Pizza" formControlName="lpg" />
+                <mat-label>(tấn)*</mat-label>
+                <input matInput placeholder="1025" formControlName="lpg" />
               </mat-form-field>
               <app-error-label
                 [control]="updateForm.controls.lpg"
@@ -157,8 +157,8 @@
             <mat-list-item role="listitem">
               <b>NG: </b>
               <mat-form-field class="input-value">
-                <mat-label>NG</mat-label>
-                <input matInput placeholder="Ex. Pizza" formControlName="ng" />
+                <mat-label>(triệu m3)*</mat-label>
+                <input matInput placeholder="1025" formControlName="ng" />
               </mat-form-field>
               <app-error-label
                 [control]="updateForm.controls.ng"
@@ -169,10 +169,10 @@
             <mat-list-item role="listitem">
               <b>Năng lượng sinh khối: </b>
               <mat-form-field class="input-value">
-                <mat-label>Năng lượng sinh khối</mat-label>
+                <mat-label>(TWE)*</mat-label>
                 <input
                   matInput
-                  placeholder="Ex. Pizza"
+                  placeholder="1025"
                   formControlName="biomass_energy"
                 />
               </mat-form-field>
@@ -185,10 +185,10 @@
             <mat-list-item role="listitem">
               <b>Năng lượng tái tạo: </b>
               <mat-form-field class="input-value">
-                <mat-label>Năng lượng tái tạo</mat-label>
+                <mat-label>(TWE)*</mat-label>
                 <input
                   matInput
-                  placeholder="Ex. Pizza"
+                  placeholder="1025"
                   formControlName="renewable_energy"
                 />
               </mat-form-field>
@@ -202,7 +202,7 @@
               <b>KO: </b>
               <mat-form-field class="input-value">
                 <mat-label>Favorite food</mat-label>
-                <input matInput placeholder="Ex. Pizza" formControlName="ko" />
+                <input matInput placeholder="1025" formControlName="ko" />
               </mat-form-field>
               <app-error-label
                 [control]="updateForm.controls.ko"
