@@ -1,0 +1,65 @@
+<mat-card style="text-align: center;">
+  <mat-card-title>Thông tin sản phẩm</mat-card-title>
+  <div class="container mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" class="tb-product">
+      <ng-container matColumnDef="id" sticky>
+        <th mat-header-cell *matHeaderCellDef>Mã sản phẩm</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.id }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="name" sticky>
+        <th mat-header-cell *matHeaderCellDef>Tên sản phẩm</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.name }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="update" sticky>
+        <th mat-header-cell *matHeaderCellDef>Cập nhập</th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-button color="primary" (click)="onUpdate(element.id)">
+            Cập nhập
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="delete" sticky>
+        <th mat-header-cell *matHeaderCellDef>Xóa</th>
+        <td mat-cell *matCellDef="let element; let i = index">
+          <button
+            mat-button
+            color="warn"
+            (click)="onDeleteProduct(element.id, i)"
+          >
+            Xóa
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="productivitie" sticky>
+        <th mat-header-cell *matHeaderCellDef>Sản lượng sản xuất</th>
+        <td mat-cell *matCellDef="let element">
+          <button
+            mat-button
+            (click)="onWatchProductivitie(element.id)"
+          >
+            Xem
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+  <button
+    mat-raised-button
+    color="primary"
+    id="btn-create"
+    (click)="onCreateProduct()"
+  >
+    Tạo mới sản phẩm
+  </button>
+</mat-card>

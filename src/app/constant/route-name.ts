@@ -33,6 +33,27 @@ export const RouteNames = {
       CREATE: {
         name: "create"
       }
+    },
+    PRODUCT: {
+      URL: "products",
+      SHOW: {
+        name: ""
+      },
+      CREATE: {
+        name: "create"
+      },
+      UPDATE: {
+        name: "update"
+      },
+      PRODUCTIVITIE: {
+        URL: "productivities",
+        SHOW: {
+          name: ""
+        },
+        CREATE: {
+          name: "create"
+        }
+      }
     }
   }
 };

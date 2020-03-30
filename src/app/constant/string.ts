@@ -8,5 +8,7 @@ export const Value = {
   return_qes: "Bạn muốn trở về",
   return: "Trở về",
   delete_qes: "Bạn muốn xóa",
-  delete: "Xóa"
+  delete: "Xóa",
+  update: "update",
+  post: "post"
 };

@@ -1,0 +1,8 @@
+<mat-card style="text-align: center;">
+  <mat-card-title>Cập nhập sản phẩm</mat-card-title>
+  <app-product-input
+    [formData]="updateForm"
+    (productOutput)="handleProductOutput($event)"
+    [status]="status"
+  ></app-product-input>
+</mat-card>

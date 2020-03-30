@@ -44,6 +44,30 @@ const routes: Routes = [
       )
   },
   {
+    path: RouteNames.ENTERPRISE.PRODUCT.URL,
+    data: {
+      title: RouteNames.AUTH.title,
+      showHeader: false,
+      showSidebar: false
+    },
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import("./modules/product/product.module").then(m => m.ProductModule)
+  },
+  {
+    path: RouteNames.ENTERPRISE.PRODUCT.PRODUCTIVITIE.URL,
+    data: {
+      title: RouteNames.AUTH.title,
+      showHeader: false,
+      showSidebar: false
+    },
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import("./modules/productivitie/productivitie.module").then(
+        m => m.ProductivitieModule
+      )
+  },
+  {
     path: RouteNames.AUTH.name,
     data: {
       title: RouteNames.AUTH.title,

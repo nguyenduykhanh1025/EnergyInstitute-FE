@@ -19,8 +19,17 @@
     [routerLink]="['/enterprise/show']"
     routerLinkActive="active-link"
   >
-    <i class="material-icons" >domain</i>
+    <i class="material-icons">domain</i>
     Thông tin công ty
+  </button>
+  <mat-divider></mat-divider>
+  <button
+    mat-button
+    [routerLink]="['/products']"
+    routerLinkActive="active-link"
+  >
+    <i class="material-icons">emoji_objects</i>
+    Thông tin sản phẩm
   </button>
   <mat-divider></mat-divider>
   <button mat-raised-button color="primary" (click)="logout()">
