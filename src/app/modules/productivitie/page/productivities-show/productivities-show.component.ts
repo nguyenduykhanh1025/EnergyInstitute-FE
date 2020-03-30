@@ -8,6 +8,7 @@ import { ProductHttpService } from "src/app/core/http/product-http.service";
 import { MatDialog } from "@angular/material/dialog";
 import { ConfirmDeleteDialogComponent } from "src/app/shared/components/confirm-delete-dialog/confirm-delete-dialog.component";
 import { Value } from "src/app/constant/string";
+import { RouteNames } from 'src/app/constant/route-name';
 
 @Component({
   selector: "app-productivities-show",
@@ -63,6 +64,9 @@ export class ProductivitiesShowComponent implements OnInit {
     });
   }
 
+  onCreate() {
+    // this.router.navigate([`${RouteNames.ENTERPRISE.}`])
+  }
   onConfirmDelete(id: number, index: number) {
     this.productivitieHttpService
       .deleteFollowId(id, this.product.id)
