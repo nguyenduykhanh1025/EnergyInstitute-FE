@@ -1,0 +1,41 @@
+<form *ngIf="formData != null" [formGroup]="formData" id="form">
+  <mat-list-item role="listitem">
+    <b class="title">Năm điều tra: </b>
+    <mat-form-field class="input-value">
+      <mat-label>Chọn giá trị</mat-label>
+      <mat-select formControlName="year_of_investigation" [disabled]="statusDisabledYearOfInvent">
+        <mat-option *ngFor="let year of yearList" [value]="year">
+          {{ year }}
+        </mat-option>
+      </mat-select>
+
+      <app-error-label
+        [control]="formData.controls.year_of_investigation"
+        label=""
+      ></app-error-label>
+    </mat-form-field>
+  </mat-list-item>
+
+  <mat-list-item role="listitem">
+    <b class="title">Số lượng sản phẩm: </b>
+    <mat-form-field class="input-value" style="width: 20%;">
+      <mat-label>Giá trị*</mat-label>
+      <input matInput placeholder="69" formControlName="amount" />
+      <app-error-label
+        [control]="formData.controls.amount"
+        label=""
+      ></app-error-label>
+    </mat-form-field>
+  </mat-list-item>
+
+  <button mat-raised-button (click)="onReturn()">Trở về</button>
+  <button
+    mat-raised-button
+    color="warn"
+    id="btn-create"
+    [disabled]="!formData.valid"
+    (click)="onOutput()"
+  >
+    {{ status == "post" ? "Tạo mới" : "Cập nhập" }}
+  </button>
+</form>

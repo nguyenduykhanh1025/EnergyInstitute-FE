@@ -8,6 +8,7 @@ import { ProductHttpService } from "src/app/core/http/product-http.service";
 import { MatDialog } from "@angular/material/dialog";
 import { ConfirmDeleteDialogComponent } from "src/app/shared/components/confirm-delete-dialog/confirm-delete-dialog.component";
 import { Value } from "src/app/constant/string";
+import { RouteNames } from "src/app/constant/route-name";
 
 @Component({
   selector: "app-productivities-show",
@@ -47,10 +48,6 @@ export class ProductivitiesShowComponent implements OnInit {
       });
   }
 
-  onUpdate(id: number) {
-    console.log(id);
-  }
-
   onDelete(id: number, index: number) {
     const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {
       width: "250px",
@@ -61,6 +58,23 @@ export class ProductivitiesShowComponent implements OnInit {
         this.onConfirmDelete(id, index);
       }
     });
+  }
+
+  onCreate() {
+    this.router.navigate([
+      RouteNames.ENTERPRISE.PRODUCT.PRODUCTIVITIE.URL,
+      this.getIdProductInUrl(),
+      RouteNames.ENTERPRISE.ENERGY_CONSUMPTIONS.CREATE.name
+    ]);
+  }
+
+  onUpdate(year: number) {
+    this.router.navigate([
+      RouteNames.ENTERPRISE.PRODUCT.PRODUCTIVITIE.URL,
+      this.getIdProductInUrl(),
+      RouteNames.ENTERPRISE.ENERGY_CONSUMPTIONS.UPDATE.name,
+      year
+    ]);
   }
 
   onConfirmDelete(id: number, index: number) {
