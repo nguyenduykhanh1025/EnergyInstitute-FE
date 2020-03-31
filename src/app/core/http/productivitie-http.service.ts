@@ -27,4 +27,20 @@ export class ProductivitieHttpService {
     let uri = `${this.productUri}/${idProduct}/${RouteNames.ENTERPRISE.PRODUCT.PRODUCTIVITIE.URL}/${id}`;
     return this.apiService.delete(uri).pipe(map(res => res));
   }
+
+  createProductivitie(data: Productivitie, productId: number) {
+    let uri = `${this.productUri}/${productId}/${RouteNames.ENTERPRISE.PRODUCT.PRODUCTIVITIE.URL}`;
+    return this.apiService.put(uri, data).pipe(res => res);
+  }
+
+  getProductivitieFollowYear(
+    year: number,
+    productId: number
+  ): Observable<Productivitie> {
+    let uri = `${this.productUri}/${productId}/${RouteNames.ENTERPRISE.PRODUCT.PRODUCTIVITIE.URL}`;
+    let param = new HttpParams().set("year", `${year}`);
+    return this.apiService
+      .get(uri, param)
+      .pipe(map(res => res.productivities[0]));
+  }
 }

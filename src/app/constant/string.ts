@@ -10,5 +10,7 @@ export const Value = {
   delete_qes: "Bạn muốn xóa",
   delete: "Xóa",
   update: "update",
-  post: "post"
+  post: "post",
+  product_id: "product_id",
+  year: "year"
 };
