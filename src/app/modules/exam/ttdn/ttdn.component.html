@@ -4,7 +4,7 @@
     <table mat-table [dataSource]="dataSource">
       <!-- Name Column -->
       <ng-container matColumnDef="year_of_investigation" sticky>
-        <th mat-header-cell *matHeaderCellDef>Năm điều tra</th>
+        <th mat-header-cell *matHeaderCellDef class="title">Năm điều tra</th>
         <td mat-cell *matCellDef="let element">
           {{ element.nam }}
         </td>
@@ -12,84 +12,84 @@
 
       <!-- Position Column -->
       <ng-container matColumnDef="self_produced_electricity">
-        <th mat-header-cell *matHeaderCellDef>Mã doanh nghiệp</th>
+        <th mat-header-cell *matHeaderCellDef class="title">Mã doanh nghiệp</th>
         <td mat-cell *matCellDef="let element">
           {{ element.ma }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="consumption_electricity">
-        <th mat-header-cell *matHeaderCellDef>Tên DN</th>
+        <th mat-header-cell *matHeaderCellDef class="title">Tên DN</th>
         <td mat-cell *matCellDef="let element">
           {{ element.ten }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="coal" style="width: 100px;">
-        <th mat-header-cell *matHeaderCellDef>Tỉnh</th>
+        <th mat-header-cell *matHeaderCellDef class="title">Tỉnh</th>
         <td mat-cell *matCellDef="let element">
           {{ element.tinh }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="bitum_coal">
-        <th mat-header-cell *matHeaderCellDef>Huyện</th>
+        <th mat-header-cell *matHeaderCellDef class="title">Huyện</th>
         <td mat-cell *matCellDef="let element">
           {{ element.huyen }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="coke_coal">
-        <th mat-header-cell *matHeaderCellDef>Xã</th>
+        <th mat-header-cell *matHeaderCellDef class="title">Xã</th>
         <td mat-cell *matCellDef="let element">
           {{ element.xa }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="dust_coal">
-        <th mat-header-cell *matHeaderCellDef>Tọa độ X</th>
+        <th mat-header-cell *matHeaderCellDef class="title">Tọa độ X</th>
         <td mat-cell *matCellDef="let element">
           {{ element.toa_do_x }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="ko">
-        <th mat-header-cell *matHeaderCellDef>Tọa độ Y</th>
+        <th mat-header-cell *matHeaderCellDef class="title">Tọa độ Y</th>
         <td mat-cell *matCellDef="let element">
           {{ element.toa_do_y }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="do">
-        <th mat-header-cell *matHeaderCellDef>Nghành cấp 1</th>
+        <th mat-header-cell *matHeaderCellDef class="title">Nghành cấp 1</th>
         <td mat-cell *matCellDef="let element">
           {{ element.nganh_cap_1 }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="fo">
-        <th mat-header-cell *matHeaderCellDef>Mã cấp 2</th>
+        <th mat-header-cell *matHeaderCellDef class="title">Mã cấp 2</th>
         <td mat-cell *matCellDef="let element">
           {{ element.ma_cap_2 }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="lpg">
-        <th mat-header-cell *matHeaderCellDef>Tên nghành cấp 2</th>
+        <th mat-header-cell *matHeaderCellDef class="title">Tên nghành cấp 2</th>
         <td mat-cell *matCellDef="let element">
           {{ element.ten_nganh_cap_2 }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="ng">
-        <th mat-header-cell *matHeaderCellDef>GTSX</th>
+        <th mat-header-cell *matHeaderCellDef class="title">GTSX</th>
         <td mat-cell *matCellDef="let element">
           {{ element.gtsx }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="biomass_energy">
-        <th mat-header-cell *matHeaderCellDef>Số lượng Lao động</th>
+        <th mat-header-cell *matHeaderCellDef class="title">Số lượng Lao động</th>
         <td mat-cell *matCellDef="let element">
           {{ element.so_lao_dong }}
         </td>

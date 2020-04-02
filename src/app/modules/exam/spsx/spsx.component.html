@@ -1,5 +1,5 @@
 <mat-card style="text-align: center;">
-  <mat-card-title>Thông tin tiêu thụ năng lượng</mat-card-title>
+  <mat-card-title>Sản phẩm sản xuất</mat-card-title>
   <div class="example-container mat-elevation-z8">
     <table mat-table [dataSource]="dataSource">
       <!-- Name Column -->
@@ -26,42 +26,42 @@
       </ng-container>
 
       <ng-container matColumnDef="stt" style="width: 100px;">
-        <th mat-header-cell *matHeaderCellDef>Mã cấp 2</th>
+        <th mat-header-cell *matHeaderCellDef>stt</th>
         <td mat-cell *matCellDef="let element">
           {{ element.stt }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="ten_san_pham">
-        <th mat-header-cell *matHeaderCellDef>Tên nghành</th>
+        <th mat-header-cell *matHeaderCellDef>Tên sản phẩm</th>
         <td mat-cell *matCellDef="let element">
           {{ element.ten_san_pham }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="ma_cap_2">
-        <th mat-header-cell *matHeaderCellDef>Điện (NLTT)</th>
+        <th mat-header-cell *matHeaderCellDef>Mã nghành cấp 2</th>
         <td mat-cell *matCellDef="let element">
           {{ element.ma_cap_2 }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="ten_nganh_cap_2">
-        <th mat-header-cell *matHeaderCellDef>Than bitum (NLTT)</th>
+        <th mat-header-cell *matHeaderCellDef>Tên nghành cấp 2</th>
         <td mat-cell *matCellDef="let element">
           {{ element.ten_nganh_cap_2 }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="don_vi">
-        <th mat-header-cell *matHeaderCellDef>Than cốc (NLTT)</th>
+        <th mat-header-cell *matHeaderCellDef>Đơn vị</th>
         <td mat-cell *matCellDef="let element">
           {{ element.don_vi }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="so_luong">
-        <th mat-header-cell *matHeaderCellDef>KO (NLTT)</th>
+        <th mat-header-cell *matHeaderCellDef>Số lượng</th>
         <td mat-cell *matCellDef="let element">
           {{ element.so_luong }}
         </td>
@@ -96,7 +96,7 @@
       </ng-container>
 
       <ng-container matColumnDef="npk_pnl">
-        <th mat-header-cell *matHeaderCellDef>NPK,NH3 (NLTT)</th>
+        <th mat-header-cell *matHeaderCellDef>NPK,NH3 (PNL)</th>
         <td mat-cell *matCellDef="let element">
           {{ element.npk_pnl }}
         </td>

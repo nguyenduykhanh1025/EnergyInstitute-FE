@@ -6,8 +6,7 @@
 }
 
 table {
-  width: 250%;
-  margin-top: 20px;
+  width: 180%;
 }
 
 td.mat-column-star {
@@ -30,4 +29,7 @@ td.mat-column-star {
 .empty {
     font-size: 10px;
     color: red;
+}
+.title {
+  text-align: center;
 }

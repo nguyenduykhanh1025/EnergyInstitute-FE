@@ -8,7 +8,7 @@ import { AuthService } from "./core/authentication/auth.service";
 })
 export class AppComponent implements OnInit {
   title = "EnergyInstitute-FE";
-  
+
   constructor(private authService: AuthService) {}
   ngOnInit() {}
 

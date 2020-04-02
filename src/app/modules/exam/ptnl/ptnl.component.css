@@ -6,7 +6,7 @@
 }
 
 table {
-  width: 400%;
+  width: 500%;
 }
 
 td.mat-column-star {
@@ -23,5 +23,9 @@ td.mat-column-star {
 }
 
 .action {
+  text-align: center;
+}
+
+.title {
   text-align: center;
 }

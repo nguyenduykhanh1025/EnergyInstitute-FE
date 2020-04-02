@@ -4,17 +4,94 @@
 </mat-toolbar>
 
 <mat-accordion>
+  <!-- ADMIN -->
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>Admin</b>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <button
+      mat-button
+      [routerLink]="['/v1/TTDN']"
+      routerLinkActive="active-link"
+      class="btn-admin"
+    >
+      <i class="material-icons">apartment</i>
+      Thông tin doanh nghiệp
+    </button>
+
+    <button
+      mat-button
+      [routerLink]="['/v1/TDNL']"
+      routerLinkActive="active-link"
+      class="btn-admin"
+    >
+      <i class="material-icons">ev_station</i>
+      Tiêu dùng năng lượng
+    </button>
+
+    <button
+      mat-button
+      [routerLink]="['/v1/SPSX']"
+      routerLinkActive="active-link"
+      class="btn-admin"
+    >
+      <i class="material-icons">fastfood</i>
+      Sản phẩm sản xuất
+    </button>
+
+    <button
+      mat-button
+      [routerLink]="['/v1/PTSP']"
+      routerLinkActive="active-link"
+      class="btn-admin"
+    >
+      <i class="material-icons">local_drink</i>
+      Phát thải theo sản phẩm
+    </button>
+
+    <button
+      mat-button
+      [routerLink]="['/v1/PTNL']"
+      routerLinkActive="active-link"
+      class="btn-admin"
+    >
+      <i class="material-icons">domain</i>
+      Phát thải năng lượng
+    </button>
+
+    <button
+      mat-button
+      [routerLink]="['/v1/TPT']"
+      routerLinkActive="active-link"
+      class="btn-admin"
+    >
+      <i class="material-icons">add_box</i>
+      Tổng phát thải
+    </button>
+  </mat-expansion-panel>
+
+  <!-- End ADMIN -->
+
   <mat-divider></mat-divider>
   <button
     mat-button
     [routerLink]="['/energy_consumptions']"
     routerLinkActive="active-link"
+    class="btn-menu"
   >
     <i class="material-icons">fireplace</i>
     Thông tin tiêu thụ năng lượng
   </button>
   <mat-divider></mat-divider>
-  <button mat-button [routerLink]="['/v1/TTDN']" routerLinkActive="active-link">
+  <button
+    mat-button
+    [routerLink]="['/v1/TTDN']"
+    routerLinkActive="active-link"
+    class="btn-menu"
+  >
     <i class="material-icons">domain</i>
     Thông tin công ty
   </button>
@@ -23,6 +100,7 @@
     mat-button
     [routerLink]="['/products']"
     routerLinkActive="active-link"
+    class="btn-menu"
   >
     <i class="material-icons">emoji_objects</i>
     Thông tin sản phẩm
@@ -32,76 +110,14 @@
     mat-button
     [routerLink]="['/greenhouse_emissions']"
     routerLinkActive="active-link"
+    class="btn-menu"
   >
     <i class="material-icons">emoji_transportation</i>
     Phát thải khí nhà kính
   </button>
   <mat-divider></mat-divider>
 
-  <!-- ADMIN -->
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        <b>Admin</b>
-      </mat-panel-title>
-    </mat-expansion-panel-header>
-    <button
-      mat-button
-      [routerLink]="['/v1/TTDN']"
-      routerLinkActive="active-link"
-    >
-      <i class="material-icons">domain</i>
-      Thông tin doanh nghiệp
-    </button>
-
-    <button
-      mat-button
-      [routerLink]="['/v1/TDNL']"
-      routerLinkActive="active-link"
-    >
-      <i class="material-icons">domain</i>
-      Tiêu dùng năng lượng
-    </button>
-
-    <button
-      mat-button
-      [routerLink]="['/v1/SPSX']"
-      routerLinkActive="active-link"
-    >
-      <i class="material-icons">domain</i>
-      Sản phẩm sản xuất
-    </button>
-
-    <button
-      mat-button
-      [routerLink]="['/v1/PTSP']"
-      routerLinkActive="active-link"
-    >
-      <i class="material-icons">domain</i>
-      Phát thải theo sản phẩm
-    </button>
-
-    <button
-      mat-button
-      [routerLink]="['/v1/TPT']"
-      routerLinkActive="active-link"
-    >
-      <i class="material-icons">domain</i>
-      Tổng phát thải
-    </button>
-
-    <button
-      mat-button
-      [routerLink]="['/v1/PTNL']"
-      routerLinkActive="active-link"
-    >
-      <i class="material-icons">domain</i>
-      Phát thải năng lượng
-    </button>
-  </mat-expansion-panel>
-
-  <!-- End ADMIN -->
-  <button mat-raised-button color="primary" (click)="logout()">
+  <button mat-raised-button color="primary" (click)="logout()" class="btn-menu">
     <mat-icon aria-hidden="false" aria-label="Example home icon"
       >logout</mat-icon
     >

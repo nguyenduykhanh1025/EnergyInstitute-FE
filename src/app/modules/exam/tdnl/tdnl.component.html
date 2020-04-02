@@ -4,190 +4,190 @@
     <table mat-table [dataSource]="dataSource">
       <!-- Name Column -->
       <ng-container matColumnDef="nam" sticky>
-        <th mat-header-cell *matHeaderCellDef>Năm điều tra</th>
+        <th mat-header-cell *matHeaderCellDef class="title">Năm điều tra</th>
         <td mat-cell *matCellDef="let element">
           {{ element.nam }}
         </td>
-      </ng-container>
+      </ng-container> 
 
       <!-- Position Column -->
       <ng-container matColumnDef="ma_so_doanh_nghiep">
-        <th mat-header-cell *matHeaderCellDef>Mã doanh nghiệp</th>
+        <th mat-header-cell *matHeaderCellDef class="title">Mã doanh nghiệp</th>
         <td mat-cell *matCellDef="let element">
           {{ element.ma_so_doanh_nghiep }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="ten_doanh_nghiep">
-        <th mat-header-cell *matHeaderCellDef>Tên DN</th>
+        <th mat-header-cell *matHeaderCellDef class="title">Tên DN</th>
         <td mat-cell *matCellDef="let element">
           {{ element.ten_doanh_nghiep }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="ma_cap" style="width: 100px;">
-        <th mat-header-cell *matHeaderCellDef>Mã cấp 2</th>
+        <th mat-header-cell *matHeaderCellDef class="title">Mã cấp 2</th>
         <td mat-cell *matCellDef="let element">
           {{ element.ma_cap }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="ten_nganh">
-        <th mat-header-cell *matHeaderCellDef>Tên nghành</th>
+        <th mat-header-cell *matHeaderCellDef class="title">Tên nghành</th>
         <td mat-cell *matCellDef="let element">
           {{ element.ten_nganh }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="dien_nltt">
-        <th mat-header-cell *matHeaderCellDef>Điện (NLTT)</th>
+        <th mat-header-cell *matHeaderCellDef class="title">Điện (NLTT)</th>
         <td mat-cell *matCellDef="let element">
           {{ element.dien_nltt }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="bitum_nltt">
-        <th mat-header-cell *matHeaderCellDef>Than bitum (NLTT)</th>
+        <th mat-header-cell *matHeaderCellDef class="title">Than bitum (NLTT)</th>
         <td mat-cell *matCellDef="let element">
           {{ element.bitum_nltt }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="than_coc_nltt">
-        <th mat-header-cell *matHeaderCellDef>Than cốc (NLTT)</th>
+        <th mat-header-cell *matHeaderCellDef class="title">Than cốc (NLTT)</th>
         <td mat-cell *matCellDef="let element">
           {{ element.than_coc_nltt }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="ko_nltt">
-        <th mat-header-cell *matHeaderCellDef>KO (NLTT)</th>
+        <th mat-header-cell *matHeaderCellDef class="title">KO (NLTT)</th>
         <td mat-cell *matCellDef="let element">
           {{ element.ko_nltt }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="do_nltt">
-        <th mat-header-cell *matHeaderCellDef>DO (NLTT)</th>
+        <th mat-header-cell *matHeaderCellDef class="title">DO (NLTT)</th>
         <td mat-cell *matCellDef="let element">
           {{ element.do_nltt }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="fo_nltt">
-        <th mat-header-cell *matHeaderCellDef>FO (NLTT)</th>
+        <th mat-header-cell *matHeaderCellDef class="title">FO (NLTT)</th>
         <td mat-cell *matCellDef="let element">
           {{ element.fo_nltt }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="lpg_nltt">
-        <th mat-header-cell *matHeaderCellDef>LPG (NLTT)</th>
+        <th mat-header-cell *matHeaderCellDef class="title">LPG (NLTT)</th>
         <td mat-cell *matCellDef="let element">
           {{ element.lpg_nltt }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="ng_nltt">
-        <th mat-header-cell *matHeaderCellDef>NG (NLTT)</th>
+        <th mat-header-cell *matHeaderCellDef class="title">NG (NLTT)</th>
         <td mat-cell *matCellDef="let element">
           {{ element.ng_nltt }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="npk_pnl">
-        <th mat-header-cell *matHeaderCellDef>NPK,NH3 (NLTT)</th>
+        <th mat-header-cell *matHeaderCellDef class="title">NPK,NH3 (NLTT)</th>
         <td mat-cell *matCellDef="let element">
           {{ element.npk_pnl }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="hs_pnl">
-        <th mat-header-cell *matHeaderCellDef>HS (PNL)</th>
+        <th mat-header-cell *matHeaderCellDef class="title">HS (PNL)</th>
         <td mat-cell *matCellDef="let element">
           {{ element.hs_pnl }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="than_pnl">
-        <th mat-header-cell *matHeaderCellDef>Than (PNL)</th>
+        <th mat-header-cell *matHeaderCellDef class="title">Than (PNL)</th>
         <td mat-cell *matCellDef="let element">
           {{ element.than_pnl }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="ng_pnl">
-        <th mat-header-cell *matHeaderCellDef>NG (PNL)</th>
+        <th mat-header-cell *matHeaderCellDef class="title">NG (PNL)</th>
         <td mat-cell *matCellDef="let element">
           {{ element.ng_pnl }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="dien_pnl">
-        <th mat-header-cell *matHeaderCellDef>Điện (PNL)</th>
+        <th mat-header-cell *matHeaderCellDef class="title">Điện (PNL)</th>
         <td mat-cell *matCellDef="let element">
           {{ element.dien_pnl }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="antracite_nltt_tj">
-        <th mat-header-cell *matHeaderCellDef>Than antracite (TJ)</th>
+        <th mat-header-cell *matHeaderCellDef class="title">Than antracite (TJ)</th>
         <td mat-cell *matCellDef="let element">
           {{ element.antracite_nltt_tj }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="bitum_nltt_tj">
-        <th mat-header-cell *matHeaderCellDef>Than Bituminous (TJ)</th>
+        <th mat-header-cell *matHeaderCellDef class="title">Than Bituminous (TJ)</th>
         <td mat-cell *matCellDef="let element">
           {{ element.bitum_nltt_tj }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="than_coc_nltt_tj">
-        <th mat-header-cell *matHeaderCellDef>Than cốc (TJ)</th>
+        <th mat-header-cell *matHeaderCellDef class="title">Than cốc (TJ)</th>
         <td mat-cell *matCellDef="let element">
           {{ element.than_coc_nltt_tj }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="ko_nltt_tj">
-        <th mat-header-cell *matHeaderCellDef>KO (TJ)</th>
+        <th mat-header-cell *matHeaderCellDef class="title">KO (TJ)</th>
         <td mat-cell *matCellDef="let element">
           {{ element.ko_nltt_tj }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="do_nltt_tj">
-        <th mat-header-cell *matHeaderCellDef>DO (TJ)</th>
+        <th mat-header-cell *matHeaderCellDef class="title">DO (TJ)</th>
         <td mat-cell *matCellDef="let element">
           {{ element.do_nltt_tj }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="fo_nltt_tj">
-        <th mat-header-cell *matHeaderCellDef>FO (TJ)</th>
+        <th mat-header-cell *matHeaderCellDef class="title">FO (TJ)</th>
         <td mat-cell *matCellDef="let element">
           {{ element.fo_nltt_tj }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="lpg_nltt_tj">
-        <th mat-header-cell *matHeaderCellDef>LPG (TJ)</th>
+        <th mat-header-cell *matHeaderCellDef class="title">LPG (TJ)</th>
         <td mat-cell *matCellDef="let element">
           {{ element.lpg_nltt_tj }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="ng_nltt_tj">
-        <th mat-header-cell *matHeaderCellDef>NG (TJ)</th>
+        <th mat-header-cell *matHeaderCellDef class="title">NG (TJ)</th>
         <td mat-cell *matCellDef="let element">
           {{ element.ng_nltt_tj }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="tong">
-        <th mat-header-cell *matHeaderCellDef>Tổng</th>
+        <th mat-header-cell *matHeaderCellDef class="title">Tổng</th>
         <td mat-cell *matCellDef="let element">
           {{ element.tong }}
         </td>
