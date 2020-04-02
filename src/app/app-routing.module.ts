@@ -4,19 +4,19 @@ import { RouteNames } from "./constant/route-name";
 import { AuthGuard } from "src/app/core/guards/auth.guard";
 
 const routes: Routes = [
+  { path: "", pathMatch: "full", redirectTo: RouteNames.ENTERPRISE.PRODUCT.URL},
+  //EXAM
   {
-    path: "",
+    path: "v1",
     data: {
       title: RouteNames.AUTH.title,
       showHeader: false,
       showSidebar: false
     },
-    canActivate: [AuthGuard],
     loadChildren: () =>
-      import("./modules/enterprise/enterprise.module").then(
-        m => m.EnterpriseModule
-      )
+      import("./modules/exam/exam.module").then(m => m.ExamModule)
   },
+  
   {
     path: RouteNames.ENTERPRISE.url,
     data: {
@@ -68,6 +68,19 @@ const routes: Routes = [
       )
   },
   {
+    path: RouteNames.ENTERPRISE.GREENHOUSE_EMISSIONS.URL,
+    data: {
+      title: RouteNames.AUTH.title,
+      showHeader: false,
+      showSidebar: false
+    },
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import("./modules/greenhouse-emissions/greenhouse-emissions.module").then(
+        m => m.GreenhouseEmissionsModule
+      )
+  },
+  {
     path: RouteNames.AUTH.name,
     data: {
       title: RouteNames.AUTH.title,
@@ -76,7 +89,7 @@ const routes: Routes = [
     },
     loadChildren: () =>
       import("./modules/auth/auth.module").then(m => m.AuthModule)
-  }
+  },
 ];
 
 @NgModule({

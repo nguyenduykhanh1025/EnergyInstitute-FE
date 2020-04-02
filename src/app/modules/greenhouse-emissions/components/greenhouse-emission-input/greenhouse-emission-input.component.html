@@ -1,0 +1,116 @@
+<form *ngIf="formData != null" [formGroup]="formData" id="form">
+  <mat-grid-list cols="2" rowHeight="1:1">
+    <mat-grid-tile>
+      <mat-list role="list">
+        <mat-list-item role="listitem">
+          <b class="title">Năm điều tra: </b>
+          <mat-form-field class="input-value">
+            <mat-label>(Chọn năm)*</mat-label>
+            <mat-select formControlName="year_of_investigation">
+              <mat-option *ngFor="let year of yearList" [value]="year">
+                {{ year }}
+              </mat-option>
+            </mat-select>
+
+            <app-error-label
+              [control]="formData.controls.year_of_investigation"
+              label=""
+            ></app-error-label>
+          </mat-form-field>
+        </mat-list-item>
+
+        <mat-list-item role="listitem">
+          <b class="title">Sản phẩm: </b>
+          <mat-form-field class="input-value">
+            <mat-label>(Chọn sản phẩm)*</mat-label>
+            <mat-select formControlName="product_id">
+              <mat-option *ngFor="let product of products" [value]="product.id">
+                {{ product.name }}
+              </mat-option>
+            </mat-select>
+
+            <app-error-label
+              [control]="formData.controls.product_id"
+              label=""
+            ></app-error-label>
+          </mat-form-field>
+        </mat-list-item>
+
+        <mat-list-item role="listitem">
+          <b class="title">Nguyên nhân: </b>
+          <mat-form-field class="input-value">
+            <mat-label>(Chọn nguyên nhân)*</mat-label>
+            <mat-select formControlName="emission_reason_id">
+              <mat-option
+                *ngFor="let emissionReason of emissionReasons"
+                [value]="emissionReason.id"
+              >
+                {{ emissionReason.description }}
+              </mat-option>
+            </mat-select>
+
+            <app-error-label
+              [control]="formData.controls.emission_reason_id"
+              label=""
+            ></app-error-label>
+          </mat-form-field>
+        </mat-list-item>
+      </mat-list>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-list>
+        <mat-list-item role="listitem">
+          <b class="title">Phát thải C02: </b>
+          <mat-form-field class="input-value">
+            <mat-label>(kg/đơn vị phát thải)*</mat-label>
+            <input matInput placeholder="69" formControlName="carbon_dioxide" />
+            <app-error-label
+              [control]="formData.controls.carbon_dioxide"
+              label=""
+            ></app-error-label>
+          </mat-form-field>
+        </mat-list-item>
+
+        <mat-list-item role="listitem">
+          <b class="title">Phát thải CH4: </b>
+          <mat-form-field class="input-value">
+            <mat-label>(kg/đơn vị phát thải)*</mat-label>
+            <input matInput placeholder="69" formControlName="methane" />
+            <app-error-label
+              [control]="formData.controls.methane"
+              label=""
+            ></app-error-label>
+          </mat-form-field>
+        </mat-list-item>
+
+        <mat-list-item role="listitem">
+          <b class="title">Phát thải N20: </b>
+          <mat-form-field class="input-value">
+            <mat-label>(kg/đơn vị phát thải)*</mat-label>
+            <input
+              matInput
+              placeholder="69"
+              formControlName="nitrous_dioxide"
+            />
+            <app-error-label
+              [control]="formData.controls.nitrous_dioxide"
+              label=""
+            ></app-error-label>
+          </mat-form-field>
+        </mat-list-item>
+      </mat-list>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <button mat-raised-button (click)="onReturn()">Trở về</button>
+  <button
+    mat-raised-button
+    color="warn"
+    id="btn-create"
+    [disabled]="!formData.valid"
+    (click)="onOutput()"
+  >
+    Tạo mới
+  </button>
+</form>

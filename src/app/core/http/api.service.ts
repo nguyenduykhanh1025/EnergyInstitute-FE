@@ -10,7 +10,6 @@ import { CustomSnackbarService } from "../services/custom-snackbar.service";
   providedIn: "root"
 })
 export class ApiService {
-    
   constructor(
     private http: HttpClient,
     private customSnackbarService: CustomSnackbarService
@@ -28,7 +27,7 @@ export class ApiService {
 
   put(path: string, body: Object = {}): Observable<any> {
     console.log(body);
-    
+
     return this.http
       .put(`${environment.api_url}${path}`, JSON.stringify(body))
       .pipe(
@@ -68,5 +67,15 @@ export class ApiService {
         return null;
       })
     );
+  }
+
+  readJson(
+    path: string,
+    params: HttpParams = new HttpParams(),
+    headers?: HttpHeaders
+  ): Observable<any> {
+    return this.http
+      .get(`${path}`, { headers, params })
+      .pipe(map((response: any) => response.data));
   }
 }
