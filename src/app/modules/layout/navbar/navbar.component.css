@@ -12,6 +12,7 @@
     cursor: pointer;
 }
 .btn-admin {
-    width: 100%;
+    width: 120%;
     text-align: left;
+    margin: 0;
 }
