@@ -4,8 +4,8 @@
     <table mat-table [dataSource]="dataSource">
       <!-- Name Column -->
       <ng-container matColumnDef="nam" sticky>
-        <th mat-header-cell *matHeaderCellDef class="title">Năm điều tra</th>
-        <td mat-cell *matCellDef="let element">
+        <th mat-header-cell *matHeaderCellDef id="year">Năm điều tra</th>
+        <td mat-cell *matCellDef="let element" id="year-content">
           {{ element.nam }}
         </td>
       </ng-container>
@@ -33,8 +33,8 @@
       </ng-container>
 
       <ng-container matColumnDef="ten_nganh_cap_2">
-        <th mat-header-cell *matHeaderCellDef class="title">Tên nghành cấp 2</th>
-        <td mat-cell *matCellDef="let element">
+        <th mat-header-cell *matHeaderCellDef >Tên nghành cấp 2</th>
+        <td mat-cell *matCellDef="let element" class="content">
           {{ element.ten_nganh_cap_2 }}
         </td>
       </ng-container>

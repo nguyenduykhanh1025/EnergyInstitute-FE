@@ -6,13 +6,12 @@
 }
 
 table {
-  width: 250%;
+  width: 260%;
 }
 
-td.mat-column-star {
+/* td.mat-column-star {
   width: 20px;
-  padding-right: 8px;
-}
+} */
 
 .mat-table-sticky:first-child {
   border-right: 1px solid #e0e0e0;
@@ -28,4 +27,19 @@ td.mat-column-star {
 
 .title {
   text-align: center;
+}
+
+#year {
+  width: 50px;
+}
+
+.content {
+  text-align: left;
+}
+
+#year-content {
+  text-align: left;
+}
+#ma-cap-2 {
+  width: 200px;
 }

@@ -5,7 +5,7 @@
 
 <mat-accordion>
   <!-- ADMIN -->
-  <mat-expansion-panel>
+  <mat-expansion-panel [expanded]="true">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <b>Admin</b>
@@ -117,10 +117,10 @@
   </button>
   <mat-divider></mat-divider> -->       
 
-  <button mat-raised-button color="primary" (click)="logout()" class="btn-menu">
+  <!-- <button mat-raised-button color="primary" (click)="logout()" class="btn-menu">
     <mat-icon aria-hidden="false" aria-label="Example home icon"
       >logout</mat-icon
     >
     Logout
-  </button>
+  </button> -->
 </mat-accordion>

@@ -29,3 +29,15 @@ td.mat-column-star {
 .title {
   text-align: center;
 }
+
+#year {
+  width: 50px;
+}
+
+.content {
+  text-align: left;
+}
+
+#year-content{
+  text-align: left;
+}

@@ -4,8 +4,8 @@
     <table mat-table [dataSource]="dataSource">
       <!-- Name Column -->
       <ng-container matColumnDef="nam" sticky>
-        <th mat-header-cell *matHeaderCellDef class="title">Năm điều tra</th>
-        <td mat-cell *matCellDef="let element">
+        <th mat-header-cell *matHeaderCellDef id="year">Năm điều tra</th>
+        <td mat-cell *matCellDef="let element" id="year-content">
           {{ element.nam }}
         </td>
       </ng-container> 
@@ -26,8 +26,8 @@
       </ng-container>
 
       <ng-container matColumnDef="ma_cap" style="width: 100px;">
-        <th mat-header-cell *matHeaderCellDef class="title">Mã cấp 2</th>
-        <td mat-cell *matCellDef="let element">
+        <th mat-header-cell *matHeaderCellDef>Mã cấp 2</th>
+        <td mat-cell *matCellDef="let element" class="content">
           {{ element.ma_cap }}
         </td>
       </ng-container>
@@ -80,7 +80,7 @@
           {{ element.fo_nltt }}
         </td>
       </ng-container>
-
+      class="title"
       <ng-container matColumnDef="lpg_nltt">
         <th mat-header-cell *matHeaderCellDef class="title">LPG (NLTT)</th>
         <td mat-cell *matCellDef="let element">

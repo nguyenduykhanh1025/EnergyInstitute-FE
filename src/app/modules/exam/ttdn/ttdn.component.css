@@ -6,12 +6,12 @@
 }
 
 table {
-  width: 180%;
+  width: 150%;
 }
 
 td.mat-column-star {
   width: 20px;
-  padding-right: 8px;
+  /* padding-right: 8px; */
 }
 
 .mat-table-sticky:first-child {
@@ -32,4 +32,15 @@ td.mat-column-star {
 }
 .title {
   text-align: center;
+}
+#year {
+  width: 50px;
+}
+
+.content {
+  text-align: left;
+}
+
+#year-content{
+  text-align: left;
 }

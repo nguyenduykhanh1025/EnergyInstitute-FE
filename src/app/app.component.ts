@@ -12,11 +12,11 @@ export class AppComponent implements OnInit {
   constructor(private authService: AuthService) {}
   ngOnInit() {}
 
-  handleStatusOpenLayoutNavbarFollowUserLogin() {
-    if (this.authService.isLoggedOut()) {
-      return false;
-    } else {
-      return true;
-    }
-  }
+  // handleStatusOpenLayoutNavbarFollowUserLogin() {
+  //   if (this.authService.isLoggedOut()) {
+  //     return false;
+  //   } else {
+  //     return true;
+  //   }
+  // }
 }
