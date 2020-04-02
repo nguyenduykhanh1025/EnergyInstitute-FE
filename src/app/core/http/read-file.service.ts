@@ -13,7 +13,7 @@ export class ReadFile {
   readonly urlGetTDNL =
     "https://energy-institute.herokuapp.com/energy_consumptions.json";
 
-  readonly urlGetSPSX = "http://energy-institute.herokuapp.com/products.json";
+  readonly urlGetSPSX = "https://energy-institute.herokuapp.com/products.json";
 
   readonly urlGetPTSP =
     "https://energy-institute.herokuapp.com/greenhouse_emission_products.json";
