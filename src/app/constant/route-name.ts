@@ -57,6 +57,18 @@ export const RouteNames = {
           name: "update"
         }
       }
+    },
+    GREENHOUSE_EMISSIONS: {
+      URL: "greenhouse_emissions",
+      SHOW: {
+        name: ""
+      },
+      CREATE: {
+        name: "create"
+      }
     }
+  },
+  REASONS: {
+    URL: "emission_reasons"
   }
 };

@@ -1,0 +1,94 @@
+<mat-card style="text-align: center;">
+  <mat-card-title>Thông tin phát thải khí nhà kính</mat-card-title>
+  <mat-form-field>
+    <mat-label>Năm khảo sát</mat-label>
+    <mat-select [value]="yearList[0]">
+      <mat-option
+        *ngFor="let year of yearList"
+        [value]="year"
+        (click)="changeYearList(year)"
+      >
+        {{ year }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div class="container mat-elevation-z8">
+    <table
+      mat-table
+      *ngIf="dataSourceCurrent != null"
+      [dataSource]="dataSourceCurrent"
+      class="tb-productivies"
+    >
+      <ng-container matColumnDef="carbon_dioxide" sticky>
+        <th mat-header-cell *matHeaderCellDef>carbon_dioxide</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.greenhouse_emission_details[0].carbon_dioxide }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="methane">
+        <th mat-header-cell *matHeaderCellDef>methane</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.greenhouse_emission_details[0].methane }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="nitrous_dioxide">
+        <th mat-header-cell *matHeaderCellDef>nitrous_dioxide</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.greenhouse_emission_details[0].nitrous_dioxide }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="emission_reason">
+        <th mat-header-cell *matHeaderCellDef>emission_reason</th>
+        <td mat-cell *matCellDef="let element">
+          {{
+            element.greenhouse_emission_details[0].emission_reason.description
+          }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="product">
+        <th mat-header-cell *matHeaderCellDef>product</th>
+        <td mat-cell *matCellDef="let element">
+          {{
+            element.product == null ? "Chưa có dữ liệu" : element.product.name
+          }}
+        </td>
+      </ng-container>
+      
+      <ng-container matColumnDef="update" sticky>
+        <th mat-header-cell *matHeaderCellDef>Cập nhập</th>
+        <td mat-cell *matCellDef="let element">
+          <button
+            mat-button
+            color="primary"
+          >
+            Cập nhập
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="delete" sticky>
+        <th mat-header-cell *matHeaderCellDef>Xóa</th>
+        <td mat-cell *matCellDef="let element; let i = index">
+          <button mat-button color="warn" (click)="onDelete(element.id, i)">
+            Xóa
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+  <button
+    mat-raised-button
+    color="primary"
+    id="btn-create"
+    (click)="onCreate()"
+  >
+    Tạo mới thông tin
+  </button>
+</mat-card>

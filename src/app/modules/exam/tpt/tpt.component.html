@@ -1,0 +1,204 @@
+<mat-card style="text-align: center;">
+  <mat-card-title>Thông tin doanh nghiệp</mat-card-title>
+  <div class="example-container mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+      <!-- Name Column -->
+      <ng-container matColumnDef="nam" sticky>
+        <th mat-header-cell *matHeaderCellDef>Năm điều tra</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.nam }}
+        </td>
+      </ng-container>
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="ma_so_doanh_nghiep">
+        <th mat-header-cell *matHeaderCellDef>Mã doanh nghiệp</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.ma_so_doanh_nghiep }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="ten_doanh_nghiep">
+        <th mat-header-cell *matHeaderCellDef>Tên DN</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.ten_doanh_nghiep }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="ma_cap_2" style="width: 100px;">
+        <th mat-header-cell *matHeaderCellDef>Tỉnh</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.ma_cap_2 }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="ten_nganh_cap_2">
+        <th mat-header-cell *matHeaderCellDef>Huyện</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.ten_nganh_cap_2 }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="dien">
+        <th mat-header-cell *matHeaderCellDef>Xã</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.dien }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="qtnl_co2">
+        <th mat-header-cell *matHeaderCellDef>Tọa độ X</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.qtnl_co2 }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="qtnl_ch4">
+        <th mat-header-cell *matHeaderCellDef>Tọa độ Y</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.qtnl_ch4 }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="qtnl_n2o">
+        <th mat-header-cell *matHeaderCellDef>Nghành cấp 1</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.qtnl_n2o }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="pnl_co2">
+        <th mat-header-cell *matHeaderCellDef>Mã cấp 2</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.pnl_co2 }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="pnl_ch4">
+        <th mat-header-cell *matHeaderCellDef>Tên nghành cấp 2</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.pnl_ch4 }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="pnl_n2o">
+        <th mat-header-cell *matHeaderCellDef>GTSX</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.pnl_n2o }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="phat_tan_co2">
+        <th mat-header-cell *matHeaderCellDef>Số lượng Lao động</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.phat_tan_co2 }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="phat_tan_ch4">
+        <th mat-header-cell *matHeaderCellDef>Số lượng Lao động</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.phat_tan_ch4 }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="phat_tan_n2o">
+        <th mat-header-cell *matHeaderCellDef>Số lượng Lao động</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.phat_tan_n2o }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="qtcn_co2">
+        <th mat-header-cell *matHeaderCellDef>Số lượng Lao động</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.qtcn_co2 }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="qtcn_ch4">
+        <th mat-header-cell *matHeaderCellDef>Số lượng Lao động</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.qtcn_ch4 }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="tong_tru_dien_co2">
+        <th mat-header-cell *matHeaderCellDef>Số lượng Lao động</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.tong_tru_dien_co2 }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="tong_tru_dien_ch4">
+        <th mat-header-cell *matHeaderCellDef>Số lượng Lao động</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.tong_tru_dien_ch4 }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="tong_tru_dien_n2o">
+        <th mat-header-cell *matHeaderCellDef>Số lượng Lao động</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.tong_tru_dien_n2o }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="tong_co2">
+        <th mat-header-cell *matHeaderCellDef>Số lượng Lao động</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.tong_co2 }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="tong_ch4">
+        <th mat-header-cell *matHeaderCellDef>Số lượng Lao động</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.tong_ch4 }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="tong_n2o">
+        <th mat-header-cell *matHeaderCellDef>Số lượng Lao động</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.tong_n2o }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="tong_quy_doi">
+        <th mat-header-cell *matHeaderCellDef>Số lượng Lao động</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.tong_quy_doi }}
+        </td>
+      </ng-container>
+      <!-- <ng-container matColumnDef="update" stickyEnd>
+            <th mat-header-cell *matHeaderCellDef class="action">Cập nhập</th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-button color="primary">
+                Cập nhập
+              </button>
+            </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="delete" stickyEnd>
+            <th mat-header-cell *matHeaderCellDef class="action">Xóa</th>
+            <td mat-cell *matCellDef="let element; let i = index">
+              <button mat-button color="warn">
+                Xóa
+              </button>
+            </td>
+          </ng-container> -->
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+  <mat-paginator
+    [pageSizeOptions]="[100, 200, 300]"
+    showFirstLastButtons
+  ></mat-paginator>
+  <button mat-raised-button color="primary" style="margin-top: 10px;">
+    Tạo mới thông tin
+  </button>
+  <p></p>
+</mat-card>
