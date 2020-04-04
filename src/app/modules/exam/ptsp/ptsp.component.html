@@ -1,5 +1,29 @@
 <mat-card style="text-align: center;">
   <mat-card-title>Phát thải khí nhà kính theo sản phẩm sản xuất</mat-card-title>
+
+  <mat-card style="text-align: left;">
+    <h2>Lọc/Tìm kiếm</h2>
+    <mat-card-content>
+      <mat-form-field>
+        <mat-label>Năm điều tra*</mat-label>
+        <input
+          matInput
+          (keyup)="handleFilter($event)"
+          [formControl]="filterFollowYear"
+          placeholder="2014"
+        />
+      </mat-form-field>
+      <button
+        style="margin-left: 20px; width: 100px;"
+        mat-raised-button
+        color="primary"
+        (click)="applyFilter()"
+      >
+        Tìm kiếm
+      </button>
+    </mat-card-content>
+  </mat-card>
+
   <div class="example-container mat-elevation-z8">
     <table mat-table [dataSource]="dataSource">
       <!-- Name Column -->
@@ -12,7 +36,7 @@
 
       <!-- Position Column -->
       <ng-container matColumnDef="ma_so_doanh_nghiep">
-        <th mat-header-cell *matHeaderCellDef class="title" >Mã doanh nghiệp</th>
+        <th mat-header-cell *matHeaderCellDef class="title">Mã doanh nghiệp</th>
         <td mat-cell *matCellDef="let element" style="width: 110px;">
           {{ element.ma_so_doanh_nghiep }}
         </td>
@@ -20,12 +44,12 @@
 
       <ng-container matColumnDef="ten_doanh_nghiep">
         <th mat-header-cell *matHeaderCellDef class="title">Tên DN</th>
-        <td mat-cell *matCellDef="let element"    style="width: 60px;">
+        <td mat-cell *matCellDef="let element" style="width: 60px;">
           {{ element.ten_doanh_nghiep }}
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="ma_nganh_2" >
+      <ng-container matColumnDef="ma_nganh_2">
         <th mat-header-cell *matHeaderCellDef class="title">Mã nghành cấp 2</th>
         <td mat-cell *matCellDef="let element" style="width: 110px;">
           {{ element.ma_nganh_2 }}
@@ -34,7 +58,12 @@
 
       <ng-container matColumnDef="te_cap_2">
         <th mat-header-cell *matHeaderCellDef>Mã cấp 2</th>
-        <td mat-cell *matCellDef="let element" class="content" style="width: 120px;">
+        <td
+          mat-cell
+          *matCellDef="let element"
+          class="content"
+          style="width: 120px;"
+        >
           {{ element.te_cap_2 }}
         </td>
       </ng-container>
@@ -48,7 +77,12 @@
 
       <ng-container matColumnDef="ten_sp">
         <th mat-header-cell *matHeaderCellDef>Tên sản phẩm</th>
-        <td mat-cell *matCellDef="let element" class="content" style="width: 150px;">
+        <td
+          mat-cell
+          *matCellDef="let element"
+          class="content"
+          style="width: 150px;"
+        >
           {{ element.ten_sp }}
         </td>
       </ng-container>

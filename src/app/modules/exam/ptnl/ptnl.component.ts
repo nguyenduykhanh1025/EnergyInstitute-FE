@@ -1,12 +1,13 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
-import { ReadFile, PTNL } from 'src/app/core/http/read-file.service';
-import { MatTableDataSource } from '@angular/material/table';
+import { ReadFile, PTNL } from "src/app/core/http/read-file.service";
+import { MatTableDataSource } from "@angular/material/table";
+import { FormControl } from "@angular/forms";
 
 @Component({
   selector: "app-ptnl",
   templateUrl: "./ptnl.component.html",
-  styleUrls: ["./ptnl.component.css"]
+  styleUrls: ["./ptnl.component.css"],
 })
 export class PTNLComponent implements OnInit {
   dataSource: any;
@@ -45,9 +46,11 @@ export class PTNLComponent implements OnInit {
     "tong_co2",
     "tong_ch4",
     "tong_n2o",
-    "tong"
+    "tong",
   ];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  filterFollowYear = new FormControl("");
+  dataSourceOld: any;
 
   constructor(private readFile: ReadFile) {}
 
@@ -55,9 +58,32 @@ export class PTNLComponent implements OnInit {
     this.initData();
   }
   initData() {
-    this.readFile.getPTNL().subscribe(data => {
+    this.readFile.getPTNL().subscribe((data) => {
       this.dataSource = new MatTableDataSource<PTNL>(data);
       this.dataSource.paginator = this.paginator;
+      this.dataSourceOld = data;
     });
+  }
+
+  applyFilter() {
+    this.dataSource.data = this.dataSourceOld.filter(
+      (item) => item.nam == this.filterFollowYear.value
+    );
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+  handleFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    if (filterValue == "") {
+      console.log(this.dataSourceOld);
+
+      this.dataSource.data = [...this.dataSourceOld];
+      if (this.dataSource.paginator) {
+        this.dataSource.paginator.firstPage();
+      }
+    }
   }
 }

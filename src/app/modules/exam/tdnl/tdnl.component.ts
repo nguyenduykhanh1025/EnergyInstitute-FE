@@ -4,11 +4,12 @@ import { EnergyConsumptionsHttpService } from "src/app/core/http/energy-consumpt
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
 import { ReadFile, TDNL } from "src/app/core/http/read-file.service";
+import { FormControl } from "@angular/forms";
 
 @Component({
   selector: "app-tdnl",
   templateUrl: "./tdnl.component.html",
-  styleUrls: ["./tdnl.component.css"]
+  styleUrls: ["./tdnl.component.css"],
 })
 export class TdnlComponent implements OnInit {
   dataSource: any;
@@ -40,9 +41,12 @@ export class TdnlComponent implements OnInit {
     "fo_nltt_tj",
     "lpg_nltt_tj",
     "ng_nltt_tj",
-    "tong"
+    "tong",
   ];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+
+  filterFollowYear = new FormControl("");
+  dataSourceOld: any;
 
   constructor(
     private energyConsumptionsHttpService: EnergyConsumptionsHttpService,
@@ -54,9 +58,32 @@ export class TdnlComponent implements OnInit {
   }
 
   initDataSource() {
-    this.readFile.getTDNL().subscribe(data => {
+    this.readFile.getTDNL().subscribe((data) => {
       this.dataSource = new MatTableDataSource<TDNL>(data);
       this.dataSource.paginator = this.paginator;
+      this.dataSourceOld = data;
     });
+  }
+
+  applyFilter() {
+    this.dataSource.data = this.dataSourceOld.filter(
+      (item) => item.nam == this.filterFollowYear.value
+    );
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+  handleFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    if (filterValue == "") {
+      console.log(this.dataSourceOld);
+
+      this.dataSource.data = [...this.dataSourceOld];
+      if (this.dataSource.paginator) {
+        this.dataSource.paginator.firstPage();
+      }
+    }
   }
 }

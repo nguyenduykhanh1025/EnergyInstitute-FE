@@ -2,11 +2,12 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
 import { ReadFile, TPT } from "src/app/core/http/read-file.service";
 import { MatTableDataSource } from "@angular/material/table";
+import { FormControl } from "@angular/forms";
 
 @Component({
   selector: "app-tpt",
   templateUrl: "./tpt.component.html",
-  styleUrls: ["./tpt.component.css"]
+  styleUrls: ["./tpt.component.css"],
 })
 export class TPTComponent implements OnInit {
   dataSource: any;
@@ -34,9 +35,12 @@ export class TPTComponent implements OnInit {
     "tong_co2",
     "tong_ch4",
     "tong_n2o",
-    "tong_quy_doi"
+    "tong_quy_doi",
   ];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+
+  filterFollowYear = new FormControl("");
+  dataSourceOld: any;
 
   constructor(private readFile: ReadFile) {}
 
@@ -45,9 +49,31 @@ export class TPTComponent implements OnInit {
   }
 
   initData() {
-    this.readFile.getTPT().subscribe(data => {
+    this.readFile.getTPT().subscribe((data) => {
       this.dataSource = new MatTableDataSource<TPT>(data);
       this.dataSource.paginator = this.paginator;
+      this.dataSourceOld = data;
     });
+  }
+
+  applyFilter() {
+    this.dataSource.data = this.dataSourceOld.filter(
+      (item) => item.nam == this.filterFollowYear.value
+    );
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+  handleFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    if (filterValue == "") {
+
+      this.dataSource.data = [...this.dataSourceOld];
+      if (this.dataSource.paginator) {
+        this.dataSource.paginator.firstPage();
+      }
+    }
   }
 }

@@ -1,5 +1,31 @@
 <mat-card style="text-align: center;">
-  <mat-card-title>Phát thải khí nhà kính theo tiêu dùng năng lượng</mat-card-title>
+  <mat-card-title
+    >Phát thải khí nhà kính theo tiêu dùng năng lượng</mat-card-title
+  >
+
+  <mat-card style="text-align: left;">
+    <h2>Lọc/Tìm kiếm</h2>
+    <mat-card-content>
+      <mat-form-field>
+        <mat-label>Năm điều tra*</mat-label>
+        <input
+          matInput
+          (keyup)="handleFilter($event)"
+          [formControl]="filterFollowYear"
+          placeholder="2014"
+        />
+      </mat-form-field>
+      <button
+        style="margin-left: 20px; width: 100px;"
+        mat-raised-button
+        color="primary"
+        (click)="applyFilter()"
+      >
+        Tìm kiếm
+      </button>
+    </mat-card-content>
+  </mat-card>
+
   <div class="example-container mat-elevation-z8">
     <table mat-table [dataSource]="dataSource">
       <!-- Name Column -->
@@ -33,14 +59,18 @@
       </ng-container>
 
       <ng-container matColumnDef="ten_nganh_cap_2">
-        <th mat-header-cell *matHeaderCellDef class="title">tên nghành cấp 2</th>
+        <th mat-header-cell *matHeaderCellDef class="title">
+          tên nghành cấp 2
+        </th>
         <td mat-cell *matCellDef="let element">
           {{ element.ten_nganh_cap_2 }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="he_so_su_dung_nang_luong">
-        <th mat-header-cell *matHeaderCellDef class="title">hệ số sử dụng năng lượng</th>
+        <th mat-header-cell *matHeaderCellDef class="title">
+          hệ số sử dụng năng lượng
+        </th>
         <td mat-cell *matCellDef="let element">
           {{ element.he_so_su_dung_nang_luong }}
         </td>
@@ -54,35 +84,45 @@
       </ng-container>
 
       <ng-container matColumnDef="antracite_co2">
-        <th mat-header-cell *matHeaderCellDef class="title">Than Antracite (tC02)</th>
+        <th mat-header-cell *matHeaderCellDef class="title">
+          Than Antracite (tC02)
+        </th>
         <td mat-cell *matCellDef="let element">
           {{ element.antracite_co2 }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="antracite_ch4">
-        <th mat-header-cell *matHeaderCellDef class="title">Than Antracite (tCH4)</th>
+        <th mat-header-cell *matHeaderCellDef class="title">
+          Than Antracite (tCH4)
+        </th>
         <td mat-cell *matCellDef="let element">
           {{ element.antracite_ch4 }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="antracite_n2o">
-        <th mat-header-cell *matHeaderCellDef class="title">Than Antracite (tN20)</th>
+        <th mat-header-cell *matHeaderCellDef class="title">
+          Than Antracite (tN20)
+        </th>
         <td mat-cell *matCellDef="let element">
           {{ element.antracite_n2o }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="coke_co2">
-        <th mat-header-cell *matHeaderCellDef class="title">Than coke (tC02)</th>
+        <th mat-header-cell *matHeaderCellDef class="title">
+          Than coke (tC02)
+        </th>
         <td mat-cell *matCellDef="let element">
           {{ element.coke_co2 }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="coke_ch4">
-        <th mat-header-cell *matHeaderCellDef class="title">Than coke (tCH4)</th>
+        <th mat-header-cell *matHeaderCellDef class="title">
+          Than coke (tCH4)
+        </th>
         <td mat-cell *matCellDef="let element">
           {{ element.coke_ch4 }}
         </td>
@@ -96,21 +136,27 @@
       </ng-container>
 
       <ng-container matColumnDef="bitum_co2">
-        <th mat-header-cell *matHeaderCellDef class="title">Than Bituminous (tC02)</th>
+        <th mat-header-cell *matHeaderCellDef class="title">
+          Than Bituminous (tC02)
+        </th>
         <td mat-cell *matCellDef="let element">
           {{ element.bitum_co2 }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="bitum_ch4">
-        <th mat-header-cell *matHeaderCellDef class="title">Than Bituminous (tCH4)</th>
+        <th mat-header-cell *matHeaderCellDef class="title">
+          Than Bituminous (tCH4)
+        </th>
         <td mat-cell *matCellDef="let element">
           {{ element.bitum_ch4 }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="bitum_n2o">
-        <th mat-header-cell *matHeaderCellDef class="title">Than Bituminous (tN20)</th>
+        <th mat-header-cell *matHeaderCellDef class="title">
+          Than Bituminous (tN20)
+        </th>
         <td mat-cell *matCellDef="let element">
           {{ element.bitum_n2o }}
         </td>
@@ -147,7 +193,7 @@
       <ng-container matColumnDef="fo_ch4">
         <th mat-header-cell *matHeaderCellDef class="title">FO (tCH4)</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.fo_ch4  }}
+          {{ element.fo_ch4 }}
         </td>
       </ng-container>
 
@@ -180,56 +226,72 @@
       </ng-container>
 
       <ng-container matColumnDef="khi_tu_nhien_co2">
-        <th mat-header-cell *matHeaderCellDef class="title">Khí tự nhiên (tC02)</th>
+        <th mat-header-cell *matHeaderCellDef class="title">
+          Khí tự nhiên (tC02)
+        </th>
         <td mat-cell *matCellDef="let element">
           {{ element.khi_tu_nhien_co2 }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="khi_tu_nhien_ch4">
-        <th mat-header-cell *matHeaderCellDef class="title">Khí tự nhiên (tCH4)</th>
+        <th mat-header-cell *matHeaderCellDef class="title">
+          Khí tự nhiên (tCH4)
+        </th>
         <td mat-cell *matCellDef="let element">
           {{ element.khi_tu_nhien_ch4 }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="khi_tu_nhien_n2o">
-        <th mat-header-cell *matHeaderCellDef class="title">Khí tự nhiên (tN20)</th>
+        <th mat-header-cell *matHeaderCellDef class="title">
+          Khí tự nhiên (tN20)
+        </th>
         <td mat-cell *matCellDef="let element">
           {{ element.khi_tu_nhien_n2o }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="nang_luong_sinh_khoi_co2">
-        <th mat-header-cell *matHeaderCellDef class="title">Năng lượng sinh khối (tC02)</th>
+        <th mat-header-cell *matHeaderCellDef class="title">
+          Năng lượng sinh khối (tC02)
+        </th>
         <td mat-cell *matCellDef="let element">
           {{ element.nang_luong_sinh_khoi_co2 }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="nang_luong_sinh_khoi_ch4">
-        <th mat-header-cell *matHeaderCellDef class="title">Năng lượng sinh khối (tCH4)</th>
+        <th mat-header-cell *matHeaderCellDef class="title">
+          Năng lượng sinh khối (tCH4)
+        </th>
         <td mat-cell *matCellDef="let element">
           {{ element.nang_luong_sinh_khoi_ch4 }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="nang_luong_sinh_khoi_n2o">
-        <th mat-header-cell *matHeaderCellDef class="title">Năng lượng sinh khối (tN20)</th>
+        <th mat-header-cell *matHeaderCellDef class="title">
+          Năng lượng sinh khối (tN20)
+        </th>
         <td mat-cell *matCellDef="let element">
           {{ element.nang_luong_sinh_khoi_n2o }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="tong_co2">
-        <th mat-header-cell *matHeaderCellDef class="title">Năng lượng sinh khối (tC02)</th>
+        <th mat-header-cell *matHeaderCellDef class="title">
+          Năng lượng sinh khối (tC02)
+        </th>
         <td mat-cell *matCellDef="let element">
           {{ element.tong_co2 }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="tong_ch4">
-        <th mat-header-cell *matHeaderCellDef class="title">Năng lượng sinh khối (tCH4)</th>
+        <th mat-header-cell *matHeaderCellDef class="title">
+          Năng lượng sinh khối (tCH4)
+        </th>
         <td mat-cell *matCellDef="let element">
           {{ element.tong_ch4 }}
         </td>
@@ -247,7 +309,7 @@
         <td mat-cell *matCellDef="let element">
           {{ element.tong }}
         </td>
-      </ng-container>   
+      </ng-container>
 
       <!-- <ng-container matColumnDef="update" stickyEnd>
           <th mat-header-cell *matHeaderCellDef class="action">Cập nhập</th>
