@@ -18,6 +18,7 @@ import { MatTreeModule } from "@angular/material/tree";
 import { MatTableModule } from "@angular/material/table";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatDialogModule } from "@angular/material/dialog";
+import { MatProgressBarModule } from "@angular/material/progress-bar";
 
 @NgModule({
   declarations: [],
@@ -40,7 +41,8 @@ import { MatDialogModule } from "@angular/material/dialog";
     MatTreeModule,
     MatTableModule,
     MatPaginatorModule,
-    MatDialogModule
-  ]
+    MatDialogModule,
+    MatProgressBarModule,
+  ],
 })
 export class AppMaterialModule {}

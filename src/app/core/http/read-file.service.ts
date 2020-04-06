@@ -2,9 +2,11 @@ import { Injectable } from "@angular/core";
 import { ApiService } from "./api.service";
 import { map } from "rxjs/operators";
 import { Observable } from "rxjs";
+import { params_get_enterprises } from "src/app/shared/modules/enterprise";
+import { HttpParams } from "@angular/common/http";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class ReadFile {
   readonly urlGetTTDN =
@@ -24,43 +26,74 @@ export class ReadFile {
   readonly urlGetPTNL =
     "https://energy-institute.herokuapp.com/greenhouse_emission_consumptions.json";
 
+  readonly urlTTDNV2 = "admin/enterprises";
+
   constructor(private apiService: ApiService) {}
 
   getTTDN(): Observable<TTDN[]> {
     return this.apiService
       .readJson(this.urlGetTTDN)
-      .pipe(map(res => res.enterprises));
+      .pipe(map((res) => res.enterprises));
   }
 
   getTDNL(): Observable<TDNL[]> {
     return this.apiService
       .readJson(this.urlGetTDNL)
-      .pipe(map(res => res.energy_consumptions));
+      .pipe(map((res) => res.energy_consumptions));
   }
 
   getSPSX(): Observable<SPSX[]> {
     return this.apiService
       .readJson(this.urlGetSPSX)
-      .pipe(map(res => res.products));
+      .pipe(map((res) => res.products));
   }
 
   getPTSP(): Observable<PTSP[]> {
     return this.apiService
       .readJson(this.urlGetPTSP)
-      .pipe(map(res => res.greenhouse_emission_products));
+      .pipe(map((res) => res.greenhouse_emission_products));
   }
 
   getTPT(): Observable<TPT[]> {
     return this.apiService
       .readJson(this.urlGetTPT)
-      .pipe(map(res => res.greenhouse_emission_sum));
+      .pipe(map((res) => res.greenhouse_emission_sum));
   }
 
   getPTNL(): Observable<PTNL[]> {
     return this.apiService
       .readJson(this.urlGetPTNL)
-      .pipe(map(res => res.greenhouse_emission_consumptions));
+      .pipe(map((res) => res.greenhouse_emission_consumptions));
   }
+
+  getTTDNV2(data: params_get_enterprises): Observable<TTDN_V2[]> {
+    const param = new HttpParams()
+      .set("year", `${data.year}`)
+      .set("province", data.province)
+      .set("page", `${data.page}`)
+      .set("amount", `${data.amount}`);
+
+    return this.apiService
+      .get(this.urlTTDNV2, param)
+      .pipe(map((res) => res.enterprises));
+  }
+}
+
+export interface TTDN_V2 {
+  id: number;
+  nam: string;
+  ma_so_doanh_nghiep: string;
+  ten_doanh_nghiep: string;
+  tinh: string;
+  huyen: string;
+  xa: string;
+  toa_do_x: string;
+  toa_do_y: string;
+  nganh_cap_1: string;
+  ma_Cap: string;
+  ten_nganh_cap_2: string;
+  gtsx: string;
+  so_lao_dong: string;
 }
 
 export interface TTDN {

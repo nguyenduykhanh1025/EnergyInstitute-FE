@@ -1,139 +1,151 @@
+<mat-progress-bar
+  mode="indeterminate"
+  *ngIf="spinnerService.visibility | async"
+></mat-progress-bar>
+
 <mat-card style="text-align: center;">
   <mat-card-title>Thông tin doanh nghiệp</mat-card-title>
 
-  <mat-card style="text-align: left;">
+  <div style="text-align: left;">
     <h2>Lọc/Tìm kiếm</h2>
     <mat-card-content>
-      <mat-form-field>
-        <mat-label>Năm điều tra*</mat-label>
-        <input
-          matInput
-          (keyup)="handleFilter($event)"
-          [formControl]="filterFollowYear"
-          placeholder="2014"
-        />
-      </mat-form-field>
+      <form
+        *ngIf="fgpFilter != null"
+        [formGroup]="fgpFilter"
+        (ngSubmit)="onSubmitFilter()"
+      >
+        <mat-form-field class="ip-filter-item">
+          <mat-label>Năm điều tra*</mat-label>
+          <input matInput formControlName="year" placeholder="2014" />
+          <app-error-label
+            [control]="fgpFilter.controls.year"
+            label=""
+          ></app-error-label>
+        </mat-form-field>
 
-      <mat-form-field style="margin-left: 20px;">
-        <mat-label>Tỉnh/Thành phố*</mat-label>
-        <input
-          matInput
-          (keyup)="handleFilter($event)"
-          [formControl]="filterFollowCity"
-          placeholder="Hồ Chí Minh"
-        />
-      </mat-form-field>
+        <mat-form-field class="ip-filter-item">
+          <mat-label>Tỉnh/Thành phố*</mat-label>
+          <input
+            matInput
+            formControlName="province"
+            placeholder="Hồ Chí Minh"
+          />
+        </mat-form-field>
 
-      <button  style="margin-left: 20px; width: 100px;" mat-raised-button color="primary" (click)="applyFilter()">
-        Tìm kiếm
-      </button>
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="!fgpFilter.valid"
+        >
+          Tìm kiếm
+        </button>
+      </form>
     </mat-card-content>
-  </mat-card>
+  </div>
 
   <div class="example-container mat-elevation-z8">
     <table mat-table [dataSource]="dataSource">
-      <!-- Name Column -->
-      <ng-container matColumnDef="year_of_investigation" sticky>
-        <th mat-header-cell *matHeaderCellDef id="year">Năm điều tra</th>
-        <td mat-cell *matCellDef="let element" id="year-content">
+      <ng-container matColumnDef="nam" sticky>
+        <th mat-header-cell *matHeaderCellDef>Năm điều tra</th>
+        <td mat-cell *matCellDef="let element" class="special-with">
           {{ element.nam }}
         </td>
       </ng-container>
 
-      <!-- Position Column -->
-      <ng-container matColumnDef="self_produced_electricity">
+      <ng-container matColumnDef="ma_so_doanh_nghiep">
         <th mat-header-cell *matHeaderCellDef class="title">Mã doanh nghiệp</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.ma }}
+          {{ element.ma_so_doanh_nghiep }}
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="consumption_electricity">
-        <th mat-header-cell *matHeaderCellDef>Tên DN</th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.ten }}
+      <ng-container matColumnDef="ten_doanh_nghiep">
+        <th mat-header-cell *matHeaderCellDef>Tên doanh nghiệp</th>
+        <td mat-cell *matCellDef="let element" class="text-content">
+          {{ element.ten_doanh_nghiep }}
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="coal" style="width: 100px;">
+      <ng-container matColumnDef="tinh" style="width: 100px;">
         <th mat-header-cell *matHeaderCellDef>Tỉnh</th>
         <td
           mat-cell
           *matCellDef="let element"
-          class="content"
+          class="text-content"
           style="width: 180px;"
         >
           {{ element.tinh }}
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="bitum_coal">
+      <ng-container matColumnDef="huyen">
         <th mat-header-cell *matHeaderCellDef>Huyện</th>
-        <td mat-cell *matCellDef="let element">
+        <td mat-cell *matCellDef="let element" class="text-content">
           {{ element.huyen }}
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="coke_coal">
+      <ng-container matColumnDef="xa">
         <th mat-header-cell *matHeaderCellDef>Xã</th>
-        <td mat-cell *matCellDef="let element">
+        <td mat-cell *matCellDef="let element" class="text-content">
           {{ element.xa }}
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="dust_coal">
+      <ng-container matColumnDef="toa_do_X">
         <th mat-header-cell *matHeaderCellDef class="title">Tọa độ X</th>
         <td mat-cell *matCellDef="let element">
           {{ element.toa_do_x }}
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="ko">
+      <ng-container matColumnDef="toa_do_Y">
         <th mat-header-cell *matHeaderCellDef class="title">Tọa độ Y</th>
         <td mat-cell *matCellDef="let element">
           {{ element.toa_do_y }}
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="do">
+      <ng-container matColumnDef="nganh_cap_1">
         <th mat-header-cell *matHeaderCellDef>Nghành cấp 1</th>
         <td
           mat-cell
           *matCellDef="let element"
-          class="content"
+          class="text-content"
           style="width: 190px;"
         >
           {{ element.nganh_cap_1 }}
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="fo">
+      <ng-container matColumnDef="ma_Cap">
         <th mat-header-cell *matHeaderCellDef class="title">Mã cấp 2</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.ma_cap_2 }}
+          {{ element.ma_Cap }}
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="lpg">
+      <ng-container matColumnDef="ten_nganh_cap_2">
         <th mat-header-cell *matHeaderCellDef>Tên nghành cấp 2</th>
         <td
           mat-cell
           *matCellDef="let element"
-          class="content"
+          class="text-content"
           style="width: 180px;"
         >
           {{ element.ten_nganh_cap_2 }}
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="ng">
+      <ng-container matColumnDef="gtsx">
         <th mat-header-cell *matHeaderCellDef class="title">GTSX</th>
         <td mat-cell *matCellDef="let element">
           {{ element.gtsx }}
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="biomass_energy">
+      <ng-container matColumnDef="so_lao_dong">
         <th mat-header-cell *matHeaderCellDef class="title">
           Số lượng Lao động
         </th>
@@ -142,34 +154,18 @@
         </td>
       </ng-container>
 
-      <!-- <ng-container matColumnDef="update" stickyEnd>
-        <th mat-header-cell *matHeaderCellDef class="action">Cập nhập</th>
-        <td mat-cell *matCellDef="let element">
-          <button mat-button color="primary">
-            Cập nhập
-          </button>
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="delete" stickyEnd>
-        <th mat-header-cell *matHeaderCellDef class="action">Xóa</th>
-        <td mat-cell *matCellDef="let element; let i = index">
-          <button mat-button color="warn">
-            Xóa
-          </button>
-        </td>
-      </ng-container> -->
-
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
   </div>
   <mat-paginator
-    [pageSizeOptions]="[100, 200, 300]"
-    showFirstLastButtons
-  ></mat-paginator>
+    [length]="1000"
+    [pageSize]="params.amount"
+    [pageSizeOptions]="[50, 100, 200, 300]"
+    (page)="hangePaginator($event)"
+  >
+  </mat-paginator>
   <button mat-raised-button color="primary" style="margin-top: 10px;">
     Tạo mới thông tin
   </button>
-  <p></p>
 </mat-card>

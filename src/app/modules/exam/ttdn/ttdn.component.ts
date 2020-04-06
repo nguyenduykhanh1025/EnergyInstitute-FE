@@ -3,9 +3,11 @@ import { EnergyConsumption } from "src/app/shared/modules/energy_consumption";
 import { EnergyConsumptionsHttpService } from "src/app/core/http/energy-consumptions-http.service";
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
-import { ReadFile, TTDN } from "src/app/core/http/read-file.service";
-import { FormControl } from "@angular/forms";
+import { ReadFile, TTDN, TTDN_V2 } from "src/app/core/http/read-file.service";
+import { FormControl, FormGroup } from "@angular/forms";
 import { CustomValidators } from "src/app/shared/validations/custom-validators";
+import { SpinnerService } from "src/app/core/services/spinner.service";
+import { params_get_enterprises } from "src/app/shared/modules/enterprise";
 
 @Component({
   selector: "app-ttdn",
@@ -14,86 +16,70 @@ import { CustomValidators } from "src/app/shared/validations/custom-validators";
 })
 export class TTDNComponent implements OnInit {
   dataSource: any;
-  dataSourceCurrent: EnergyConsumption;
   displayedColumns = [
-    "year_of_investigation",
-    "self_produced_electricity",
-    "consumption_electricity",
-    "coal",
-    "bitum_coal",
-    "coke_coal",
-    "dust_coal",
-    "ko",
-    "do",
-    "fo",
-    "lpg",
-    "ng",
-    "biomass_energy",
-    // "update",
-    // "delete",
+    "nam",
+    "ma_so_doanh_nghiep",
+    "ten_doanh_nghiep",
+    "tinh",
+    "huyen",
+    "xa",
+    "toa_do_X",
+    "toa_do_Y",
+    "nganh_cap_1",
+    "ma_Cap",
+    "ten_nganh_cap_2",
+    "gtsx",
+    "so_lao_dong",
   ];
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  filterFollowYear = new FormControl("");
-  filterFollowCity = new FormControl("");
-  dataSourceOld: any;
+  params: params_get_enterprises = {
+    year: "",
+    province: "",
+    page: 1,
+    amount: 50,
+  };
+
+  fgpFilter = new FormGroup({
+    year: new FormControl("", [CustomValidators.onlyNumber]),
+    province: new FormControl(""),
+  });
 
   constructor(
-    private energyConsumptionsHttpService: EnergyConsumptionsHttpService,
-    private readFile: ReadFile
+    private readFile: ReadFile,
+    public spinnerService: SpinnerService
   ) {}
 
   ngOnInit(): void {
-    // this.initDataSource();
     this.initData();
   }
 
   initData() {
-    this.readFile.getTTDN().subscribe((data) => {
-      this.dataSource = new MatTableDataSource<TTDN>(data);
-      this.dataSource.paginator = this.paginator;
-      this.dataSourceOld = data;
+    this.spinnerService.show();
+    this.readFile.getTTDNV2(this.params).subscribe((data) => {
+      this.dataSource = new MatTableDataSource<TTDN_V2>(data);
+      this.spinnerService.hide();
     });
   }
 
-  applyFilter() {
-    if (this.filterFollowCity.value == "") {
-      this.dataSource.data = this.dataSourceOld.filter(
-        (item) => item.nam == this.filterFollowYear.value
-      );
-    } else if (this.filterFollowYear.value == "") {
-      this.dataSource.data = this.dataSourceOld.filter((item) => {
-        return (
-          item.tinh
-            .toLowerCase()
-            .search(this.filterFollowCity.value.toLowerCase()) != -1
-        );
-      });
-    } else {
-      this.dataSource.data = this.dataSourceOld.filter((item) => {
-        return (
-          item.nam == this.filterFollowYear.value &&
-          item.tinh
-            .toLowerCase()
-            .search(this.filterFollowCity.value.toLowerCase()) != -1
-        );
-      });
-    }
+  hangePaginator($event) {
+    this.params.page = $event.pageIndex + 1;
+    this.params.amount = $event.pageSize;
 
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+    this.spinnerService.show();
+    this.readFile.getTTDNV2(this.params).subscribe((data) => {
+      this.dataSource = new MatTableDataSource<TTDN_V2>(data);
+      this.spinnerService.hide();
+    });
   }
 
-  handleFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    if (filterValue == "") {
-      console.log(this.dataSourceOld);
+  onSubmitFilter() {
+    this.params.province = this.fgpFilter.value.province;
+    this.params.year = this.fgpFilter.value.year;
 
-      this.dataSource.data = [...this.dataSourceOld];
-      if (this.dataSource.paginator) {
-        this.dataSource.paginator.firstPage();
-      }
-    }
+    this.spinnerService.show();
+    this.readFile.getTTDNV2(this.params).subscribe((data) => {
+      this.dataSource = new MatTableDataSource<TTDN_V2>(data);
+      this.spinnerService.hide();
+    });
   }
 }

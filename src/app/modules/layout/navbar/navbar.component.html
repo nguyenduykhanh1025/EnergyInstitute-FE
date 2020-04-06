@@ -1,6 +1,6 @@
-<mat-toolbar class="home" [routerLink]="['/']">
-  <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
-  <span>Home</span>
+<mat-toolbar class="home">
+  <mat-icon aria-hidden="false" aria-label="Example home icon">menu</mat-icon>
+  <span class="item-toolbar-menu" [routerLink]="['/']">Home</span>
 </mat-toolbar>
 
 <mat-accordion>
@@ -75,8 +75,7 @@
 
   <!-- End ADMIN -->
 
-  <!-- <mat-divider></mat-divider>
-  <button
+  <!-- <button
     mat-button
     [routerLink]="['/energy_consumptions']"
     routerLinkActive="active-link"
@@ -85,7 +84,6 @@
     <i class="material-icons">fireplace</i>
     Thông tin tiêu thụ năng lượng
   </button>
-  <mat-divider></mat-divider>
   <button
     mat-button
     [routerLink]="['/enterprise/show']"
@@ -95,7 +93,6 @@
     <i class="material-icons">domain</i>
     Thông tin công ty
   </button>
-  <mat-divider></mat-divider>
   <button
     mat-button
     [routerLink]="['/products']"
@@ -105,7 +102,6 @@
     <i class="material-icons">emoji_objects</i>
     Thông tin sản phẩm
   </button>
-  <mat-divider></mat-divider>
   <button
     mat-button
     [routerLink]="['/greenhouse_emissions']"
@@ -115,7 +111,6 @@
     <i class="material-icons">emoji_transportation</i>
     Phát thải khí nhà kính
   </button>
-  <mat-divider></mat-divider>
 
   <button mat-raised-button color="primary" (click)="logout()" class="btn-menu">
     <mat-icon aria-hidden="false" aria-label="Example home icon"
