@@ -3,3 +3,9 @@ export interface Product {
   enterprise_id: number;
   name: number;
 }
+
+export interface params_get_product {
+  year: string;
+  page: string;
+  amount: string;
+}

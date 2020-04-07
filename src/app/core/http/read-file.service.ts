@@ -5,6 +5,7 @@ import { Observable } from "rxjs";
 import { params_get_enterprises } from "src/app/shared/modules/enterprise";
 import { HttpParams } from "@angular/common/http";
 import { params_get_energy_consumption } from "src/app/shared/modules/energy_consumption";
+import { params_get_product } from "src/app/shared/modules/product";
 
 @Injectable({
   providedIn: "root",
@@ -29,6 +30,7 @@ export class ReadFile {
 
   readonly urlTTDNV2 = "admin/enterprises";
   readonly urlTDNLV2 = "admin/energies";
+  readonly urlSPSXV2 = "admin/products";
 
   constructor(private apiService: ApiService) {}
 
@@ -90,6 +92,32 @@ export class ReadFile {
       .get(this.urlTDNLV2, params)
       .pipe(map((res) => res.energies));
   }
+
+  getSPSXV2(data: params_get_product): Observable<SPSX_V2[]> {
+    const params = new HttpParams()
+      .set("year", data.year)
+      .set("page", data.page)
+      .set("amount", data.amount);
+
+    return this.apiService
+      .get(this.urlSPSXV2, params)
+      .pipe(map((res) => res.products));
+  }
+}
+
+export interface SPSX_V2 {
+  id: number;
+  nam: string;
+  ma_so_doanh_nghiep: string;
+  ten_doanh_nghiep: string;
+  stt: number;
+  ma_san_pham: string;
+  ten_san_pham: string;
+  ma_cap_2: string;
+  ten_nganh_cap_2: number;
+  don_vi: string;
+  so_luong: string;
+  gtsx: string;
 }
 
 export interface TDNL_V2 {
