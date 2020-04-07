@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { MatTableDataSource } from "@angular/material/table";
-import { ReadFile, TTDN, TTDN_V2 } from "src/app/core/http/read-file.service";
+import { ReadFile, TTDN_V2 } from "src/app/core/http/read-file.service";
 import { FormControl, FormGroup } from "@angular/forms";
 import { CustomValidators } from "src/app/shared/validations/custom-validators";
 import { SpinnerService } from "src/app/core/services/spinner.service";
@@ -57,8 +57,13 @@ export class TTDNComponent implements OnInit {
   }
 
   getPaginateLength() {
-    let paramNotIncludeAmount = this.params;
-    paramNotIncludeAmount.amount = "";
+    let paramNotIncludeAmount: params_get_enterprises = {
+      year: this.params.year,
+      page: this.params.page,
+      province: this.params.province,
+      amount: "",
+    };
+
     this.readFile.getTTDNV2(paramNotIncludeAmount).subscribe((data) => {
       this.lenghtPaginate = data.length;
     });
@@ -80,7 +85,7 @@ export class TTDNComponent implements OnInit {
     this.spinnerService.show();
     this.readFile.getTTDNV2(this.params).subscribe((data) => {
       this.dataSource = new MatTableDataSource<TTDN_V2>(data);
-      this.getPaginateLength(); 
+      this.getPaginateLength();
       this.spinnerService.hide();
     });
   }
