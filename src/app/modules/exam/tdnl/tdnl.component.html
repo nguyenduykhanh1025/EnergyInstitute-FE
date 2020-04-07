@@ -1,35 +1,46 @@
+<mat-progress-bar
+  mode="indeterminate"
+  *ngIf="spinnerService.visibility | async"
+></mat-progress-bar>
+
 <mat-card style="text-align: center;">
   <mat-card-title>Thông tin tiêu thụ năng lượng</mat-card-title>
 
-  <mat-card style="text-align: left;">
+  <div style="text-align: left;">
     <h2>Lọc/Tìm kiếm</h2>
     <mat-card-content>
-      <mat-form-field>
-        <mat-label>Năm điều tra*</mat-label>
-        <input
-          matInput
-          (keyup)="handleFilter($event)"
-          [formControl]="filterFollowYear"
-          placeholder="2014"
-        />
-      </mat-form-field>
-      <button
-        style="margin-left: 20px; width: 100px;"
-        mat-raised-button
-        color="primary"
-        (click)="applyFilter()"
+      <form
+        *ngIf="fgpFilter != null"
+        [formGroup]="fgpFilter"
+        (ngSubmit)="onSubmitFilter()"
       >
-        Tìm kiếm
-      </button>
+        <mat-form-field class="ip-filter-item">
+          <mat-label>Năm điều tra*</mat-label>
+          <input matInput formControlName="year" placeholder="2014" />
+          <app-error-label
+            [control]="fgpFilter.controls.year"
+            label=""
+          ></app-error-label>
+        </mat-form-field>
+
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="!fgpFilter.valid"
+        >
+          Tìm kiếm
+        </button>
+      </form>
     </mat-card-content>
-  </mat-card>
+  </div>
 
   <div class="example-container mat-elevation-z8">
     <table mat-table [dataSource]="dataSource">
       <!-- Name Column -->
       <ng-container matColumnDef="nam" sticky>
-        <th mat-header-cell *matHeaderCellDef id="year">Năm điều tra</th>
-        <td mat-cell *matCellDef="let element" id="year-content">
+        <th mat-header-cell *matHeaderCellDef>Năm điều tra</th>
+        <td mat-cell *matCellDef="let element" class="special-with">
           {{ element.nam }}
         </td>
       </ng-container>
@@ -43,18 +54,17 @@
       </ng-container>
 
       <ng-container matColumnDef="ten_doanh_nghiep">
-        <th mat-header-cell *matHeaderCellDef class="title">Tên DN</th>
-        <td mat-cell *matCellDef="let element">
+        <th mat-header-cell *matHeaderCellDef>Tên DN</th>
+        <td mat-cell *matCellDef="let element" class="text-content">
           {{ element.ten_doanh_nghiep }}
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="ma_cap" style="width: 100px;">
-        <th mat-header-cell *matHeaderCellDef>Mã cấp 2</th>
+      <ng-container matColumnDef="ma_cap">
+        <th mat-header-cell *matHeaderCellDef class="title">Mã cấp 2</th>
         <td
           mat-cell
           *matCellDef="let element"
-          class="content"
           style="width: 180px;"
         >
           {{ element.ma_cap }}
@@ -62,16 +72,25 @@
       </ng-container>
 
       <ng-container matColumnDef="ten_nganh">
-        <th mat-header-cell *matHeaderCellDef class="title">Tên nghành</th>
-        <td mat-cell *matCellDef="let element">
+        <th mat-header-cell *matHeaderCellDef>Tên nghành</th>
+        <td mat-cell *matCellDef="let element" class="text-content">
           {{ element.ten_nganh }}
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="dien_nltt">
+      <ng-container matColumnDef="dien">
         <th mat-header-cell *matHeaderCellDef class="title">Điện (NLTT)</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.dien_nltt }}
+          {{ element.dien }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="antracite_nltt">
+        <th mat-header-cell *matHeaderCellDef class="title">
+          Than Antracite (NLTT)
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.antracite_nltt }}
         </td>
       </ng-container>
 
@@ -84,10 +103,10 @@
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="than_coc_nltt">
+      <ng-container matColumnDef="coc_nltt">
         <th mat-header-cell *matHeaderCellDef class="title">Than cốc (NLTT)</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.than_coc_nltt }}
+          {{ element.coc_nltt }}
         </td>
       </ng-container>
 
@@ -161,7 +180,7 @@
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="antracite_nltt_tj">
+      <ng-container matColumnDef="antracite_tj">
         <th mat-header-cell *matHeaderCellDef class="title">
           Than antracite (TJ)
         </th>
@@ -170,7 +189,7 @@
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="bitum_nltt_tj">
+      <ng-container matColumnDef="bitum_tj">
         <th mat-header-cell *matHeaderCellDef class="title">
           Than Bituminous (TJ)
         </th>
@@ -179,42 +198,42 @@
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="than_coc_nltt_tj">
+      <ng-container matColumnDef="coc_tj">
         <th mat-header-cell *matHeaderCellDef class="title">Than cốc (TJ)</th>
         <td mat-cell *matCellDef="let element">
           {{ element.than_coc_nltt_tj }}
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="ko_nltt_tj">
+      <ng-container matColumnDef="ko_tj">
         <th mat-header-cell *matHeaderCellDef class="title">KO (TJ)</th>
         <td mat-cell *matCellDef="let element">
           {{ element.ko_nltt_tj }}
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="do_nltt_tj">
+      <ng-container matColumnDef="do_tj">
         <th mat-header-cell *matHeaderCellDef class="title">DO (TJ)</th>
         <td mat-cell *matCellDef="let element">
           {{ element.do_nltt_tj }}
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="fo_nltt_tj">
+      <ng-container matColumnDef="fo_tj">
         <th mat-header-cell *matHeaderCellDef class="title">FO (TJ)</th>
         <td mat-cell *matCellDef="let element">
           {{ element.fo_nltt_tj }}
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="lpg_nltt_tj">
+      <ng-container matColumnDef="lpg_tj">
         <th mat-header-cell *matHeaderCellDef class="title">LPG (TJ)</th>
         <td mat-cell *matCellDef="let element">
           {{ element.lpg_nltt_tj }}
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="ng_nltt_tj">
+      <ng-container matColumnDef="ng_tj">
         <th mat-header-cell *matHeaderCellDef class="title">NG (TJ)</th>
         <td mat-cell *matCellDef="let element">
           {{ element.ng_nltt_tj }}
@@ -232,12 +251,16 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
   </div>
+
   <mat-paginator
-    [pageSizeOptions]="[100, 200, 300]"
-    showFirstLastButtons
-  ></mat-paginator>
+    [length]="lenghtPaginate"
+    [pageSize]="params.amount"
+    [pageSizeOptions]="[50, 100, 200, 300]"
+    (page)="hangePaginator($event)"
+  >
+  </mat-paginator>
+
   <button mat-raised-button color="primary" style="margin-top: 10px;">
     Tạo mới thông tin
   </button>
-  <p></p>
 </mat-card>

@@ -1,13 +1,9 @@
 <mat-drawer-container class="main-container" autosize>
-  <mat-drawer
-    mode="side"
-    [opened]="true"
-    class="side-bar"
-  >
+  <mat-drawer mode="side" [opened]="true" class="side-bar">
     <app-navbar></app-navbar>
   </mat-drawer>
   <mat-drawer-content>
     <router-outlet></router-outlet>
-  </mat-drawer-content> 
+  </mat-drawer-content>
 </mat-drawer-container>
 <!-- [opened]="handleStatusOpenLayoutNavbarFollowUserLogin()" -->

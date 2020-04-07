@@ -6,7 +6,7 @@
 }
 
 table {
-  width: 300%;
+  width: 260%;
 }
 
 td.mat-column-star {
@@ -22,21 +22,20 @@ td.mat-column-star {
   border-left: 1px solid #e0e0e0;
 }
 
-.action {
-  text-align: center;
+.ip-filter-item {
+  margin-right: 10px;
 }
+
+.text-content {
+  text-align: left;
+  width: max-content;
+}
+
+.special-with {
+  width: 50px;
+  text-align: left;
+}
+
 .title {
   text-align: center;
-}
-
-#year {
-  width: 50px;
-}
-
-.content {
-  text-align: left;
-}
-
-#year-content {
-  text-align: left;
 }

@@ -16,3 +16,9 @@ export interface EnergyConsumption {
   biomass_energy: number;
   renewable_energy: number;
 }
+
+export interface params_get_energy_consumption {
+  year: string;
+  page: string;
+  amount: string;
+}

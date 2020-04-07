@@ -4,6 +4,7 @@ import { map } from "rxjs/operators";
 import { Observable } from "rxjs";
 import { params_get_enterprises } from "src/app/shared/modules/enterprise";
 import { HttpParams } from "@angular/common/http";
+import { params_get_energy_consumption } from "src/app/shared/modules/energy_consumption";
 
 @Injectable({
   providedIn: "root",
@@ -27,6 +28,7 @@ export class ReadFile {
     "https://energy-institute.herokuapp.com/greenhouse_emission_consumptions.json";
 
   readonly urlTTDNV2 = "admin/enterprises";
+  readonly urlTDNLV2 = "admin/energies";
 
   constructor(private apiService: ApiService) {}
 
@@ -77,6 +79,49 @@ export class ReadFile {
       .get(this.urlTTDNV2, param)
       .pipe(map((res) => res.enterprises));
   }
+
+  getTDNLV2(data: params_get_energy_consumption): Observable<TDNL_V2[]> {
+    const params = new HttpParams()
+      .set("year", data.year)
+      .set("page", data.page)
+      .set("amount", data.amount);
+
+    return this.apiService
+      .get(this.urlTDNLV2, params)
+      .pipe(map((res) => res.energies));
+  }
+}
+
+export interface TDNL_V2 {
+  id: number;
+  nam: string;
+  ma_so_doanh_nghiep: string;
+  ten_doanh_nghiep: string;
+  ma_cap: string;
+  ten_nganh: number;
+  dien: string;
+  antracite_nltt: string;
+  bitum_nltt: string;
+  coc_nltt: string;
+  ko_nltt: number;
+  do_nltt: string;
+  fo_nltt: string;
+  lpg_nltt: string;
+  ng_nltt: string;
+  npk_pnl: number;
+  hs_pnl: string;
+  than_pnl: string;
+  ng_pnl: string;
+  dien_pnl: string;
+  antracite_tj: number;
+  bitum_tj: string;
+  coc_tj: string;
+  ko_tj: string;
+  do_tj: string;
+  fo_tj: number;
+  lpg_tj: string;
+  ng_tj: string;
+  tong: string;
 }
 
 export interface TTDN_V2 {

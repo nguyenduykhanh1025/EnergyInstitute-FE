@@ -1,8 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { EnergyConsumption } from "src/app/shared/modules/energy_consumption";
-import { EnergyConsumptionsHttpService } from "src/app/core/http/energy-consumptions-http.service";
 import { MatTableDataSource } from "@angular/material/table";
-import { MatPaginator } from "@angular/material/paginator";
 import { ReadFile, TTDN, TTDN_V2 } from "src/app/core/http/read-file.service";
 import { FormControl, FormGroup } from "@angular/forms";
 import { CustomValidators } from "src/app/shared/validations/custom-validators";
@@ -36,8 +33,10 @@ export class TTDNComponent implements OnInit {
     year: "",
     province: "",
     page: 1,
-    amount: 50,
+    amount: "50",
   };
+
+  lenghtPaginate: number;
 
   fgpFilter = new FormGroup({
     year: new FormControl("", [CustomValidators.onlyNumber]),
@@ -54,31 +53,34 @@ export class TTDNComponent implements OnInit {
   }
 
   initData() {
-    this.spinnerService.show();
-    this.readFile.getTTDNV2(this.params).subscribe((data) => {
-      this.dataSource = new MatTableDataSource<TTDN_V2>(data);
-      this.spinnerService.hide();
+    this.getDataFromServer();
+  }
+
+  getPaginateLength() {
+    let paramNotIncludeAmount = this.params;
+    paramNotIncludeAmount.amount = "";
+    this.readFile.getTTDNV2(paramNotIncludeAmount).subscribe((data) => {
+      this.lenghtPaginate = data.length;
     });
   }
 
   hangePaginator($event) {
     this.params.page = $event.pageIndex + 1;
     this.params.amount = $event.pageSize;
-
-    this.spinnerService.show();
-    this.readFile.getTTDNV2(this.params).subscribe((data) => {
-      this.dataSource = new MatTableDataSource<TTDN_V2>(data);
-      this.spinnerService.hide();
-    });
+    this.getDataFromServer();
   }
 
   onSubmitFilter() {
     this.params.province = this.fgpFilter.value.province;
     this.params.year = this.fgpFilter.value.year;
+    this.getDataFromServer();
+  }
 
+  getDataFromServer() {
     this.spinnerService.show();
     this.readFile.getTTDNV2(this.params).subscribe((data) => {
       this.dataSource = new MatTableDataSource<TTDN_V2>(data);
+      this.getPaginateLength(); 
       this.spinnerService.hide();
     });
   }

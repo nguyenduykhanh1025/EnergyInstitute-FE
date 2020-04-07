@@ -16,5 +16,5 @@ export interface params_get_enterprises {
   year: string;
   province: string;
   page: number;
-  amount: number;
+  amount: string;
 }
