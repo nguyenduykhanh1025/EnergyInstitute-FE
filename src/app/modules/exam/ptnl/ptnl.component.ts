@@ -1,8 +1,10 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { MatPaginator } from "@angular/material/paginator";
-import { ReadFile, PTNL } from "src/app/core/http/read-file.service";
+import { Component, OnInit } from "@angular/core";
+import { ReadFile, PTNL_V2 } from "src/app/core/http/read-file.service";
 import { MatTableDataSource } from "@angular/material/table";
-import { FormControl } from "@angular/forms";
+import { FormControl, FormGroup } from "@angular/forms";
+import { SpinnerService } from "src/app/core/services/spinner.service";
+import { params_get_emission_energies } from "src/app/shared/modules/emission_energies";
+import { CustomValidators } from "src/app/shared/validations/custom-validators";
 
 @Component({
   selector: "app-ptnl",
@@ -48,42 +50,53 @@ export class PTNLComponent implements OnInit {
     "tong_n2o",
     "tong",
   ];
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  filterFollowYear = new FormControl("");
-  dataSourceOld: any;
 
-  constructor(private readFile: ReadFile) {}
+  params: params_get_emission_energies = {
+    year: "",
+    page: "1",
+    amount: "50",
+  };
+
+  lenghtPaginate: number;
+
+  fgpFilter = new FormGroup({
+    year: new FormControl("", [CustomValidators.onlyNumber]),
+  });
+
+  constructor(
+    private readFile: ReadFile,
+    public spinnerService: SpinnerService
+  ) {}
 
   ngOnInit(): void {
     this.initData();
   }
+
   initData() {
-    this.readFile.getPTNL().subscribe((data) => {
-      this.dataSource = new MatTableDataSource<PTNL>(data);
-      this.dataSource.paginator = this.paginator;
-      this.dataSourceOld = data;
+    this.getDataFromServer();
+  }
+
+  setPaginateLength(length: number) {
+    this.lenghtPaginate = length;
+  }
+
+  hangePaginator($event) {
+    this.params.page = $event.pageIndex + 1;
+    this.params.amount = $event.pageSize;
+    this.getDataFromServer();
+  }
+
+  onSubmitFilter() {
+    this.params.year = this.fgpFilter.value.year;
+    this.getDataFromServer();
+  }
+
+  getDataFromServer() {
+    this.spinnerService.show();
+    this.readFile.getPTNLV2(this.params).subscribe((data) => {
+      this.dataSource = new MatTableDataSource<PTNL_V2>(data.emission_energies);
+      this.setPaginateLength(data.length);
+      this.spinnerService.hide();
     });
-  }
-
-  applyFilter() {
-    this.dataSource.data = this.dataSourceOld.filter(
-      (item) => item.nam == this.filterFollowYear.value
-    );
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
-
-  handleFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    if (filterValue == "") {
-      console.log(this.dataSourceOld);
-
-      this.dataSource.data = [...this.dataSourceOld];
-      if (this.dataSource.paginator) {
-        this.dataSource.paginator.firstPage();
-      }
-    }
   }
 }

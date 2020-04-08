@@ -7,6 +7,7 @@ import { HttpParams } from "@angular/common/http";
 import { params_get_energy_consumption } from "src/app/shared/modules/energy_consumption";
 import { params_get_product } from "src/app/shared/modules/product";
 import { params_get_emission_products } from "src/app/shared/modules/emission_products";
+import { params_get_emission_energies } from "src/app/shared/modules/emission_energies";
 
 @Injectable({
   providedIn: "root",
@@ -33,6 +34,7 @@ export class ReadFile {
   readonly urlTDNLV2 = "admin/energies";
   readonly urlSPSXV2 = "admin/products";
   readonly urlPTSPV2 = "admin/emission_products";
+  readonly urlPTNLV2 = "admin/emission_energies";
 
   constructor(private apiService: ApiService) {}
 
@@ -108,6 +110,54 @@ export class ReadFile {
 
     return this.apiService.get(this.urlPTSPV2, params).pipe(map((res) => res));
   }
+
+  getPTNLV2(data: params_get_emission_energies) {
+    const params = new HttpParams()
+      .set("year", data.year)
+      .set("page", data.page)
+      .set("amount", data.amount);
+
+    return this.apiService.get(this.urlPTNLV2, params).pipe(map((res) => res));
+  }
+}
+
+export interface PTNL_V2 {
+  id: number;
+  nam: string;
+  ma_so_doanh_nghiep: string;
+  ten_doanh_nghiep: string;
+  ma_cap_2: string;
+  ten_nganh_cap_2: string;
+  he_so_su_dung_nang_luong: string;
+  dien: string;
+  antracite_co2: string;
+  antracite_ch4: string;
+  antracite_n2o: string;
+  coke_co2: string;
+  coke_ch4: string;
+  coke_n2o: string;
+  bitum_co2: string;
+  bitum_ch4: string;
+  bitum_n2o: string;
+  do_co2: string;
+  do_ch4: string;
+  do_n2o: string;
+  fo_co2: string;
+  fo_ch4: string;
+  fo_n2o: string;
+  lpg_co2: string;
+  lpg_ch4: string;
+  lpg_n2o: string;
+  khi_tu_nhien_co2: string;
+  khi_tu_nhien_ch4: string;
+  khi_tu_nhien_n2o: string;
+  nang_luong_sinh_khoi_co2: string;
+  nang_luong_sinh_khoi_ch4: string;
+  nang_luong_sinh_khoi_n2o: string;
+  tong_co2: string;
+  tong_ch4: string;
+  tong_n2o: string;
+  tong: string;
 }
 
 export interface PTSP_V2 {
