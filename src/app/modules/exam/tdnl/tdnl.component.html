@@ -4,10 +4,12 @@
 ></mat-progress-bar>
 
 <mat-card style="text-align: center;">
-  <mat-card-title>Thông tin tiêu thụ năng lượng</mat-card-title>
+  <mat-card-title style="text-transform: uppercase;"
+    >tiêu thụ năng lượng</mat-card-title
+  >
 
   <div style="text-align: left;">
-    <h2>Lọc/Tìm kiếm</h2>
+    <h2 style="color: #3f51b5;">Lọc/Tìm kiếm</h2>
     <mat-card-content>
       <form
         *ngIf="fgpFilter != null"
@@ -24,12 +26,12 @@
         </mat-form-field>
 
         <button
-          mat-raised-button
+          mat-button
           color="primary"
           type="submit"
           [disabled]="!fgpFilter.valid"
         >
-          Tìm kiếm
+          <i class="material-icons">search</i>
         </button>
       </form>
     </mat-card-content>
@@ -62,11 +64,7 @@
 
       <ng-container matColumnDef="ma_cap">
         <th mat-header-cell *matHeaderCellDef class="title">Mã cấp 2</th>
-        <td
-          mat-cell
-          *matCellDef="let element"
-          style="width: 180px;"
-        >
+        <td mat-cell *matCellDef="let element" style="width: 180px;">
           {{ element.ma_cap }}
         </td>
       </ng-container>

@@ -65,23 +65,15 @@ export class SpsxComponent implements OnInit {
     this.getDataFromServer();
   }
 
-  getPaginateLength() {
-    let paramNotIncludeAmount: params_get_product = {
-      year: this.params.year,
-      page: this.params.page,
-      amount: "",
-    };
-
-    this.readFile.getTDNLV2(paramNotIncludeAmount).subscribe((data) => {
-      this.lenghtPaginate = data.length;
-    });
+  setPaginateLength(length: number) {
+    this.lenghtPaginate = length;
   }
 
   getDataFromServer() {
     this.spinnerService.show();
     this.readFile.getSPSXV2(this.params).subscribe((data) => {
-      this.dataSource = new MatTableDataSource<SPSX_V2>(data);
-      this.getPaginateLength();
+      this.dataSource = new MatTableDataSource<SPSX_V2>(data.products);
+      this.setPaginateLength(data.length);
       this.spinnerService.hide();
     });
   }

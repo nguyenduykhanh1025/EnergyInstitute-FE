@@ -70,38 +70,32 @@ export class ReadFile {
       .pipe(map((res) => res.greenhouse_emission_consumptions));
   }
 
-  getTTDNV2(data: params_get_enterprises): Observable<TTDN_V2[]> {
+  getTTDNV2(data: params_get_enterprises) {
     const param = new HttpParams()
       .set("year", `${data.year}`)
       .set("province", data.province)
       .set("page", `${data.page}`)
       .set("amount", `${data.amount}`);
 
-    return this.apiService
-      .get(this.urlTTDNV2, param)
-      .pipe(map((res) => res.enterprises));
+    return this.apiService.get(this.urlTTDNV2, param).pipe(map((res) => res));
   }
 
-  getTDNLV2(data: params_get_energy_consumption): Observable<TDNL_V2[]> {
+  getTDNLV2(data: params_get_energy_consumption) {
     const params = new HttpParams()
       .set("year", data.year)
       .set("page", data.page)
       .set("amount", data.amount);
 
-    return this.apiService
-      .get(this.urlTDNLV2, params)
-      .pipe(map((res) => res.energies));
+    return this.apiService.get(this.urlTDNLV2, params).pipe(map((res) => res));
   }
 
-  getSPSXV2(data: params_get_product): Observable<SPSX_V2[]> {
+  getSPSXV2(data: params_get_product) {
     const params = new HttpParams()
       .set("year", data.year)
       .set("page", data.page)
       .set("amount", data.amount);
 
-    return this.apiService
-      .get(this.urlSPSXV2, params)
-      .pipe(map((res) => res.products));
+    return this.apiService.get(this.urlSPSXV2, params).pipe(map((res) => res));
   }
 }
 

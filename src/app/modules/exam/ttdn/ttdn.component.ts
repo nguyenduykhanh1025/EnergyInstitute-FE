@@ -56,17 +56,8 @@ export class TTDNComponent implements OnInit {
     this.getDataFromServer();
   }
 
-  getPaginateLength() {
-    let paramNotIncludeAmount: params_get_enterprises = {
-      year: this.params.year,
-      page: this.params.page,
-      province: this.params.province,
-      amount: "",
-    };
-
-    this.readFile.getTTDNV2(paramNotIncludeAmount).subscribe((data) => {
-      this.lenghtPaginate = data.length;
-    });
+  setPaginateLength(length: number) {
+    this.lenghtPaginate = length;
   }
 
   hangePaginator($event) {
@@ -84,8 +75,8 @@ export class TTDNComponent implements OnInit {
   getDataFromServer() {
     this.spinnerService.show();
     this.readFile.getTTDNV2(this.params).subscribe((data) => {
-      this.dataSource = new MatTableDataSource<TTDN_V2>(data);
-      this.getPaginateLength();
+      this.dataSource = new MatTableDataSource<TTDN_V2>(data.enterprises);
+      this.setPaginateLength(data.length);
       this.spinnerService.hide();
     });
   }
