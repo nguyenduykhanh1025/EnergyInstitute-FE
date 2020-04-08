@@ -1,8 +1,10 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { MatPaginator } from "@angular/material/paginator";
-import { ReadFile, PTSP } from "src/app/core/http/read-file.service";
+import { Component, OnInit } from "@angular/core";
+import { ReadFile, PTSP_V2 } from "src/app/core/http/read-file.service";
 import { MatTableDataSource } from "@angular/material/table";
-import { FormControl } from "@angular/forms";
+import { FormControl, FormGroup } from "@angular/forms";
+import { SpinnerService } from "src/app/core/services/spinner.service";
+import { params_get_emission_products } from "src/app/shared/modules/emission_products";
+import { CustomValidators } from "src/app/shared/validations/custom-validators";
 
 @Component({
   selector: "app-ptsp",
@@ -26,43 +28,53 @@ export class PTSPComponent implements OnInit {
     "phat_thai_co2",
     "phat_thai_ch4",
   ];
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  constructor(private readFile: ReadFile) {}
-  filterFollowYear = new FormControl("");
-  dataSourceOld: any;
+  params: params_get_emission_products = {
+    year: "",
+    page: "1",
+    amount: "50",
+  };
+
+  lenghtPaginate: number;
+
+  fgpFilter = new FormGroup({
+    year: new FormControl("", [CustomValidators.onlyNumber]),
+  });
+
+  constructor(
+    private readFile: ReadFile,
+    public spinnerService: SpinnerService
+  ) {}
 
   ngOnInit(): void {
     this.initData();
   }
 
   initData() {
-    this.readFile.getPTSP().subscribe((data) => {
-      this.dataSource = new MatTableDataSource<PTSP>(data);
-      this.dataSource.paginator = this.paginator;
-      this.dataSourceOld = data;
+    this.getDataFromServer();
+  }
+
+  setPaginateLength(length: number) {
+    this.lenghtPaginate = length;
+  }
+
+  hangePaginator($event) {
+    this.params.page = $event.pageIndex + 1;
+    this.params.amount = $event.pageSize;
+    this.getDataFromServer();
+  }
+
+  onSubmitFilter() {
+    this.params.year = this.fgpFilter.value.year;
+    this.getDataFromServer();
+  }
+
+  getDataFromServer() {
+    this.spinnerService.show();
+    this.readFile.getPTSPV2(this.params).subscribe((data) => {
+      this.dataSource = new MatTableDataSource<PTSP_V2>(data.emission_products);
+      this.setPaginateLength(data.length);
+      this.spinnerService.hide();
     });
-  }
-
-  applyFilter() {
-    this.dataSource.data = this.dataSourceOld.filter(
-      (item) => item.nam == this.filterFollowYear.value
-    );
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
-
-  handleFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    if (filterValue == "") {
-      console.log(this.dataSourceOld);
-
-      this.dataSource.data = [...this.dataSourceOld];
-      if (this.dataSource.paginator) {
-        this.dataSource.paginator.firstPage();
-      }
-    }
   }
 }

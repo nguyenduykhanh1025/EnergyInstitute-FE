@@ -6,6 +6,7 @@ import { params_get_enterprises } from "src/app/shared/modules/enterprise";
 import { HttpParams } from "@angular/common/http";
 import { params_get_energy_consumption } from "src/app/shared/modules/energy_consumption";
 import { params_get_product } from "src/app/shared/modules/product";
+import { params_get_emission_products } from "src/app/shared/modules/emission_products";
 
 @Injectable({
   providedIn: "root",
@@ -31,6 +32,7 @@ export class ReadFile {
   readonly urlTTDNV2 = "admin/enterprises";
   readonly urlTDNLV2 = "admin/energies";
   readonly urlSPSXV2 = "admin/products";
+  readonly urlPTSPV2 = "admin/emission_products";
 
   constructor(private apiService: ApiService) {}
 
@@ -97,6 +99,32 @@ export class ReadFile {
 
     return this.apiService.get(this.urlSPSXV2, params).pipe(map((res) => res));
   }
+
+  getPTSPV2(data: params_get_emission_products) {
+    const params = new HttpParams()
+      .set("year", data.year)
+      .set("page", data.page)
+      .set("amount", data.amount);
+
+    return this.apiService.get(this.urlPTSPV2, params).pipe(map((res) => res));
+  }
+}
+
+export interface PTSP_V2 {
+  id: number;
+  nam: string;
+  ma_so_doanh_nghiep: string;
+  ten_doanh_nghiep: string;
+  ma_nganh_2: number;
+  te_cap_2: string;
+  ma_sp: string;
+  ten_sp: string;
+  don_vi: number;
+  khoi_luong: string;
+  hspt_co2: string;
+  hspt_ch4: string;
+  phat_thai_co2: number;
+  phat_thai_ch4: string;
 }
 
 export interface SPSX_V2 {
