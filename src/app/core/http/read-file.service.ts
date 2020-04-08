@@ -8,6 +8,7 @@ import { params_get_energy_consumption } from "src/app/shared/modules/energy_con
 import { params_get_product } from "src/app/shared/modules/product";
 import { params_get_emission_products } from "src/app/shared/modules/emission_products";
 import { params_get_emission_energies } from "src/app/shared/modules/emission_energies";
+import { params_get_emission_sum } from "src/app/shared/modules/emission_sum";
 
 @Injectable({
   providedIn: "root",
@@ -35,6 +36,7 @@ export class ReadFile {
   readonly urlSPSXV2 = "admin/products";
   readonly urlPTSPV2 = "admin/emission_products";
   readonly urlPTNLV2 = "admin/emission_energies";
+  readonly urlTPTV2 = "admin/emission_sum";
 
   constructor(private apiService: ApiService) {}
 
@@ -119,6 +121,43 @@ export class ReadFile {
 
     return this.apiService.get(this.urlPTNLV2, params).pipe(map((res) => res));
   }
+
+  getTPTV2(data: params_get_emission_sum) {
+    const params = new HttpParams()
+      .set("year", data.year)
+      .set("page", data.page)
+      .set("amount", data.amount);
+
+    return this.apiService.get(this.urlTPTV2, params).pipe(map((res) => res));
+  }
+}
+
+export interface TPT_V2 {
+  id: number;
+  nam: string;
+  ten_doanh_nghiep: string;
+  ma_so_doanh_nghiep: string;
+  ma_cap_2: string;
+  ten_nganh_cap_2: string;
+  dien: string;
+  qtnl_co2: string;
+  qtnl_ch4: string;
+  qtnl_n2o: string;
+  pnl_co2: string;
+  pnl_ch4: string;
+  pnl_n2o: string;
+  phat_tan_co2: string;
+  phat_tan_ch4: string;
+  phat_tan_n2o: string;
+  qtcn_co2: string;
+  qtcn_ch4: string;
+  tong_tru_dien_co2: string;
+  tong_tru_dien_ch4: string;
+  tong_tru_dien_n2o: string;
+  tong_co2: string;
+  tong_ch4: string;
+  tong_n2o: string;
+  tong_quy_doi: string;
 }
 
 export interface PTNL_V2 {

@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { MatPaginator } from "@angular/material/paginator";
-import { ReadFile, TPT } from "src/app/core/http/read-file.service";
+import { ReadFile, TPT_V2 } from "src/app/core/http/read-file.service";
 import { MatTableDataSource } from "@angular/material/table";
-import { FormControl } from "@angular/forms";
+import { FormControl, FormGroup } from "@angular/forms";
+import { SpinnerService } from "src/app/core/services/spinner.service";
+import { params_get_emission_sum } from "src/app/shared/modules/emission_sum";
+import { CustomValidators } from "src/app/shared/validations/custom-validators";
 
 @Component({
   selector: "app-tpt",
@@ -37,43 +39,53 @@ export class TPTComponent implements OnInit {
     "tong_n2o",
     "tong_quy_doi",
   ];
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  filterFollowYear = new FormControl("");
-  dataSourceOld: any;
+  params: params_get_emission_sum = {
+    year: "",
+    page: "1",
+    amount: "50",
+  };
 
-  constructor(private readFile: ReadFile) {}
+  lenghtPaginate: number;
+
+  fgpFilter = new FormGroup({
+    year: new FormControl("", [CustomValidators.onlyNumber]),
+  });
+
+  constructor(
+    private readFile: ReadFile,
+    public spinnerService: SpinnerService
+  ) {}
 
   ngOnInit(): void {
     this.initData();
   }
 
   initData() {
-    this.readFile.getTPT().subscribe((data) => {
-      this.dataSource = new MatTableDataSource<TPT>(data);
-      this.dataSource.paginator = this.paginator;
-      this.dataSourceOld = data;
+    this.getDataFromServer();
+  }
+
+  setPaginateLength(length: number) {
+    this.lenghtPaginate = length;
+  }
+
+  hangePaginator($event) {
+    this.params.page = $event.pageIndex + 1;
+    this.params.amount = $event.pageSize;
+    this.getDataFromServer();
+  }
+
+  onSubmitFilter() {
+    this.params.year = this.fgpFilter.value.year;
+    this.getDataFromServer();
+  }
+
+  getDataFromServer() {
+    this.spinnerService.show();
+    this.readFile.getTPTV2(this.params).subscribe((data) => {
+      this.dataSource = new MatTableDataSource<TPT_V2>(data.emission_sum);
+      this.setPaginateLength(data.length);
+      this.spinnerService.hide();
     });
-  }
-
-  applyFilter() {
-    this.dataSource.data = this.dataSourceOld.filter(
-      (item) => item.nam == this.filterFollowYear.value
-    );
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
-
-  handleFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    if (filterValue == "") {
-
-      this.dataSource.data = [...this.dataSourceOld];
-      if (this.dataSource.paginator) {
-        this.dataSource.paginator.firstPage();
-      }
-    }
   }
 }
