@@ -1,7 +1,7 @@
 <mat-progress-bar
   mode="indeterminate"
   *ngIf="spinnerService.visibility | async"
-  style="position: fixed;z-index: 1000;"
+  style="position: fixed; z-index: 1000;"
 ></mat-progress-bar>
 
 <mat-card style="text-align: center;">
@@ -133,8 +133,4 @@
     (page)="hangePaginator($event)"
   >
   </mat-paginator>
-
-  <button mat-raised-button color="primary" style="margin-top: 10px;">
-    Tạo mới thông tin
-  </button>
 </mat-card>
