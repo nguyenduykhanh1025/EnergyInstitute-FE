@@ -5,18 +5,20 @@ import { ErrorLabelComponent } from "./components/error-label/error-label.compon
 import { AppMaterialModule } from "./material.module";
 import { SafePipe } from "./pipes/safe.pipe";
 import { ErrorMessagesPipe } from "./pipes/error-messages.pipe";
+import { ToFixed2Pipe } from "./pipes/toFixed2.pipe";
 
 const exportComponents = [ErrorLabelComponent];
 const exportModel = [AppMaterialModule];
-const exportPipes = [SafePipe, ErrorMessagesPipe];
+const exportPipes = [SafePipe, ErrorMessagesPipe, ToFixed2Pipe];
 @NgModule({
   declarations: [
     SnackBarComponent,
     ErrorLabelComponent,
     SafePipe,
-    ErrorMessagesPipe
+    ErrorMessagesPipe,
+    ToFixed2Pipe  
   ],
   imports: [CommonModule, AppMaterialModule],
-  exports: [exportComponents, exportModel, exportPipes]
+  exports: [exportComponents, exportModel, exportPipes],
 })
 export class SharedModule {}

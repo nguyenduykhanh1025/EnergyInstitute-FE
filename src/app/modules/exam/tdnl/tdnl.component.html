@@ -1,7 +1,7 @@
 <mat-progress-bar
   mode="indeterminate"
   *ngIf="spinnerService.visibility | async"
-  style="position: fixed;z-index: 1000;"
+  style="position: fixed; z-index: 1000;"
 ></mat-progress-bar>
 
 <mat-card style="text-align: center;">
@@ -19,11 +19,11 @@
       >
         <mat-form-field class="ip-filter-item">
           <mat-label>Năm điều tra*</mat-label>
-          <input matInput formControlName="year" placeholder="2014" />
-          <app-error-label
-            [control]="fgpFilter.controls.year"
-            label=""
-          ></app-error-label>
+          <mat-select formControlName="year">
+            <mat-option *ngFor="let item of listYear" [value]="item">
+              {{ item }}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
 
         <button
@@ -154,7 +154,7 @@
       <ng-container matColumnDef="hs_pnl">
         <th mat-header-cell *matHeaderCellDef class="title">HS (PNL)</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.hs_pnl }}
+          {{ element.hs_pnl | toFixed2 }}
         </td>
       </ng-container>
 
@@ -242,7 +242,7 @@
       <ng-container matColumnDef="tong">
         <th mat-header-cell *matHeaderCellDef class="title">Tổng</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.tong }}
+          {{ element.tong | toFixed2}}
         </td>
       </ng-container>
 

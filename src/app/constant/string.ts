@@ -12,5 +12,8 @@ export const Value = {
   update: "update",
   post: "post",
   product_id: "product_id",
-  year: "year"
+  year: "year",
+  FROM_YEAR: 2000,
+  TO_YEAR: new Date().getFullYear(),
+  all: "Tất cả",
 };

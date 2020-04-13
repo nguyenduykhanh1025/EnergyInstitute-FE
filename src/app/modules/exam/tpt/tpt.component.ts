@@ -5,6 +5,8 @@ import { FormControl, FormGroup } from "@angular/forms";
 import { SpinnerService } from "src/app/core/services/spinner.service";
 import { params_get_emission_sum } from "src/app/shared/modules/emission_sum";
 import { CustomValidators } from "src/app/shared/validations/custom-validators";
+import { CommonService } from "src/app/core/services/common.service";
+import { Value } from "src/app/constant/string";
 
 @Component({
   selector: "app-tpt",
@@ -49,20 +51,33 @@ export class TPTComponent implements OnInit {
   lenghtPaginate: number;
 
   fgpFilter = new FormGroup({
-    year: new FormControl("", [CustomValidators.onlyNumber]),
+    year: new FormControl(""),
   });
+
+  listYear = [];
 
   constructor(
     private readFile: ReadFile,
-    public spinnerService: SpinnerService
+    public spinnerService: SpinnerService,
+    private commonService: CommonService
   ) {}
 
   ngOnInit(): void {
     this.initData();
+    this.initDataForSelectFilter();
   }
 
   initData() {
     this.getDataFromServer();
+  }
+
+  initDataForSelectFilter() {
+    this.initListYear();
+  }
+
+  initListYear() {
+    this.listYear = this.commonService.getListYear();
+    this.listYear.unshift(Value.all);
   }
 
   setPaginateLength(length: number) {
@@ -76,7 +91,8 @@ export class TPTComponent implements OnInit {
   }
 
   onSubmitFilter() {
-    this.params.year = this.fgpFilter.value.year;
+    this.params.year =
+      this.fgpFilter.value.year == Value.all ? "" : this.fgpFilter.value.year;
     this.getDataFromServer();
   }
 

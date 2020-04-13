@@ -1,11 +1,13 @@
 <mat-progress-bar
   mode="indeterminate"
   *ngIf="spinnerService.visibility | async"
-  style="position: fixed;z-index: 1000;"
+  style="position: fixed; z-index: 1000;"
 ></mat-progress-bar>
 
 <mat-card style="text-align: center;">
-  <mat-card-title style="text-transform: uppercase;">Phát thải khí nhà kính theo sản phẩm sản xuất</mat-card-title>
+  <mat-card-title style="text-transform: uppercase;"
+    >Phát thải khí nhà kính theo sản phẩm sản xuất</mat-card-title
+  >
 
   <div style="text-align: left;">
     <h2 style="color: #3f51b5;">Lọc/Tìm kiếm</h2>
@@ -17,11 +19,11 @@
       >
         <mat-form-field class="ip-filter-item">
           <mat-label>Năm điều tra*</mat-label>
-          <input matInput formControlName="year" placeholder="2014" />
-          <app-error-label
-            [control]="fgpFilter.controls.year"
-            label=""
-          ></app-error-label>
+          <mat-select formControlName="year">
+            <mat-option *ngFor="let item of listYear" [value]="item">
+              {{ item }}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
 
         <button
@@ -106,7 +108,7 @@
           Hệ số phát thải CO2
         </th>
         <td mat-cell *matCellDef="let element">
-          {{ element.hspt_co2 }}
+          {{ element.hspt_co2 | toFixed2}}
         </td>
       </ng-container>
 
@@ -115,21 +117,21 @@
           Hệ số phát thải CH4
         </th>
         <td mat-cell *matCellDef="let element">
-          {{ element.hspt_ch4 }}
+          {{ element.hspt_ch4 | toFixed2}}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="phat_thai_co2">
         <th mat-header-cell *matHeaderCellDef class="title">Phát thải C02</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.phat_thai_co2 }}
+          {{ element.phat_thai_co2 | toFixed2}}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="phat_thai_ch4">
         <th mat-header-cell *matHeaderCellDef class="title">Phát thải CH4</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.phat_thai_ch4 }}
+          {{ element.phat_thai_ch4 | toFixed2}}
         </td>
       </ng-container>
 

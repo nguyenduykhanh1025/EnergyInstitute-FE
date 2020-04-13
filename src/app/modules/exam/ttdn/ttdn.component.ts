@@ -5,6 +5,9 @@ import { FormControl, FormGroup } from "@angular/forms";
 import { CustomValidators } from "src/app/shared/validations/custom-validators";
 import { SpinnerService } from "src/app/core/services/spinner.service";
 import { params_get_enterprises } from "src/app/shared/modules/enterprise";
+import { AddressHttpService } from "src/app/core/http/address-http.service";
+import { CommonService } from "src/app/core/services/common.service";
+import { Value } from "src/app/constant/string";
 
 @Component({
   selector: "app-ttdn",
@@ -39,13 +42,18 @@ export class TTDNComponent implements OnInit {
   lenghtPaginate: number;
 
   fgpFilter = new FormGroup({
-    year: new FormControl("", [CustomValidators.onlyNumber]),
+    year: new FormControl(""),
     province: new FormControl(""),
   });
 
+  listYear = [];
+  listProvice = [];
+
   constructor(
     private readFile: ReadFile,
-    public spinnerService: SpinnerService
+    public spinnerService: SpinnerService,
+    private commonService: CommonService,
+    private addressHttpService: AddressHttpService
   ) {}
 
   ngOnInit(): void {
@@ -54,8 +62,27 @@ export class TTDNComponent implements OnInit {
 
   initData() {
     this.getDataFromServer();
+    this.initDataForSelectFilter();
   }
 
+  initDataForSelectFilter() {
+    this.initListProvice();
+    this.initListYear();
+  }
+
+  initListYear() {
+    this.listYear = this.commonService.getListYear();
+    this.listYear.unshift(Value.all);
+  }
+
+  initListProvice() {
+    this.addressHttpService.getAllProvincial().subscribe((data) => {
+      data.forEach((item) => {
+        this.listProvice.push(item.name);
+      });
+      this.listProvice.unshift(Value.all);
+    });
+  }
   setPaginateLength(length: number) {
     this.lenghtPaginate = length;
   }
@@ -67,8 +94,12 @@ export class TTDNComponent implements OnInit {
   }
 
   onSubmitFilter() {
-    this.params.province = this.fgpFilter.value.province;
-    this.params.year = this.fgpFilter.value.year;
+    this.params.province =
+      this.fgpFilter.value.province == Value.all
+        ? ""
+        : this.fgpFilter.value.province;
+    this.params.year =
+      this.fgpFilter.value.year == Value.all ? "" : this.fgpFilter.value.year;
     this.getDataFromServer();
   }
 

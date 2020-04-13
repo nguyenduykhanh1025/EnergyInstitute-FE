@@ -19,11 +19,11 @@
       >
         <mat-form-field class="ip-filter-item">
           <mat-label>Năm điều tra*</mat-label>
-          <input matInput formControlName="year" placeholder="2014" />
-          <app-error-label
-            [control]="fgpFilter.controls.year"
-            label=""
-          ></app-error-label>
+          <mat-select formControlName="year">
+            <mat-option *ngFor="let item of listYear" [value]="item">
+              {{ item }}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
 
         <button

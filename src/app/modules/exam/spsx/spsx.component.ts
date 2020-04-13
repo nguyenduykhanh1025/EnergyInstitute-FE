@@ -8,6 +8,8 @@ import { FormControl, FormGroup } from "@angular/forms";
 import { params_get_product } from "src/app/shared/modules/product";
 import { SpinnerService } from "src/app/core/services/spinner.service";
 import { CustomValidators } from "src/app/shared/validations/custom-validators";
+import { CommonService } from "src/app/core/services/common.service";
+import { Value } from "src/app/constant/string";
 
 @Component({
   selector: "app-spsx",
@@ -38,12 +40,15 @@ export class SpsxComponent implements OnInit {
   lenghtPaginate: number;
 
   fgpFilter = new FormGroup({
-    year: new FormControl("", [CustomValidators.onlyNumber]),
+    year: new FormControl(""),
   });
+
+  listYear = [];
 
   constructor(
     private readFile: ReadFile,
-    public spinnerService: SpinnerService
+    public spinnerService: SpinnerService,
+    private commonService: CommonService
   ) {}
 
   ngOnInit(): void {
@@ -52,6 +57,16 @@ export class SpsxComponent implements OnInit {
 
   initDataSource() {
     this.getDataFromServer();
+    this.initDataForSelectFilter();
+  }
+
+  initDataForSelectFilter() {
+    this.initListYear();
+  }
+
+  initListYear() {
+    this.listYear = this.commonService.getListYear();
+    this.listYear.unshift(Value.all);
   }
 
   hangePaginator($event) {
@@ -61,7 +76,8 @@ export class SpsxComponent implements OnInit {
   }
 
   onSubmitFilter() {
-    this.params.year = this.fgpFilter.value.year;
+    this.params.year =
+      this.fgpFilter.value.year == Value.all ? "" : this.fgpFilter.value.year;
     this.getDataFromServer();
   }
 

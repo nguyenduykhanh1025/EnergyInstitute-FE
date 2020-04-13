@@ -5,6 +5,9 @@ import { ReadFile, TDNL_V2 } from "src/app/core/http/read-file.service";
 import { FormControl, FormGroup } from "@angular/forms";
 import { SpinnerService } from "src/app/core/services/spinner.service";
 import { CustomValidators } from "src/app/shared/validations/custom-validators";
+import { CommonService } from "src/app/core/services/common.service";
+import { AddressHttpService } from "src/app/core/http/address-http.service";
+import { Value } from "src/app/constant/string";
 
 @Component({
   selector: "app-tdnl",
@@ -50,22 +53,34 @@ export class TdnlComponent implements OnInit {
   };
 
   fgpFilter = new FormGroup({
-    year: new FormControl("", [CustomValidators.onlyNumber]),
+    year: new FormControl(""),
   });
 
   lenghtPaginate: number;
+  listYear = [];
 
   constructor(
     private readFile: ReadFile,
-    public spinnerService: SpinnerService
+    public spinnerService: SpinnerService,
+    private commonService: CommonService
   ) {}
 
   ngOnInit(): void {
     this.initDataSource();
+    this.initDataForSelectFilter();
+  }
+
+  initDataForSelectFilter() {
+    this.initListYear();
   }
 
   initDataSource() {
     this.getDataFromServer();
+  }
+
+  initListYear() {
+    this.listYear = this.commonService.getListYear();
+    this.listYear.unshift(Value.all);
   }
 
   hangePaginator($event) {
@@ -75,7 +90,8 @@ export class TdnlComponent implements OnInit {
   }
 
   onSubmitFilter() {
-    this.params.year = this.fgpFilter.value.year;
+    this.params.year =
+      this.fgpFilter.value.year == Value.all ? "" : this.fgpFilter.value.year;
     this.getDataFromServer();
   }
 

@@ -1,7 +1,7 @@
 <mat-progress-bar
   mode="indeterminate"
   *ngIf="spinnerService.visibility | async"
-  style="position: fixed;z-index: 1000;"
+  style="position: fixed; z-index: 1000;"
 ></mat-progress-bar>
 
 <mat-card style="text-align: center;">
@@ -19,11 +19,11 @@
       >
         <mat-form-field class="ip-filter-item">
           <mat-label>Năm điều tra*</mat-label>
-          <input matInput formControlName="year" placeholder="2014" />
-          <app-error-label
-            [control]="fgpFilter.controls.year"
-            label=""
-          ></app-error-label>
+          <mat-select formControlName="year">
+            <mat-option *ngFor="let item of listYear" [value]="item">
+              {{ item }}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
 
         <button
@@ -82,14 +82,14 @@
           hệ số sử dụng năng lượng
         </th>
         <td mat-cell *matCellDef="let element">
-          {{ element.he_so_su_dung_nang_luong }}
+          {{ element.he_so_su_dung_nang_luong | toFixed2 }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="dien">
         <th mat-header-cell *matHeaderCellDef class="title">Điện</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.dien }}
+          {{ element.dien | toFixed2 }}
         </td>
       </ng-container>
 
@@ -98,7 +98,7 @@
           Than Antracite (tC02)
         </th>
         <td mat-cell *matCellDef="let element">
-          {{ element.antracite_co2 }}
+          {{ element.antracite_co2 | toFixed2 }}
         </td>
       </ng-container>
 
@@ -107,7 +107,7 @@
           Than Antracite (tCH4)
         </th>
         <td mat-cell *matCellDef="let element">
-          {{ element.antracite_ch4 }}
+          {{ element.antracite_ch4 | toFixed2 }}
         </td>
       </ng-container>
 
@@ -116,7 +116,7 @@
           Than Antracite (tN20)
         </th>
         <td mat-cell *matCellDef="let element">
-          {{ element.antracite_n2o }}
+          {{ element.antracite_n2o | toFixed2 }}
         </td>
       </ng-container>
 
@@ -196,42 +196,42 @@
       <ng-container matColumnDef="fo_co2">
         <th mat-header-cell *matHeaderCellDef class="title">FO (tC02)</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.fo_co2 }}
+          {{ element.fo_co2 | toFixed2 }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="fo_ch4">
         <th mat-header-cell *matHeaderCellDef class="title">FO (tCH4)</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.fo_ch4 }}
+          {{ element.fo_ch4 | toFixed2 }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="fo_n2o">
         <th mat-header-cell *matHeaderCellDef class="title">FO (tN20)</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.fo_n2o }}
+          {{ element.fo_n2o | toFixed2 }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="lpg_co2">
         <th mat-header-cell *matHeaderCellDef class="title">LPG (tC02)</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.lpg_co2 }}
+          {{ element.lpg_co2 | toFixed2 }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="lpg_ch4">
         <th mat-header-cell *matHeaderCellDef class="title">LPG (tCH4)</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.lpg_ch4 }}
+          {{ element.lpg_ch4 | toFixed2 }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="lpg_n2o">
         <th mat-header-cell *matHeaderCellDef class="title">LPG (tN20)</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.lpg_n2o }}
+          {{ element.lpg_n2o | toFixed2 }}
         </td>
       </ng-container>
 
@@ -294,7 +294,7 @@
           Năng lượng sinh khối (tC02)
         </th>
         <td mat-cell *matCellDef="let element">
-          {{ element.tong_co2 }}
+          {{ element.tong_co2 | toFixed2 }}
         </td>
       </ng-container>
 
@@ -303,21 +303,21 @@
           Năng lượng sinh khối (tCH4)
         </th>
         <td mat-cell *matCellDef="let element">
-          {{ element.tong_ch4 }}
+          {{ element.tong_ch4 | toFixed2 }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="tong_n2o">
         <th mat-header-cell *matHeaderCellDef class="title">Tổng N20</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.tong_n2o }}
+          {{ element.tong_n2o | toFixed2 }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="tong">
         <th mat-header-cell *matHeaderCellDef class="title">Tổng</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.tong }}
+          {{ element.tong | toFixed2 }}
         </td>
       </ng-container>
 
