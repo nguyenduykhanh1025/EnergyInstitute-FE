@@ -7,7 +7,7 @@ import { map } from "rxjs/operators";
 import { CustomSnackbarService } from "../services/custom-snackbar.service";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class ApiService {
   constructor(

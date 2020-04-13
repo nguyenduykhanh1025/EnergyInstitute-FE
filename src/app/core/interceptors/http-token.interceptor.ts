@@ -3,7 +3,7 @@ import {
   HttpEvent,
   HttpInterceptor,
   HttpHandler,
-  HttpRequest
+  HttpRequest,
 } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { JwtService } from "../services/jwt.service";
@@ -18,10 +18,10 @@ export class HttpTokenInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     let headersConfig = {
-      Accept: "application/json"
+      Accept: "application/json",
     };
     if (!req.headers.has(InterceptorSkipContentType)) {
-      headersConfig["Content-Type"] = "application/json";
+      headersConfig["Content-Type"] = "application/json; charset=utf-8";
     }
 
     if (this.inWhiteList(req)) {
@@ -42,7 +42,7 @@ export class HttpTokenInterceptor implements HttpInterceptor {
     const url = req.url;
     const whiteList = ["auth/sign_in", "auth/signup", "assets"];
 
-    whiteList.forEach(allowURI => {
+    whiteList.forEach((allowURI) => {
       if (url.indexOf(allowURI) > -1) {
         return true;
       }
