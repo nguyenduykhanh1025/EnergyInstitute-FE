@@ -8,4 +8,5 @@ export interface params_get_product {
   year: string;
   page: string;
   amount: string;
+  sector: string;
 }

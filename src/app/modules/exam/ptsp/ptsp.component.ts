@@ -7,6 +7,7 @@ import { params_get_emission_products } from "src/app/shared/modules/emission_pr
 import { CustomValidators } from "src/app/shared/validations/custom-validators";
 import { CommonService } from "src/app/core/services/common.service";
 import { Value } from "src/app/constant/string";
+import { SectorHttpService } from "src/app/core/http/sector-http.service";
 
 @Component({
   selector: "app-ptsp",
@@ -35,20 +36,24 @@ export class PTSPComponent implements OnInit {
     year: "",
     page: "1",
     amount: "50",
+    sector: "",
   };
 
   lenghtPaginate: number;
 
   fgpFilter = new FormGroup({
     year: new FormControl(""),
+    sector: new FormControl(""),
   });
 
   listYear = [];
+  listSector = [];
 
   constructor(
     private readFile: ReadFile,
     public spinnerService: SpinnerService,
-    private commonService: CommonService
+    private commonService: CommonService,
+    private sectorHttpService: SectorHttpService
   ) {}
 
   ngOnInit(): void {
@@ -62,11 +67,19 @@ export class PTSPComponent implements OnInit {
 
   initDataForSelectFilter() {
     this.initListYear();
+    this.initListSector();
   }
 
   initListYear() {
     this.listYear = this.commonService.getListYear();
     this.listYear.unshift(Value.all);
+  }
+
+  initListSector() {
+    this.sectorHttpService.getAllSectors().subscribe((data) => {
+      this.listSector = data;
+      this.listSector.unshift(Value.all);
+    });
   }
 
   setPaginateLength(length: number) {
@@ -82,6 +95,12 @@ export class PTSPComponent implements OnInit {
   onSubmitFilter() {
     this.params.year =
       this.fgpFilter.value.year == Value.all ? "" : this.fgpFilter.value.year;
+
+    this.params.sector =
+      this.fgpFilter.value.sector == Value.all
+        ? ""
+        : this.fgpFilter.value.sector;
+
     this.getDataFromServer();
   }
 

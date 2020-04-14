@@ -2,12 +2,15 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { MatTableDataSource } from "@angular/material/table";
 import { ReadFile, TTDN_V2 } from "src/app/core/http/read-file.service";
 import { FormControl, FormGroup } from "@angular/forms";
-import { CustomValidators } from "src/app/shared/validations/custom-validators";
 import { SpinnerService } from "src/app/core/services/spinner.service";
-import { params_get_enterprises } from "src/app/shared/modules/enterprise";
+import {
+  params_get_enterprises,
+  Enterprise,
+} from "src/app/shared/modules/enterprise";
 import { AddressHttpService } from "src/app/core/http/address-http.service";
 import { CommonService } from "src/app/core/services/common.service";
 import { Value } from "src/app/constant/string";
+import { SectorHttpService } from "src/app/core/http/sector-http.service";
 
 @Component({
   selector: "app-ttdn",
@@ -37,6 +40,7 @@ export class TTDNComponent implements OnInit {
     province: "",
     page: 1,
     amount: "50",
+    sector: "",
   };
 
   lenghtPaginate: number;
@@ -44,16 +48,22 @@ export class TTDNComponent implements OnInit {
   fgpFilter = new FormGroup({
     year: new FormControl(""),
     province: new FormControl(""),
+    sector: new FormControl(""),
   });
 
+  /*
+   data for filter
+  */
   listYear = [];
   listProvice = [];
+  listSector = [];
 
   constructor(
     private readFile: ReadFile,
     public spinnerService: SpinnerService,
     private commonService: CommonService,
-    private addressHttpService: AddressHttpService
+    private addressHttpService: AddressHttpService,
+    private sectorHttpService: SectorHttpService
   ) {}
 
   ngOnInit(): void {
@@ -68,6 +78,7 @@ export class TTDNComponent implements OnInit {
   initDataForSelectFilter() {
     this.initListProvice();
     this.initListYear();
+    this.initListSector();
   }
 
   initListYear() {
@@ -83,6 +94,14 @@ export class TTDNComponent implements OnInit {
       this.listProvice.unshift(Value.all);
     });
   }
+
+  initListSector() {
+    this.sectorHttpService.getAllSectors().subscribe((data) => {
+      this.listSector = data;
+      this.listSector.unshift(Value.all);
+    });
+  }
+
   setPaginateLength(length: number) {
     this.lenghtPaginate = length;
   }
@@ -100,6 +119,12 @@ export class TTDNComponent implements OnInit {
         : this.fgpFilter.value.province;
     this.params.year =
       this.fgpFilter.value.year == Value.all ? "" : this.fgpFilter.value.year;
+
+    this.params.sector =
+      this.fgpFilter.value.sector == Value.all
+        ? ""
+        : this.fgpFilter.value.sector;
+        
     this.getDataFromServer();
   }
 

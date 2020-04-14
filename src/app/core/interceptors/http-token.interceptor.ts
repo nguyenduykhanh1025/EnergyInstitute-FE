@@ -21,7 +21,7 @@ export class HttpTokenInterceptor implements HttpInterceptor {
       Accept: "application/json",
     };
     if (!req.headers.has(InterceptorSkipContentType)) {
-      headersConfig["Content-Type"] = "application/json; charset=utf-8";
+      headersConfig["Content-Type"] = "application/json";
     }
 
     if (this.inWhiteList(req)) {

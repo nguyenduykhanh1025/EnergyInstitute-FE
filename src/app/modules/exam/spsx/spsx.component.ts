@@ -3,13 +3,14 @@ import { EnergyConsumption } from "src/app/shared/modules/energy_consumption";
 import { EnergyConsumptionsHttpService } from "src/app/core/http/energy-consumptions-http.service";
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
-import { ReadFile, SPSX, SPSX_V2 } from "src/app/core/http/read-file.service";
+import { ReadFile, SPSX_V2 } from "src/app/core/http/read-file.service";
 import { FormControl, FormGroup } from "@angular/forms";
 import { params_get_product } from "src/app/shared/modules/product";
 import { SpinnerService } from "src/app/core/services/spinner.service";
 import { CustomValidators } from "src/app/shared/validations/custom-validators";
 import { CommonService } from "src/app/core/services/common.service";
 import { Value } from "src/app/constant/string";
+import { SectorHttpService } from "src/app/core/http/sector-http.service";
 
 @Component({
   selector: "app-spsx",
@@ -36,19 +37,23 @@ export class SpsxComponent implements OnInit {
     year: "",
     page: "1",
     amount: "50",
+    sector: "",
   };
   lenghtPaginate: number;
 
   fgpFilter = new FormGroup({
     year: new FormControl(""),
+    sector: new FormControl(""),
   });
 
   listYear = [];
+  listSector = [];
 
   constructor(
     private readFile: ReadFile,
     public spinnerService: SpinnerService,
-    private commonService: CommonService
+    private commonService: CommonService,
+    private sectorHttpService: SectorHttpService
   ) {}
 
   ngOnInit(): void {
@@ -62,11 +67,19 @@ export class SpsxComponent implements OnInit {
 
   initDataForSelectFilter() {
     this.initListYear();
+    this.initListSector();
   }
 
   initListYear() {
     this.listYear = this.commonService.getListYear();
     this.listYear.unshift(Value.all);
+  }
+
+  initListSector() {
+    this.sectorHttpService.getAllSectors().subscribe((data) => {
+      this.listSector = data;
+      this.listSector.unshift(Value.all);
+    });
   }
 
   hangePaginator($event) {
@@ -78,6 +91,12 @@ export class SpsxComponent implements OnInit {
   onSubmitFilter() {
     this.params.year =
       this.fgpFilter.value.year == Value.all ? "" : this.fgpFilter.value.year;
+
+    this.params.sector =
+      this.fgpFilter.value.sector == Value.all
+        ? ""
+        : this.fgpFilter.value.sector;
+
     this.getDataFromServer();
   }
 

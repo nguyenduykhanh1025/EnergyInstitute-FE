@@ -21,4 +21,5 @@ export interface params_get_energy_consumption {
   year: string;
   page: string;
   amount: string;
+  sector: string;
 }

@@ -16,6 +16,7 @@
         *ngIf="fgpFilter != null"
         [formGroup]="fgpFilter"
         (ngSubmit)="onSubmitFilter()"
+        accept-charset="utf-8"
       >
         <mat-form-field class="ip-filter-item">
           <mat-label>Năm điều tra*</mat-label>
@@ -30,6 +31,15 @@
           <mat-label>Tỉnh/Thành phố*</mat-label>
           <mat-select formControlName="province">
             <mat-option *ngFor="let item of listProvice" [value]="item">
+              {{ item }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="ip-filter-item">
+          <mat-label>Tên nghành*</mat-label>
+          <mat-select formControlName="sector">
+            <mat-option *ngFor="let item of listSector" [value]="item">
               {{ item }}
             </mat-option>
           </mat-select>

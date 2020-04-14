@@ -4,10 +4,9 @@ import { MatTableDataSource } from "@angular/material/table";
 import { ReadFile, TDNL_V2 } from "src/app/core/http/read-file.service";
 import { FormControl, FormGroup } from "@angular/forms";
 import { SpinnerService } from "src/app/core/services/spinner.service";
-import { CustomValidators } from "src/app/shared/validations/custom-validators";
 import { CommonService } from "src/app/core/services/common.service";
-import { AddressHttpService } from "src/app/core/http/address-http.service";
 import { Value } from "src/app/constant/string";
+import { SectorHttpService } from "src/app/core/http/sector-http.service";
 
 @Component({
   selector: "app-tdnl",
@@ -50,19 +49,27 @@ export class TdnlComponent implements OnInit {
     year: "",
     page: "1",
     amount: "50",
+    sector: "",
   };
 
   fgpFilter = new FormGroup({
     year: new FormControl(""),
+    sector: new FormControl(""),
   });
 
   lenghtPaginate: number;
+
+  /*
+   data for filter
+  */
   listYear = [];
+  listSector = [];
 
   constructor(
     private readFile: ReadFile,
     public spinnerService: SpinnerService,
-    private commonService: CommonService
+    private commonService: CommonService,
+    private sectorHttpService: SectorHttpService
   ) {}
 
   ngOnInit(): void {
@@ -72,6 +79,7 @@ export class TdnlComponent implements OnInit {
 
   initDataForSelectFilter() {
     this.initListYear();
+    this.initListSector();
   }
 
   initDataSource() {
@@ -83,6 +91,13 @@ export class TdnlComponent implements OnInit {
     this.listYear.unshift(Value.all);
   }
 
+  initListSector() {
+    this.sectorHttpService.getAllSectors().subscribe((data) => {
+      this.listSector = data;
+      this.listSector.unshift(Value.all);
+    });
+  }
+
   hangePaginator($event) {
     this.params.page = $event.pageIndex + 1;
     this.params.amount = $event.pageSize;
@@ -92,6 +107,12 @@ export class TdnlComponent implements OnInit {
   onSubmitFilter() {
     this.params.year =
       this.fgpFilter.value.year == Value.all ? "" : this.fgpFilter.value.year;
+
+    this.params.sector =
+      this.fgpFilter.value.sector == Value.all
+        ? ""
+        : this.fgpFilter.value.sector;
+        
     this.getDataFromServer();
   }
 
