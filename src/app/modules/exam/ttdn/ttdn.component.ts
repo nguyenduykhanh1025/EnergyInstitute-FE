@@ -89,7 +89,7 @@ export class TTDNComponent implements OnInit {
   initListProvice() {
     this.addressHttpService.getAllProvincial().subscribe((data) => {
       data.forEach((item) => {
-        this.listProvice.push(item.name);
+        this.listProvice.push(item);
       });
       this.listProvice.unshift(Value.all);
     });
@@ -124,7 +124,7 @@ export class TTDNComponent implements OnInit {
       this.fgpFilter.value.sector == Value.all
         ? ""
         : this.fgpFilter.value.sector;
-        
+
     this.getDataFromServer();
   }
 
