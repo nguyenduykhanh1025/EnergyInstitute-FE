@@ -13,6 +13,7 @@ import { RouteNames } from "src/app/constant/route-name";
   styleUrls: ["./productivities-update.component.css"]
 })
 export class ProductivitiesUpdateComponent implements OnInit {
+  
   updateForm: FormGroup;
   productId: number;
   yearOfInventication: number;
