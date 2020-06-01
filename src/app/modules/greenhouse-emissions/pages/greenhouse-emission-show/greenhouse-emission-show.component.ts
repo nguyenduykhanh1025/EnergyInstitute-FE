@@ -10,7 +10,7 @@ import { Router } from "@angular/router";
 @Component({
   selector: "app-greenhouse-emission-show",
   templateUrl: "./greenhouse-emission-show.component.html",
-  styleUrls: ["./greenhouse-emission-show.component.css"]
+  styleUrls: ["./greenhouse-emission-show.component.css"],
 })
 export class GreenhouseEmissionShowComponent implements OnInit {
   yearList: Number[];
@@ -23,7 +23,7 @@ export class GreenhouseEmissionShowComponent implements OnInit {
     "emission_reason",
     "product",
     "update",
-    "delete"
+    "delete",
   ];
 
   constructor(
@@ -40,7 +40,9 @@ export class GreenhouseEmissionShowComponent implements OnInit {
   initGreenhouseEmission() {
     this.greenhouseEmissionHttpService
       .getAllGreenhouseEmissions()
-      .subscribe(data => {
+      .subscribe((data) => {
+        console.log(data);
+        
         this.greenhouseEmissions = data;
         this.changeYearList(TO_YEAR);
       });
@@ -60,16 +62,16 @@ export class GreenhouseEmissionShowComponent implements OnInit {
 
   changeYearList(year: number) {
     this.dataSourceCurrent = this.greenhouseEmissions.filter(
-      item => item.year_of_investigation == year
+      (item) => item.year_of_investigation == year
     );
   }
 
   onDelete(id: number, index: number) {
     const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {
       width: "250px",
-      data: { title: Value.delete, message: Value.delete_qes }
+      data: { title: Value.delete, message: Value.delete_qes },
     });
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result == true) {
         this.onConfirmDelete(id, index);
       }
@@ -79,12 +81,20 @@ export class GreenhouseEmissionShowComponent implements OnInit {
   onCreate() {
     this.router.navigate([
       RouteNames.ENTERPRISE.GREENHOUSE_EMISSIONS.URL,
-      RouteNames.ENTERPRISE.GREENHOUSE_EMISSIONS.CREATE.name
+      RouteNames.ENTERPRISE.GREENHOUSE_EMISSIONS.CREATE.name,
     ]);
   }
-  
+
+  onUpdate(id: number) {
+    this.router.navigate([
+      RouteNames.ENTERPRISE.GREENHOUSE_EMISSIONS.URL,
+      RouteNames.ENTERPRISE.GREENHOUSE_EMISSIONS.UPDATE.name,
+      id,
+    ]);
+  }
+
   onConfirmDelete(id: number, index: number) {
-    this.greenhouseEmissionHttpService.deleteFollowId(id).subscribe(data => {
+    this.greenhouseEmissionHttpService.deleteFollowId(id).subscribe((data) => {
       this.deleteProductInTableDataSource(index);
     });
   }

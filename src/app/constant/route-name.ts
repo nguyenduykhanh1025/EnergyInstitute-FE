@@ -3,72 +3,75 @@ export const RouteNames = {
     name: "auth",
     title: "Đăng nhập",
     login: {
-      name: "login"
+      name: "login",
     },
     company: "company",
-    logout: "logout"
+    logout: "logout",
   },
   DASHBOARD: {
-    url: "homepage"
+    url: "homepage",
   },
   ENTERPRISE: {
     url: "enterprise",
     SHOW: {
-      name: "show"
+      name: "show",
     },
     DETAIL: {
-      name: "detail"
+      name: "detail",
     },
     UPDATE: {
-      name: "update"
+      name: "update",
     },
     ENERGY_CONSUMPTIONS: {
       URL: "energy_consumptions",
       SHOW: {
-        name: ""
+        name: "",
       },
       UPDATE: {
-        name: "update"
+        name: "update",
       },
       CREATE: {
-        name: "create"
-      }
+        name: "create",
+      },
     },
     PRODUCT: {
       URL: "products",
       SHOW: {
-        name: ""
+        name: "",
       },
       CREATE: {
-        name: "create"
+        name: "create",
       },
       UPDATE: {
-        name: "update"
+        name: "update",
       },
       PRODUCTIVITIE: {
         URL: "productivities",
         SHOW: {
-          name: ""
+          name: "",
         },
         CREATE: {
-          name: "create"
+          name: "create",
         },
         UPDATE: {
-          name: "update"
-        }
-      }
+          name: "update",
+        },
+      },
     },
     GREENHOUSE_EMISSIONS: {
       URL: "greenhouse_emissions",
       SHOW: {
-        name: ""
+        name: "",
       },
       CREATE: {
-        name: "create"
-      }
-    }
+        name: "create",
+      },
+      UPDATE: {
+        name: "update",
+      },
+    },
   },
   REASONS: {
-    URL: "emission_reasons"
-  }
+    URL: "emission_reasons",
+  },
 };

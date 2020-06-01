@@ -7,9 +7,10 @@ import { RouterModule } from "@angular/router";
 import { GreenhouseEmissionShowComponent } from './pages/greenhouse-emission-show/greenhouse-emission-show.component';
 import { GreenhouseEmissionCreateComponent } from './pages/greenhouse-emission-create/greenhouse-emission-create.component';
 import { GreenhouseEmissionInputComponent } from './components/greenhouse-emission-input/greenhouse-emission-input.component';
+import { GreenhouseEmissionUpdateComponent } from './pages/greenhouse-emission-update/greenhouse-emission-update.component';
 
 @NgModule({
-  declarations: [GreenhouseEmissionShowComponent, GreenhouseEmissionCreateComponent, GreenhouseEmissionInputComponent],
+  declarations: [GreenhouseEmissionShowComponent, GreenhouseEmissionCreateComponent, GreenhouseEmissionInputComponent, GreenhouseEmissionUpdateComponent],
   imports: [
     SharedModule,
     CommonModule,

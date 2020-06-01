@@ -8,11 +8,12 @@ import { Router } from "@angular/router";
 import { RouteNames } from "src/app/constant/route-name";
 import { GreenhouseEmissionCreate } from "src/app/shared/modules/greenhouse_mission_create";
 import { GreenhouseEmissionHttpService } from "src/app/core/http/greenhouse-emission-http.service";
+import { Value } from "src/app/constant/string";
 
 @Component({
   selector: "app-greenhouse-emission-create",
   templateUrl: "./greenhouse-emission-create.component.html",
-  styleUrls: ["./greenhouse-emission-create.component.css"]
+  styleUrls: ["./greenhouse-emission-create.component.css"],
 })
 export class GreenhouseEmissionCreateComponent implements OnInit {
   formData = new FormGroup({
@@ -21,14 +22,24 @@ export class GreenhouseEmissionCreateComponent implements OnInit {
     emission_reason_id: new FormControl("", [Validators.required]),
     carbon_dioxide: new FormControl("", [Validators.required]),
     methane: new FormControl("", [Validators.required]),
-    nitrous_dioxide: new FormControl("", [Validators.required])
+    nitrous_dioxide: new FormControl("", [Validators.required]),
   });
-
-  constructor() {}
+  status = Value.post;
+  
+  constructor(
+    private greenhouseEmissionHttpService: GreenhouseEmissionHttpService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {}
 
   handleGreenhouseEmissionOutput($event) {
-    console.log($event);
+    this.greenhouseEmissionHttpService
+      .createGreenhouseEmission($event)
+      .subscribe((data) => {
+        this.router.navigate([
+          `${RouteNames.ENTERPRISE.GREENHOUSE_EMISSIONS.URL}`,
+        ]);
+      });
   }
 }

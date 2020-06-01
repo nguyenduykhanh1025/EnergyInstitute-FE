@@ -13,5 +13,6 @@ export interface GreenhouseEmissionDetails {
   nitrous_dioxide: number;
   emission_reason: {
     description: string;
+    id: number;
   };
 }

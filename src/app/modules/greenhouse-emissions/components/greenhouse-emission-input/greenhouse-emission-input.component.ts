@@ -8,41 +8,52 @@ import { EmissionReason } from "src/app/shared/modules/emission-reason";
 import { GreenhouseEmissionCreate } from "src/app/shared/modules/greenhouse_mission_create";
 import { FormGroup } from "@angular/forms";
 import { RouteNames } from "src/app/constant/route-name";
+import { Value } from "src/app/constant/string";
 
 @Component({
   selector: "app-greenhouse-emission-input",
   templateUrl: "./greenhouse-emission-input.component.html",
-  styleUrls: ["./greenhouse-emission-input.component.css"]
+  styleUrls: ["./greenhouse-emission-input.component.css"],
 })
 export class GreenhouseEmissionInputComponent implements OnInit {
   @Input() formData: FormGroup;
-  @Output() greenhouseEmissionOutput = new EventEmitter<GreenhouseEmissionCreate>();
+  @Output() greenhouseEmissionOutput = new EventEmitter<
+    GreenhouseEmissionCreate
+  >();
+  @Input() status: String;
 
   products: Product[];
   yearList: Number[];
   emissionReasons: EmissionReason[];
+  statusDisabledYearOfInvent: Boolean;
 
   constructor(
     private productHttpService: ProductHttpService,
     private emissionReasonHttpService: EmissionReasonHttpService,
-    private router: Router,
-    private greenhouseEmissionHttpService: GreenhouseEmissionHttpService
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.initYearList();
     this.initProducts();
     this.initEmissionReasons();
+    this.initStatusDisabledYearOfInvent();
+  }
+
+  initStatusDisabledYearOfInvent() {
+    this.statusDisabledYearOfInvent =
+      this.status == Value.update ? true : false;
+    console.log(this.statusDisabledYearOfInvent);
   }
 
   initEmissionReasons() {
-    this.emissionReasonHttpService.getAll().subscribe(data => {
+    this.emissionReasonHttpService.getAll().subscribe((data) => {
       this.emissionReasons = data;
     });
   }
 
   initProducts() {
-    this.productHttpService.getAllProducts().subscribe(data => {
+    this.productHttpService.getAllProducts().subscribe((data) => {
       this.products = data;
     });
   }
@@ -64,7 +75,9 @@ export class GreenhouseEmissionInputComponent implements OnInit {
   }
 
   onOutput() {
-    this.greenhouseEmissionOutput.emit(this.formData.value as GreenhouseEmissionCreate);
+    this.greenhouseEmissionOutput.emit(
+      this.formData.value as GreenhouseEmissionCreate
+    );
     // this.greenhouseEmissionHttpService
     //   .createGreenhouseEmission()
     //   .subscribe(data => {

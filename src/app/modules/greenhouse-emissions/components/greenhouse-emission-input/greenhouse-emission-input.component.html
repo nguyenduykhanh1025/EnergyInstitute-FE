@@ -6,7 +6,10 @@
           <b class="title">Năm điều tra: </b>
           <mat-form-field class="input-value">
             <mat-label>(Chọn năm)*</mat-label>
-            <mat-select formControlName="year_of_investigation">
+            <mat-select
+              formControlName="year_of_investigation"
+              [disabled]="statusDisabledYearOfInvent"
+            >
               <mat-option *ngFor="let year of yearList" [value]="year">
                 {{ year }}
               </mat-option>
@@ -111,6 +114,6 @@
     [disabled]="!formData.valid"
     (click)="onOutput()"
   >
-    Tạo mới
+    {{ status == "post" ? "Tạo mới" : "Cập nhập" }}
   </button>
 </form>

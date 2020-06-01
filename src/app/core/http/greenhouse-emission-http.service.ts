@@ -11,7 +11,7 @@ import { GreenhouseEmission } from "src/app/shared/modules/greenhouse_mission";
 import { GreenhouseEmissionCreate } from "src/app/shared/modules/greenhouse_mission_create";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class GreenhouseEmissionHttpService {
   readonly greenhouseEmissionHttpUri = `${RouteNames.ENTERPRISE.url}/${RouteNames.ENTERPRISE.GREENHOUSE_EMISSIONS.URL}`;
@@ -21,17 +21,22 @@ export class GreenhouseEmissionHttpService {
   getAllGreenhouseEmissions(): Observable<GreenhouseEmission[]> {
     return this.apiService
       .get(this.greenhouseEmissionHttpUri)
-      .pipe(map(res => res.greenhouse_missions));
+      .pipe(map((res) => res.greenhouse_missions));
   }
 
   deleteFollowId(id: number) {
     let uri = `${this.greenhouseEmissionHttpUri}/${id}`;
-    return this.apiService.delete(uri).pipe(map(res => res));
+    return this.apiService.delete(uri).pipe(map((res) => res));
   }
 
   createGreenhouseEmission(data: GreenhouseEmissionCreate) {
     return this.apiService
       .put(this.greenhouseEmissionHttpUri, data)
-      .pipe(map(res => res));
+      .pipe(map((res) => res));
+  }
+
+  getFollowId(id: number): Observable<GreenhouseEmission> {
+    let uri = `${this.greenhouseEmissionHttpUri}/${id}`;
+    return this.apiService.get(uri).pipe(map((res) => res.greenhouse_mission));
   }
 }
